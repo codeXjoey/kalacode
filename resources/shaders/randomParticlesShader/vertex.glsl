@@ -1,13 +1,12 @@
 attribute vec3 aRandomColors;
 
-uniform sampler2D uTexture;
-uniform float uWidth;
-uniform float uHeight;
 uniform float uPointSize;
 uniform float uPixelRatio;
+uniform float uTime;
+uniform float uDepth;
+uniform float uCameraPositionZ;
 
 varying vec3 vRandomColor;
-varying vec4 vPointColor;
 
 //Model matrix
 //View Matrix
@@ -16,6 +15,14 @@ varying vec4 vPointColor;
 
 void main (){
     vec3 vertexPosition = position;
+
+    // float t = uTime*0.1;
+    // t += distance(vertexPosition.z, 0.0);
+
+    // //Animation
+    // vertexPosition.z += (t - floor((t+1.0)))*uDepth;
+
+    // vertexPosition.z += uTime;
     
     vec4 modelPosition = modelMatrix * vec4(vertexPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -33,12 +40,5 @@ void main (){
     //Varyings
     vRandomColor = aRandomColors;
 
-    vec2 vertexUv = vec2(vertexPosition.x/uWidth, vertexPosition.y/uHeight);
-    vertexUv.x += 0.5;
-    vertexUv.y += 0.5;
-    
-    vPointColor = (texture2D(uTexture, vertexUv));
-    
-    vPointColor = vec4(1.0- step(vPointColor.r, 0.5));
 
 }
