@@ -3,8 +3,8 @@ attribute vec3 aRandomColors;
 uniform float uPointSize;
 uniform float uPixelRatio;
 uniform float uTime;
+uniform float uTimeLine;
 uniform float uDepth;
-uniform float uCameraPositionZ;
 
 varying vec3 vRandomColor;
 
@@ -16,13 +16,12 @@ varying vec3 vRandomColor;
 void main (){
     vec3 vertexPosition = position;
 
-    // float t = uTime*0.1;
-    // t += distance(vertexPosition.z, 0.0);
+    float t = (uTimeLine+uTime)*0.01;
+    t += distance(vertexPosition.z, 0.0);
 
-    // //Animation
-    // vertexPosition.z += (t - floor((t+1.0)))*uDepth;
+    //Animation
+    vertexPosition.z = (t - floor((t+1.0)))*uDepth;
 
-    // vertexPosition.z += uTime;
     
     vec4 modelPosition = modelMatrix * vec4(vertexPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;

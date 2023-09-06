@@ -17,7 +17,7 @@ import GUI from 'lil-gui';
 
 console.time('Threejs')
 
-THREE.ColorManagement.enabled = false;
+// THREE.ColorManagement.enabled = false;
 
 //Sizes 
 const sizes = {
@@ -59,7 +59,7 @@ const scene = new THREE.Scene();
 const cameraGroup = new THREE.Group()
 scene.add(cameraGroup)
 
-const camera = new THREE.PerspectiveCamera(50, sizes.width/sizes.height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(50, sizes.width/sizes.height, 0.01, 40);
 cameraGroup.add(camera)
 
 //Renderer
@@ -75,7 +75,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(sizes.width, sizes.height);
 
 //Controls 
-const orbitControls = new OrbitControls(camera, canvas)
+// const orbitControls = new OrbitControls(camera, canvas)
 //Parameters
 
 
@@ -85,7 +85,7 @@ const orbitControls = new OrbitControls(camera, canvas)
 
 //Objects
 
-camera.position.set(0, 0, 10)
+camera.position.set(0, 0, 0.1)
 
 //Create particles
 const debug = {
@@ -98,9 +98,9 @@ const debug = {
     fingerprintparticlesRandomOffset: 0.0,
 
     //Random particles 
-    ranodmCount: 1000,
+    ranodmCount: 3000,
     randomSize: 40,
-    randomParticlesDepth: 20,
+    randomParticlesDepth: 50,
 
     
 };
@@ -115,12 +115,8 @@ let randomParticlesGeometry = null
 let randomParticlesMaterial = null
 let randomParticles = null
 
-const cameraX = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 1.0), new THREE.MeshBasicMaterial());
-scene.add(cameraX)
 
 createFingerprint();
-// fingerprintParticles.position.z = -20;
-
 
 createRandomParticles();
 
@@ -128,18 +124,26 @@ createRandomParticles();
 
 addDebugUI();
 
+//------------- Animation
+
 //Scroll event
-let timeLine = 0;
-window.addEventListener('wheel', (event)=>{
-    console.log(event)
-    if(event.deltaY < 100){
-        console.log('move up');
-    } else {
-        console.log('move down');
-    }
+let timeLine = { t : 0 };
+window.addEventListener('scroll', (event)=>{
+
+    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.05});
 })
 
 //Animate
+const cursor = {
+    x: 0,
+    y: 0,
+}
+
+window.addEventListener('mousemove', (event)=>{
+    cursor.x = -((event.clientX/ sizes.width)-0.5);
+    cursor.y = -((event.clientY/ sizes.height)-0.5);
+    
+})
 
 const clock = new THREE.Clock();
 let previousTime = 0;
@@ -149,13 +153,23 @@ const tick = ()=>{
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
+    //Parallax Effect
+    
+    const parallaxX = -cursor.x*1;
+    const parallaxY = cursor.y*1;
+
+    cameraGroup.position.x += (parallaxX - cameraGroup.position.x)*2 * deltaTime;
+    cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
+
+
     //Update objects
-    cameraX.position.z = -elapsedTime;
+    // camera.position.z = -timeLine;
 
     //Update materials 
-    fingerprintParticlesMaterial.uniforms.uTime.value = elapsedTime
-    randomParticlesMaterial.uniforms.uTime.value = elapsedTime
-    randomParticlesMaterial.uniforms.uCameraPositionZ.value = cameraX.position.z;
+    fingerprintParticlesMaterial.uniforms.uTimeLine.value = timeLine.t;
+    fingerprintParticlesMaterial.uniforms.uTime.value = elapsedTime;
+    randomParticlesMaterial.uniforms.uTime.value = elapsedTime;
+    randomParticlesMaterial.uniforms.uTimeLine.value = timeLine.t;
 
     renderer.render(scene, camera);
     window.requestAnimationFrame(tick);
@@ -224,15 +238,16 @@ function createFingerprint(){
             uTexture: { value: fingerprintTexture },
             uWidth: { value: width },
             uHeight: { value: height },
-            uTime: { value: 0 }
+            uTime: { value: 0 },
+            uTimeLine: { value: 0 },
         }
     })
 
     //Particles 
     fingerprintParticles = new THREE.Points(fingerprintParticlesGeometry, fingerprintParticlesMaterial)
-    scene.add(fingerprintParticles);
-    fingerprintParticles.visible = false;
+    fingerprintParticles.position.z = -20;
 
+    scene.add(fingerprintParticles);
 }
 
 function createRandomParticles(){
@@ -265,16 +280,18 @@ function createRandomParticles(){
     randomParticlesMaterial = new THREE.ShaderMaterial({
         vertexShader: randomParticlesVS,
         fragmentShader: randomParticlesFS,
+        // depthWrite: false,
         uniforms: {
             uPointSize: { value: size },
             uPixelRatio: { value : Math.min(window.devicePixelRatio, 2)},
             uTime: { value: 0 },
+            uTimeLine: { value: 0 },
             uDepth: { value: depth },
-            uCameraPositionZ: {value: cameraX.position.z}
         }
     })
 
     randomParticles = new THREE.Points(randomParticlesGeometry, randomParticlesMaterial);
+    randomParticles.position.z = 1;
     scene.add(randomParticles);
 }
 

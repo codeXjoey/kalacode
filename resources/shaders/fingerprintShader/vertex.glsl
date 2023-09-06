@@ -5,6 +5,8 @@ uniform float uWidth;
 uniform float uHeight;
 uniform float uPointSize;
 uniform float uPixelRatio;
+uniform float uTime;
+uniform float uTimeLine;
 
 varying vec3 vRandomColor;
 varying vec4 vPointColor;
@@ -16,7 +18,9 @@ varying vec4 vPointColor;
 
 void main (){
     vec3 vertexPosition = position;
-    
+
+    vertexPosition.z += uTimeLine;
+
     vec4 modelPosition = modelMatrix * vec4(vertexPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
