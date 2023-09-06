@@ -2,9 +2,15 @@ import './style.css';
 
 import * as THREE from 'three';
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+import fingerprintParticlesVS from '/resources/shaders/fingerprintShader/vertex.glsl'
+import fingerprintParticlesFS from '/resources/shaders/fingerprintShader/fragment.glsl'
 
 import gsap from 'gsap';
 import GUI from 'lil-gui';
+
+
 
 console.time('Threejs')
 
@@ -30,6 +36,9 @@ window.addEventListener('resize', ()=>{
     //Update Renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    //Update Material
+    fingerprintParticlesMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
 });
 
 //Textures
@@ -37,8 +46,7 @@ window.addEventListener('resize', ()=>{
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
-// const gradient = textureLoader.load('/textures/gradientTextures/3.jpg');
-// gradient.magFilter = THREE.NearestFilter;
+const fingerprintTexture = textureLoader.load('/resources/textures/fingerprint.jpg');
 
 //Scene 
 const scene = new THREE.Scene();
@@ -54,169 +62,43 @@ cameraGroup.add(camera)
 const canvas = document.querySelector('.experience')
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas, 
-    //here we can make the background transparent of the canvas
     alpha:true
 }); 
-//Also we can chanve the color of the renderer backround with 
-//renderer.setClearColor(new THREE.Color('#220022'))
 
-//And we can change the amoun of the alpha with is a value from 0 to 1 the default is 0
-renderer.setClearAlpha = 0
-
-renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+renderer.setClearAlpha = 0;
 
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(sizes.width, sizes.height);
 
 //Controls 
-
-
+const orbitControls = new OrbitControls(camera, canvas)
 //Parameters
-const parameters = {
-    materialColor: '#2aa0a2',
-}
+
 
 //Lights
-const light = new THREE.DirectionalLight('ffffff', 1, 4, 1);
-light.position.set(2,1, 1)
-light.lookAt(new THREE.Vector3(0, 0, 0))
-const lightHelper = new RectAreaLightHelper(light)
-
-const ambientLight = new THREE.DirectionalLight('ffffff', 1)
-scene.add(ambientLight);
 
 //Objects
-const toonMaterial = new THREE.MeshToonMaterial({
-    color: parameters.materialColor,
-    // gradientMap: gradient,
-}) //This mesh toon material have only two colors, but we can change it by adding a gradient texture 
 
-const torusMesh = new THREE.Mesh(
-    new THREE.TorusGeometry(1, 0.5, 20, 40),
-    toonMaterial
-)
+camera.position.set(0, 0, 20)
 
-const cubeMesh = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    toonMaterial
-)
+//Create particles
+const debug = {
+    fingerprintWidth: 10,
+    fingerprintHeight: 10,
+    fingerprintResolution: 150,
+    fingerprintParticlesSize : 40,
+    fingerprintparticlesRandomOffset: 0.0,
+};
 
-const KnotMesh = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(0.8, 0.4, 100, 16),
-    toonMaterial
-)
+let fingerprintParticlesMaterial = null;
+let fingerprintParticlesGeometry = null;
+let fingerprintParticles = null;
 
-scene.add(torusMesh, cubeMesh, KnotMesh)
-
-const sectionMeshes = [torusMesh, KnotMesh, cubeMesh]
-//Scene Configuration
-const objectsDistance = 5
-
-
-torusMesh.position.y = -objectsDistance*0
-torusMesh.position.x = -1.5
-
-
-KnotMesh.position.y = -objectsDistance*1
-KnotMesh.position.x = 1.5
-
-cubeMesh.position.y = -objectsDistance*2
-cubeMesh.position.x = -1.25
-
-camera.position.set(0, 0, 5)
-
-//Particles 
-const parcilesAmount = 10000
-
-const particlesGoemetry = new THREE.BufferGeometry()
-const partilcesPosition = new Float32Array(parcilesAmount*3) 
-for (let i = 0; i < partilcesPosition.length; i++){
-    partilcesPosition[i] = (Math.random()-0.5)*20;
-}
-const positionBufferAttribute = new THREE.BufferAttribute(partilcesPosition, 3);
-
-particlesGoemetry.setAttribute('position', positionBufferAttribute);
-
-const particles = new THREE.Points(
-    particlesGoemetry, 
-    new THREE.PointsMaterial({
-        size: 0.02, 
-        sizeAttenuation: true, 
-        color:'orange'
-    })    
-)
-
-
-particles.position.y = -5
-particles.position.z = -5
-scene.add(particles);
-
-console.log(particlesGoemetry)
+createFingertip();
 
 //Gui
 
-
-const gui = new GUI();
-
-gui.addColor(parameters, 'materialColor').onChange(()=>{
-    toonMaterial.color.set(parameters.materialColor); //We can update the color materia simply with this function without updating the hole object 
-});
-
-
-//-----------------------------------------------Scroll based animation------------------------------
-//Sometimes we want the experience to be part of a classic website, it can be in the background to add beauty, but we want it to intregrate propery with the html content
-
-//We will learn to use three.js as a background of a classic html page
-//Make the camera translate for follow the scroll 
-//discover some tricks to make it more inmersive 
-//Add a parallax animation based on the cursor position
-//Trigger some animations when arriving at the corresponding sections
-
-//First we could have set the background-color of the pge to the same color as the clearColor, instead, we are going to make the clearColor transparent and only set the background-color on the page
-//This can be made activating the alpha on the renderer renderer.alpha = true;
-//Also we can change .setClearAlpha and .setClearColor
-
-//Now the scene is ready we can move the camera with the scroll, fist getting an updating the scroll every time scroll happens
-let currentSection = 0;
-let scrollY = window.scrollY
-
-window.addEventListener('scroll', ()=>{
-    scrollY = window.scrollY
-
-    const newSection = Math.round(scrollY/sizes.height)
-
-    if(newSection != currentSection){
-        console.log('changed to: ' + newSection)
-        currentSection = newSection;
-        
-        gsap.to(sectionMeshes[currentSection].rotation,
-            {
-                duration:1.5,
-                ease: 'power2.inOut',
-                x: '+=6',
-                y: '+=3',
-                z:'+=1.5'
-            }
-        );
-    }
-    
-});
-//In the tick function we can update the camera with the scroll variable
-
-//--------------------------Parallax effect
-//Parallax is the action of seeing one object through different points of view, this is done naturally boy our eyes and its how we feel the depth
-
-//First we need to get the position of the cursor 
-
-const cursor = {
-    x: 0,
-    y: 0,
-}
-
-window.addEventListener('mousemove', (event)=>{
-    cursor.x = -(event.clientX/ sizes.width)-0.5;
-    cursor.y = -(event.clientY/ sizes.height) -0.5;
-})
+addDebugUI();
 
 
 //Animate
@@ -228,42 +110,90 @@ const tick = ()=>{
     const deltaTime = time - previousTime;
     previousTime = time;
 
-
-
-    //Update objects
-    sectionMeshes.forEach((object)=>{
-        object.rotation.y += deltaTime*0.1; 
-        object.rotation.x += deltaTime*0.15; 
-    })
-    camera.position.y = (-scrollY/sizes.height* objectsDistance);
-
-    const parallaxX = -cursor.x*0.5;
-    const parallaxY = cursor.y*0.5;
-
-    //Update the position camera with the parallax effect
-    //With this the parallax effect feel too mechanic an not reallistic, we can get a smooth movement using the Lerp formula
-    
-    //With this get a lerp effect.
-    cameraGroup.position.x += (parallaxX - cameraGroup.position.x)*2 * deltaTime;
-    cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
-
-
-
-
-    
-    //-------------------------------My solution    
-
-    // camera.position.y = (-scrollY/sizes.height* objectsDistance);
-
-    // camera.position.x = parallaxX
-    // camera.position.y += parallaxY
-    // camera.lookAt(new THREE.Vector3(0, camera.position.y-parallaxY, 0))
-
-    //Render
-    
     renderer.render(scene, camera);
     window.requestAnimationFrame(tick);
 } 
 
 console.timeEnd('Threejs')
 tick();
+
+function createFingertip(){
+    //Errase last fingertip
+    if(fingerprintParticles){
+        fingerprintParticlesGeometry.dispose();
+        fingerprintParticlesMaterial.dispose();
+        scene.remove(fingerprintParticles);
+    }
+
+    //Sizes
+    const width = debug.fingerprintWidth;
+    const height = debug.fingerprintHeight;
+    const resolution = debug.fingerprintResolution;
+    const size = debug.fingerprintParticlesSize;
+
+    //Geometry 
+    fingerprintParticlesGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(resolution*resolution*3);
+    const colors = new Float32Array(resolution*resolution*3);
+
+    let v = 0;
+    for (let i = 0; i < positions.length; i++ ){
+        const x = i*3+0;
+        const y = (i*3)+1;
+        const z = (i*3)+2;
+
+        //Position
+        for (let h = 0; h < resolution; h++){
+            positions[v*3+0] = i*(width/resolution)+ (Math.random()*debug.fingerprintparticlesRandomOffset);
+            positions[v*3+1] = h*(height/resolution)+ (Math.random()*debug.fingerprintparticlesRandomOffset);
+            // positions[v*3+2] = Math. random()*100;
+            v++;
+        }
+
+         //Colors
+
+         const h = 60;
+         const l = (Math.random()*0.2)+0.25;
+         const baseColor = new THREE.Color().setHSL(h*Math.PI/180, 1.0, l);
+         colors[x] = baseColor.r
+         colors[y] = baseColor.g
+         colors[z] = baseColor.b
+
+    }
+
+    fingerprintParticlesGeometry.setAttribute('position' ,new THREE.BufferAttribute(positions, 3));
+    fingerprintParticlesGeometry.setAttribute('aRandomColors', new THREE.BufferAttribute(colors, 3));
+    fingerprintParticlesGeometry.center();
+
+    //Material
+    fingerprintParticlesMaterial = new THREE.ShaderMaterial({
+        vertexShader: fingerprintParticlesVS,
+        fragmentShader: fingerprintParticlesFS,
+        transparent: true,
+        alphaTest: 0.01,
+        uniforms:{
+            uPointSize: { value: size },
+            uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+            uTexture: { value: fingerprintTexture },
+            uWidth: { value: width },
+            uHeight: { value: height },
+        }
+    })
+
+    //Particles 
+    fingerprintParticles = new THREE.Points(fingerprintParticlesGeometry, fingerprintParticlesMaterial)
+    scene.add(fingerprintParticles);
+}
+
+function addDebugUI(){
+    const gui = new GUI();
+    
+    const fingerprintGui = gui.addFolder('fingerprint').onFinishChange(()=>{
+        createFingertip();
+    })
+    fingerprintGui.add(debug, 'fingerprintWidth', 0, 20, 1);
+    fingerprintGui.add(debug, 'fingerprintHeight', 0, 20, 1);
+    fingerprintGui.add(debug, 'fingerprintResolution', 0, 200, 1);
+    fingerprintGui.add(debug, 'fingerprintParticlesSize', 0, 100);
+    fingerprintGui.add(debug, 'fingerprintparticlesRandomOffset', 0, 2).name('Random offset');
+}
