@@ -19,7 +19,12 @@ varying vec4 vPointColor;
 void main (){
     vec3 vertexPosition = position;
 
-    vertexPosition.z += uTimeLine;
+
+    float randomDistance = (length(aRandomColors))*clamp(length(vertexPosition), 0.5, 1.0);
+    
+
+
+    vertexPosition.z -= (uTimeLine-200.0)*randomDistance;
 
     vec4 modelPosition = modelMatrix * vec4(vertexPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -43,6 +48,6 @@ void main (){
     
     vPointColor = (texture2D(uTexture, vertexUv));
     
-    vPointColor = vec4(1.0- step(vPointColor.r, 0.5));
+    vPointColor = vec4(step(vPointColor.r, 0.5));
 
 }

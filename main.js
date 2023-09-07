@@ -50,7 +50,7 @@ window.addEventListener('resize', ()=>{
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
-const fingerprintTexture = textureLoader.load('/resources/textures/fingerprint.jpg');
+const fingerprintTexture = textureLoader.load('/resources/textures/fingerprint.jpeg');
 
 //Scene 
 const scene = new THREE.Scene();
@@ -85,17 +85,17 @@ renderer.setSize(sizes.width, sizes.height);
 
 //Objects
 
-camera.position.set(0, 0, 0.1)
+// camera.position.set(0, 0, 10);
 
 //Create particles
 const debug = {
     //Fingerprint
-    fingerprintBaseColor: 60,
-    fingerprintWidth: 10,
-    fingerprintHeight: 10,
-    fingerprintResolution: 150,
-    fingerprintParticlesSize : 40,
-    fingerprintparticlesRandomOffset: 0.0,
+    fingerprintBaseColor: '#ff8800',
+    fingerprintWidth: 14,
+    fingerprintHeight: 19,
+    fingerprintResolution: 200,
+    fingerprintParticlesSize : 60,
+    fingerprintparticlesRandomOffset: 0.035,
 
     //Random particles 
     ranodmCount: 3000,
@@ -119,6 +119,7 @@ let randomParticles = null
 createFingerprint();
 
 createRandomParticles();
+// randomParticles.visible = false;
 
 //Gui
 
@@ -191,6 +192,7 @@ function createFingerprint(){
     const height = debug.fingerprintHeight;
     const resolution = debug.fingerprintResolution;
     const size = debug.fingerprintParticlesSize;
+    const randomOffset = debug.fingerprintparticlesRandomOffset;
     const color = debug.fingerprintBaseColor;
 
     //Geometry 
@@ -206,21 +208,25 @@ function createFingerprint(){
 
         //Position
         for (let h = 0; h < resolution; h++){
-            positions[v*3+0] = i*(width/resolution)+ (Math.random()*debug.fingerprintparticlesRandomOffset);
-            positions[v*3+1] = h*(height/resolution)+ (Math.random()*debug.fingerprintparticlesRandomOffset);
+            positions[v*3+0] = i*(width/resolution)+ (Math.random()*randomOffset);
+            positions[v*3+1] = h*(height/resolution)+ (Math.random()*randomOffset);
             v++;
         }
 
-         //Colors
-
-         const h = color;
+         //Colors         
+         const baseColor = new THREE.Color(color)
+         baseColor.getHSL(baseColor, THREE.SRGBColorSpace);
+         const h = baseColor.h
          const l = (Math.random()*0.2)+0.25;
-         const baseColor = new THREE.Color().setHSL(h*Math.PI/180, 1.0, l);
-         randomColors[x] = baseColor.r
-         randomColors[y] = baseColor.g
-         randomColors[z] = baseColor.b
+         
+         const finalColor = new THREE.Color().setHSL( baseColor.h, baseColor.s, l);
 
+
+         randomColors[x] = finalColor.r
+         randomColors[y] = finalColor.g
+         randomColors[z] = finalColor.b
     }
+
 
     fingerprintParticlesGeometry.setAttribute('position' ,new THREE.BufferAttribute(positions, 3));
     fingerprintParticlesGeometry.setAttribute('aRandomColors', new THREE.BufferAttribute(randomColors, 3));
@@ -303,7 +309,7 @@ function addDebugUI(){
         createRandomParticles();
     })
 
-    fingerprintGui.add(debug, 'fingerprintBaseColor', 0, 360);
+    fingerprintGui.addColor(debug, 'fingerprintBaseColor');
     fingerprintGui.add(debug, 'fingerprintWidth', 0, 20, 1);
     fingerprintGui.add(debug, 'fingerprintHeight', 0, 20, 1);
     fingerprintGui.add(debug, 'fingerprintResolution', 0, 200, 1);
