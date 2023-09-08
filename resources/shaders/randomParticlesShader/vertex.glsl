@@ -16,10 +16,12 @@ varying vec3 vRandomColor;
 void main (){
     vec3 vertexPosition = position;
 
-    float t = (uTimeLine+uTime)*0.01;
+    //Modified the wich change direction at time line value 300
+    float timeLine = -abs(uTimeLine-300.0);
+    float t = -(timeLine-uTime)*0.01;
     t += distance(vertexPosition.z, 0.0);
 
-    //Animation
+    //Particles go backwards when arrived to 0
     vertexPosition.z = (t - floor((t+1.0)))*uDepth;
 
     
@@ -33,8 +35,7 @@ void main (){
     gl_PointSize = uPointSize;
 
     //Perspective & pixelRatio fix
-    gl_PointSize *= (1.0/ -viewPosition.z);
-    gl_PointSize *= uPixelRatio;
+    gl_PointSize *= (1.0/ -viewPosition.z)*uPixelRatio;
 
     //Varyings
     vRandomColor = aRandomColors;
