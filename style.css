@@ -24,6 +24,7 @@ html, body {
 
 .text {
   display: flex;
+  display: none;
   position: fixed;
   margin: 0px;
   width: 100%;

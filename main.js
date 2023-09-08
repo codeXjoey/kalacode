@@ -31,12 +31,12 @@ const debug = {
     fingerprintWidth: 10,
     fingerprintHeight: 15,
     fingerprintResolution: 110,
-    fingerprintParticlesSize : 45,
+    fingerprintParticlesSize : 75,
     fingerprintparticlesRandomOffset: 0.035,
 
     //Random particles 
     ranodmCount: 3000,
-    randomSize: 40,
+    randomSize: 50,
     randomParticlesDepth: 50,
 
     
@@ -156,7 +156,9 @@ renderer.setSize(sizes.width, sizes.height);
 //Create particles
 
 createFingerprint();
+// // fingerprintParticles.visible = false;
 createRandomParticles();
+// randomParticles.visible = false;
 createText();
 
 
@@ -173,6 +175,7 @@ let timeLine = { t : 0 };
 let qrCodesCreated = false;
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.05});
+    console.log(timeLine.t)
     if(timeLine.t>300 && !qrCodesCreated){
         qrCodesCreated = true
         createQrCodes();
@@ -200,6 +203,13 @@ const tick = ()=>{
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
+    //Animating particles position
+    if(randomParticles.position.z < 0){
+        randomParticles.position.z = timeLine.t-350;
+    }else {
+        // randomParticles.position.z = -300;
+    }
+
     //Parallax Effect
     const parallaxX = -cursor.x*1;
     const parallaxY = cursor.y*1;
@@ -218,7 +228,6 @@ const tick = ()=>{
     //Animating text
     texts[0].position.z = +timeLine.t-10;
     plane.position.z = +timeLine.t-10;
-    console.log(texts[0].position.z);
 
     for (const text of texts){
         const screenPosition = text.position.clone();
@@ -340,7 +349,7 @@ function createFingerprint(){
 
     //Particles 
     fingerprintParticles = new THREE.Points(fingerprintParticlesGeometry, fingerprintParticlesMaterial)
-    fingerprintParticles.position.z = -45;
+    fingerprintParticles.position.z = -40;
 
     scene.add(fingerprintParticles);
 }
@@ -387,7 +396,7 @@ function createRandomParticles(){
     })
 
     randomParticles = new THREE.Points(randomParticlesGeometry, randomParticlesMaterial);
-    randomParticles.position.z = 0;
+    randomParticles.position.z = -350;
     scene.add(randomParticles);
 
 }
