@@ -18,7 +18,7 @@ void main (){
 
     //Random distnace o 
     float lenthDistance = (clamp(length(vertexPosition), 0.25, 1.0)+length(vertexPosition)*0.1);
-    float randomDistance = (aRandom*10.0)+pow(lenthDistance,2.0);
+    float randomDistance = abs(aRandom*10.0)+pow(lenthDistance,2.0);
     float timeLine = (pow((uTimeLine*0.02)-5.0, 7.0));
 
     vertexPosition.z += uTimeLine*0.09;

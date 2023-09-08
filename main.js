@@ -77,6 +77,7 @@ let qrCodesArray = [];
 let qrCodeMaterial  = null;
 
 let texts = null;
+let plane = null;
 
 
 // THREE.ColorManagement.enabled = false;
@@ -213,20 +214,31 @@ const tick = ()=>{
         }
         qrCodesGroup.position.z = timeLine.t-400;
     }
+
     //Animating text
+    texts[0].position.z = +timeLine.t-10;
+    plane.position.z = +timeLine.t-10;
+    console.log(texts[0].position.z);
+
     for (const text of texts){
         const screenPosition = text.position.clone();
         screenPosition.project(camera);
 
-        const translateX = screenPosition.x * sizes.width * 0.5;
-        const translateY = - screenPosition.y * sizes.height * 0.5;
-        text.element.style.transform = `
-            translateX(${translateX}px) 
-            translateY(${translateY}px 
+        //Ading position
+        // const translateX = screenPosition.x * sizes.width * 0.5;
+        // const translateY = - screenPosition.y * sizes.height * 0.5;
+        // text.element.style.transform = `
+        // translateX(${translateX}px) 
+        // translateY(${translateY}px 
+        // )`;
             
-        )`;
-        console.log(text.element.style.transform.scaleY)
+        //Adding perspective 
+        const scale = -1.0 * (1.0/ text.position.z)
+        if(scale < 200){
+            text.element.style.scale = scale;
+        }else{
 
+        }
     }
 
     //Update materials 
@@ -414,9 +426,9 @@ function createQrCodes(){
 
 
 function createText(){
-    // const text = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial());
-    // text.position.z = -5 
-    // scene.add(text);
+    plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({color: 'black'}));
+    plane.position.z = -5 
+    // scene.add(plane);
 
     texts = [
         {
