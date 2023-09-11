@@ -16,18 +16,6 @@ varying vec4 vPointColor;
 void main (){
     vec3 vertexPosition = position;
 
-    //Random distnace o 
-    // float lenthDistance = (clamp(length(vertexPosition), 0.25, 1.0)+length(vertexPosition)*0.1);
-    // float randomDistance = (aRandom*10.0)+pow(lenthDistance,2.0);
-
-
-    // float timeLine = abs(pow((uTimeLine*0.02)-5.0, 7.0));
-
-
-
-    // vertexPosition.z += uTimeLine*0.09;
-    // vertexPosition.z += timeLine;
-
     //Create animation
     float originalPosition = position.z;
     float randomDistance = aRandom*2.0;
@@ -37,12 +25,12 @@ void main (){
     float x = newTimeLine; //-5.0 used to make the values of x can go bellow 0
     
     //Aplicando randomicidad a los vertices (posicion inicial)
-    vertexPosition.z += randomDistance*50.0+50.0;
+    vertexPosition.z += randomDistance*50.0+40.0;
 
     
     vertexPosition.z -= x;
     vertexPosition.z = clamp(vertexPosition.z, originalPosition, 1000.0);
-    vertexPosition.z += uTimeLine*0.05;
+    vertexPosition.z += uTimeLine*0.075;
     // vertexPosition.z += 50.0;
 
 
@@ -56,7 +44,10 @@ void main (){
     gl_PointSize = uPointSize;
 
     //Perspective & pixelRatio fix
-    gl_PointSize *= (1.0/ -viewPosition.z)*uPixelRatio;
+    gl_PointSize *= clamp(1.0/ -viewPosition.z, 0.0, 0.5);
+    gl_PointSize *= uPixelRatio;
+
+
 
     //Varyings
     vRandomColor = aRandomColors;

@@ -18,29 +18,31 @@ console.time('Threejs')
 
 
 //Stats
-const stats = new Stats()
-stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom)
+// const stats = new Stats()
+// stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild(stats.dom)
 
-//Variables 
+//------------------------- Variables 
 const debug = {
     //Fingerprint
-    fingerprintBaseColor1: '#1e00ff',
+    fingerprintBaseColor1: '#e17209',
     fingerprintBaseColor2: '#ffffff',
-    fingerprintBaseColor3: '#ff8800',
+    fingerprintBaseColor3: '#1d5ef7',
     fingerprintWidth: 10,
-    fingerprintHeight: 15,
-    fingerprintResolution: 110,
-    fingerprintParticlesSize : 75,
-    fingerprintparticlesRandomOffset: 0.035,
+    fingerprintHeight: 12,
+    fingerprintResolution: 150,
+    fingerprintParticlesSize : 35,
+    fingerprintparticlesRandomOffset: 0.3,
 
     //Random particles 
-    ranodmCount: 3000,
-    randomSize: 50,
+    ranodmCount: 2500,
+    randomSize: 20,
     randomParticlesDepth: 50,
 
     
 };
+
+let experienceStarted = false;
 
 let randomColors = null;
 
@@ -77,11 +79,9 @@ let qrCodesArray = [];
 let qrCodeMaterial  = null;
 
 let texts = null;
-let plane = null;
 
 
-// THREE.ColorManagement.enabled = false;
-
+//-------------------------------- Utils ----------------------------------------------------------
 //Sizes 
 const sizes = {
     width: window.innerWidth,
@@ -108,17 +108,33 @@ window.addEventListener('resize', ()=>{
     randomParticlesMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
 });
 
-//Textures
+//------------------------------ Loaders --------------------------------------------------
 
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
+loadingManager.onLoad = ()=>{
+    loaded();
+}
+
+
+//Fingerprint
 const fingerprintTexture = textureLoader.load('/resources/textures/fingerprint.jpg');
+
+//QrCodes
+const qrCodesTextures = [];
+for(let i = 0; i < (qrCodes.length > 300 ? 300 : qrCodes.length ); i++){
+    const texture = textureLoader.load(qrCodes[i].image)
+    texture .generateMipmaps = false;
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+    qrCodesTextures.push(texture)
+}
+
 
 //Scene 
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(new THREE.Color('#000000'), 1, 40);
-
 
 //Camera 
 const cameraGroup = new THREE.Group()
@@ -139,47 +155,52 @@ renderer.setClearAlpha = 0;
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(sizes.width, sizes.height);
 
-//Controls 
-// const orbitControls = new OrbitControls(camera, canvas)
-// orbitControls.target = new THREE.Vector3(0, 0, -20)
-//Parameters
+
+//---------------------------------------------- Overlay------------------------------
+
+const startButton = document.querySelector('.button_start-experience')
+const overlay = document.querySelector('.overlay');
+const scrollContainer = document.querySelector('.scrollable-container');
+
+const loaded = ()=>{
+    setTimeout(()=>startButton.classList.add('button_start-experience--active'), 500)
+}
+
+startButton.addEventListener('click', ()=>{
+    overlay.classList.add('overlay--inactive');
+    setTimeout(()=>{
+        overlay.style.display = "none";
+        experienceStarted = true;
+    }, 500)
+    scrollContainer.style.height = '22500px';
+
+})
 
 
-//Environment
 
 
-
-//Objects
-
-// camera.position.set(0, 0, 10);
-
-//Create particles
+//-------------------------------------------- Creating elements ---------------------------
 
 createFingerprint();
 // // fingerprintParticles.visible = false;
 createRandomParticles();
 // randomParticles.visible = false;
+createQrCodes();
+
 createText();
-
-
-
-
-//Gui
-
-addDebugUI();
 
 //-------------------------------------------- Animation ----------------------------------
 
 //Scroll event
 let timeLine = { t : 0 };
-let qrCodesCreated = false;
+// let qrCodesCreated = false;
 window.addEventListener('scroll', (event)=>{
-    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.05});
-    console.log(timeLine.t)
-    if(timeLine.t>300 && !qrCodesCreated){
-        qrCodesCreated = true
-        createQrCodes();
-    }
+    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.15});
+    console.log(texts[1].position.z)
+    // if(timeLine.t>500 && !qrCodesCreated){
+    //     qrCodesCreated = true
+    //     createQrCodes();
+    // }
 })
 
 //Animate
@@ -197,18 +218,13 @@ const clock = new THREE.Clock();
 let previousTime = 0;
 
 const tick = ()=>{
-    stats.begin()
+    // stats.begin()
 
     const elapsedTime = clock.getElapsedTime();
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
     //Animating particles position
-    if(randomParticles.position.z < 0){
-        randomParticles.position.z = timeLine.t-350;
-    }else {
-        // randomParticles.position.z = -300;
-    }
 
     //Parallax Effect
     const parallaxX = -cursor.x*1;
@@ -218,35 +234,28 @@ const tick = ()=>{
     cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
 
     //Animating QrCodes 
-    if(qrCodesArray){
+    if(qrCodesArray && timeLine.t > 700){
         for (let i = 0; i < qrCodesArray.length; i++){
-            qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*6+0], randomColors[i*12+2], randomColors[i*3+2]).normalize(), (timeLine.t+elapsedTime)*0.1);
+                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
         }
-        qrCodesGroup.position.z = timeLine.t-400;
+        qrCodesGroup.position.z = (timeLine.t*0.25)-225;
     }
 
     //Animating text
-    texts[0].position.z = +timeLine.t-10;
-    plane.position.z = +timeLine.t-10;
-
-    for (const text of texts){
-        const screenPosition = text.position.clone();
-        screenPosition.project(camera);
-
-        //Ading position
-        // const translateX = screenPosition.x * sizes.width * 0.5;
-        // const translateY = - screenPosition.y * sizes.height * 0.5;
-        // text.element.style.transform = `
-        // translateX(${translateX}px) 
-        // translateY(${translateY}px 
-        // )`;
-            
-        //Adding perspective 
-        const scale = -1.0 * (1.0/ text.position.z)
-        if(scale < 200){
-            text.element.style.scale = scale;
-        }else{
-
+    if (experienceStarted){
+        for (const text of texts){
+            //Animating position
+            text.position.z = Math.pow(((timeLine.t*text.speed)-text.appearTime), text.staticTime)-text.distance;
+    
+            //Adding perspective 
+            const scale = -1.0 * (1.0/ text.position.z)
+            if(text.position.z < -0.01 && text.position.z > -15){
+                text.element.style.display = 'flex';
+                text.element.style.scale = scale;
+                text.element.style.opacity = 4/Math.abs(Math.pow(text.position.z, 2));
+            }else{
+                text.element.style.display = 'none';
+            }   
         }
     }
 
@@ -259,11 +268,13 @@ const tick = ()=>{
 
     renderer.render(scene, camera);
     window.requestAnimationFrame(tick);
-    stats.end()
+    // stats.end()
 } 
 
 console.timeEnd('Threejs')
 tick();
+
+//---------------------------------------- Functions ------------------------------
 
 function createFingerprint(){
     //Errase last fingertip
@@ -334,7 +345,7 @@ function createFingerprint(){
     fingerprintParticlesMaterial = new THREE.ShaderMaterial({
         vertexShader: fingerprintParticlesVS,
         fragmentShader: fingerprintParticlesFS,
-        // transparent: true,
+        transparent: true,
         depthWrite: false,
         uniforms:{
             uPointSize: { value: size },
@@ -372,9 +383,24 @@ function createRandomParticles(){
     const positions = new Float32Array(count*3);
 
     for(let i = 0; i < count; i++){
-        positions[i*3+0] = (Math.random()-0.5)*width;
-        positions[i*3+1] = (Math.random()-0.5)*height;
+        const phi = Math.random() * Math.PI * 2; // Ángulo alrededor del eje Y (0 a 2π)
+        const costheta = Math.random() * 2 - 1; // Valor entre -1 y 1
+        const u = Math.random(); // Valor entre 0 y 1
+        const theta = Math.acos(costheta); // Ángulo respecto al eje Y (0 a π)
+        const r = height/2 * Math.cbrt(u); // Aplicamos la distancia radial para distribuir las partículas uniformemente en el volumen de la esfera
+      
+        // Coordenadas cartesianas
+        const x = r * Math.sin(theta) * Math.cos(phi);
+        const y = r * Math.sin(theta) * Math.sin(phi);
+        const z = r * Math.cos(theta);
+      
+        positions[i*3+0] = x
+        positions[i*3+1] = y
         positions[i*3+2] = (Math.random()-1.0)*depth;
+
+        // positions[i*3+0] = (Math.random()-0.5)*width;
+        // positions[i*3+1] = (Math.random()-0.5)*height;
+        // positions[i*3+2] = (Math.random()-1.0)*depth;
     }
     randomPositions = positions;
 
@@ -385,7 +411,8 @@ function createRandomParticles(){
     randomParticlesMaterial = new THREE.ShaderMaterial({
         vertexShader: randomParticlesVS,
         fragmentShader: randomParticlesFS,
-        // depthWrite: false,
+        depthWrite: false,
+        transparent: true,
         uniforms: {
             uPointSize: { value: size },
             uPixelRatio: { value : Math.min(window.devicePixelRatio, 2)},
@@ -396,17 +423,11 @@ function createRandomParticles(){
     })
 
     randomParticles = new THREE.Points(randomParticlesGeometry, randomParticlesMaterial);
-    randomParticles.position.z = -350;
     scene.add(randomParticles);
 
 }
 
 function createQrCodes(){
-    const qrCodesTextures = [];
-
-    for(let i = 0; i < (qrCodes.length > 300 ? 300 : qrCodes.length ); i++){
-        qrCodesTextures.push(textureLoader.load(qrCodes[i].image));
-    }
 
 
     for (let i = 0; i < 300; i++){
@@ -428,29 +449,60 @@ function createQrCodes(){
 
         qrCodesGroup.add(qrCodeMesh);
         qrCodesArray.push(qrCodeMesh);
+
+        
     }
+
+    qrCodesGroup.position.z = -1000;
     scene.add(qrCodesGroup);
+    
 
 }
 
 
 function createText(){
-    plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({color: 'black'}));
-    plane.position.z = -5 
-    // scene.add(plane);
-
     texts = [
         {
-            position: new THREE.Vector3(0, 0, -5),
-            element: document.querySelector('.text-0')
+            position: new THREE.Vector3(0, 0, 0),
+            element: document.querySelector('.text-0'),
+            appearTime: 2,
+            speed: 0.03,
+            distance: 1,
+            staticTime: 3
         },
-        // {
-        //     position: new THREE.Vector3(),
-        //     element: document.querySelector('.point-0')
-        // },
+        {
+            position: new THREE.Vector3(0, 0, 0),
+            element: document.querySelector('.text-1'),
+            appearTime: 4,
+            speed: 0.03,
+            distance: 1,
+            staticTime: 3
+        },
+        {
+            position: new THREE.Vector3(0, 0, 0),
+            element: document.querySelector('.text-2'),
+            appearTime: 6,
+            speed: 0.03,
+            distance: 1,
+            staticTime: 3
+        },
+        {
+            position: new THREE.Vector3(0, 0, 0),
+            element: document.querySelector('.text-3'),
+            appearTime: 8,
+            speed: 0.03,
+            distance: 1,
+            staticTime: 3
+        },
+        {
+            position: new THREE.Vector3(0, 0, 0),
+            element: document.querySelector('.text-4'),
+            appearTime: 2.5,
+            speed: 0.004,
+            distance: 1,
+            staticTime: 17 
+        },
     ];
-    
-
 }
 
 function addDebugUI(){

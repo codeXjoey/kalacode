@@ -17,8 +17,8 @@ void main (){
     vec3 vertexPosition = position;
 
     //Modified the wich change direction at time line value 300
-    float timeLine = -abs(uTimeLine-300.0);
-    float t = -(timeLine-uTime)*0.01;
+    float timeLine = -abs(uTimeLine-280.0);
+    float t = -(timeLine-uTime)*0.005;
     t += distance(vertexPosition.z, 0.0);
 
     //Particles go backwards when arrived to 0
@@ -35,7 +35,8 @@ void main (){
     gl_PointSize = uPointSize;
 
     //Perspective & pixelRatio fix
-    gl_PointSize *= (1.0/ -viewPosition.z)*uPixelRatio;
+    gl_PointSize *= (1.0/ -viewPosition.z);
+    gl_PointSize *= uPixelRatio;
 
     //Varyings
     vRandomColor = aRandomColors;
