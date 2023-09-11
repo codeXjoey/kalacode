@@ -57,17 +57,17 @@ let randomPositions = null;
 
 let qrCodes = [
     {
-        'image': '/resources/textures/QrCode.png',
+        'image': '/textures/QrCode.png',
         'prompt': 'The best Qr Ever',
         'id': '1'
     },
     {
-        'image': '/resources/textures/QrCode.png',
+        'image': '/textures/QrCode.png',
         'prompt': 'The best Qr Ever',
         'id': '1'
     },
     {
-        'image': '/resources/textures/QrCode.png',
+        'image': '/textures/QrCode.png',
         'prompt': 'The best Qr Ever',
         'id': '1'
     }
@@ -119,7 +119,7 @@ loadingManager.onLoad = ()=>{
 
 
 //Fingerprint
-const fingerprintTexture = textureLoader.load('/resources/textures/fingerprint.jpg');
+const fingerprintTexture = textureLoader.load('/textures/fingerprint.jpg');
 
 //QrCodes
 const qrCodesTextures = [];
