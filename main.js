@@ -195,7 +195,7 @@ createText();
 let timeLine = { t : 0 };
 // let qrCodesCreated = false;
 window.addEventListener('scroll', (event)=>{
-    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.15});
+    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.075});
     console.log(texts[1].position.z)
     // if(timeLine.t>500 && !qrCodesCreated){
     //     qrCodesCreated = true
