@@ -106,6 +106,15 @@ window.addEventListener('resize', ()=>{
     //Update Material
     fingerprintParticlesMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
     randomParticlesMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
+    
+    //Scroll speed update
+    if(sizes.width > 700){
+        scrollVelocity = 0.12;
+        scrollContainer.style.height = '28000px';    
+    }else{
+        scrollVelocity = 0.075;
+        scrollContainer.style.height = '44000px';
+    }
 });
 
 //------------------------------ Loaders --------------------------------------------------
@@ -131,6 +140,7 @@ for(let i = 0; i < (qrCodes.length > 300 ? 300 : qrCodes.length ); i++){
     qrCodesTextures.push(texture)
 }
 
+//--------------------------------------------- Setup ----------------------------
 
 //Scene 
 const scene = new THREE.Scene();
@@ -162,6 +172,10 @@ const startButton = document.querySelector('.button_start-experience')
 const overlay = document.querySelector('.overlay');
 const scrollContainer = document.querySelector('.scrollable-container');
 
+const buttonGenerateThenActive = document.querySelector('.button_generate-then--active')
+const buttonGenerateThen = document.querySelector('.button_generate-then')
+
+
 const loaded = ()=>{
     setTimeout(()=>startButton.classList.add('button_start-experience--active'), 500)
 }
@@ -172,10 +186,22 @@ startButton.addEventListener('click', ()=>{
         overlay.style.display = "none";
         experienceStarted = true;
     }, 500)
-    scrollContainer.style.height = '22500px';
+    if(sizes.width > 700){
+        scrollVelocity = 0.12;
+        scrollContainer.style.height = '28000px';    
+    }else{
+        scrollVelocity = 0.075;
+        scrollContainer.style.height = '44000px';
+    }
 
 })
 
+buttonGenerateThen.addEventListener('click', ()=>{
+    window.scrollTo(0, 7500);
+})
+buttonGenerateThenActive.addEventListener('click', ()=>{
+    window.scrollTo(0, 7500);
+})
 
 
 
@@ -193,14 +219,10 @@ createText();
 
 //Scroll event
 let timeLine = { t : 0 };
-// let qrCodesCreated = false;
+let scrollVelocity = null;
+
 window.addEventListener('scroll', (event)=>{
-    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*0.075});
-    console.log(texts[1].position.z)
-    // if(timeLine.t>500 && !qrCodesCreated){
-    //     qrCodesCreated = true
-    //     createQrCodes();
-    // }
+    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
 })
 
 //Animate
@@ -224,7 +246,9 @@ const tick = ()=>{
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
-    //Animating particles position
+    //Animating buttons
+    const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - 400)/(850 - 400)))*100;
+    buttonGenerateThenActive.style.clipPath = `polygon(${buttonPercentage}% 0, ${buttonPercentage}% 100%, 0 100%, 0 0)`;
 
     //Parallax Effect
     const parallaxX = -cursor.x*1;
@@ -252,7 +276,7 @@ const tick = ()=>{
             if(text.position.z < -0.01 && text.position.z > -15){
                 text.element.style.display = 'flex';
                 text.element.style.scale = scale;
-                text.element.style.opacity = 4/Math.abs(Math.pow(text.position.z, 2));
+                text.element.style.opacity = 2/Math.abs((text.position.z));
             }else{
                 text.element.style.display = 'none';
             }   
@@ -428,8 +452,6 @@ function createRandomParticles(){
 }
 
 function createQrCodes(){
-
-
     for (let i = 0; i < 300; i++){
         let randomImage = 0;
         if(i <= qrCodesTextures.length){
@@ -448,15 +470,11 @@ function createQrCodes(){
         qrCodeMesh.position.z = randomPositions[i*3+2]*12;
 
         qrCodesGroup.add(qrCodeMesh);
-        qrCodesArray.push(qrCodeMesh);
-
-        
+        qrCodesArray.push(qrCodeMesh);      
     }
 
     qrCodesGroup.position.z = -1000;
     scene.add(qrCodesGroup);
-    
-
 }
 
 
@@ -532,3 +550,7 @@ function addDebugUI(){
     randomParticlesGui.add(debug, 'randomParticlesDepth', 1, 150, 1);
 
 }
+
+// Una pasion no es mas que la interseccion entre multiples curiosidades. Averigua que tienen en comun esas cosas que realmente te interesan y habras encontrado una pasion
+// Conecta esa pasion con un problema existente en el mundo que quieras resolver y habras encontrado un propositio
+// Alinea es e poropositoi con cualquier tectnologia o servicio emergente y tendras el mapa para cualquier negocio a largo plazo

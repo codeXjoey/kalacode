@@ -3,11 +3,6 @@
   padding: 0px;
 }
 
-@font-face{
-  font-family: stangith;
-  src:url(/resources/fonts/stangith.ttf)
-}
-
 html, body {
   /* overflow:hidden ; */
   background-color: black;
@@ -23,6 +18,7 @@ html, body {
 .scrollable-container {
    /* Altura deseada para el contenedor */
   overflow:visible;
+  font-family: 'Courier Prime', monospace;
   
 }
 
@@ -60,16 +56,17 @@ html, body {
   display: flex;
   justify-content: center;
   margin-bottom: 48px;
+  
 
 }
 
 .button_start-experience{ 
+  font-family: 'Courier Prime', monospace;
   cursor: pointer;
   width: 300px;
   height: 75px;
   font-size: 30px;
   border-radius: 60px;
-  font-family: stangith;
   background-color: black;
   color: white;
   border: solid 1px white;
@@ -90,7 +87,6 @@ html, body {
   justify-content: center;
   color: white;
   font-size: 50px;
-  font-family: stangith;
   text-align: center;
   transition: opacity 0.5s;
 }
@@ -104,26 +100,43 @@ html, body {
   justify-content: space-around;
 }
 
-.text-4 > div > footer > button{
+.button_generate-now{
+  font-family: 'Courier Prime', monospace;
   cursor: pointer;
   width: 300px;
   height: 80px;
   font-size: 30px;
   border-radius: 60px;
-  border: none;
   margin-top: 24px;
-  font-family: stangith;
-}
-
-#button_generate-now{
   background-color: #e17209;
   color: white;
+  border: none;
 }
-#button_generate-then{
+
+.text-4 > div > footer > div > button{
+  font-family: 'Courier Prime', monospace;
+  cursor: pointer;
+  width: 300px;
+  height: 80px;
+  font-size: 30px;
+  border-radius: 60px;
+  margin-top: 24px;
+  
+}
+
+.button_generate-then{
   background-color: transparent;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(1px);
   color: white;
   border: solid 1px white;
+  position: absolute;
+}
+
+.button_generate-then--active {
+  border: none;
+  background-color: white;
+  color: black;
+  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
 }
 
 @media (max-width: 800px) {
@@ -146,6 +159,12 @@ html, body {
 
   }
   .text-4 > div > footer > button{
+    width: 250px;
+    height: 60px;
+    font-size: 22px;
+    /* padding-bottom: 5; */
+  }
+  .text-4 > div > footer > div > button{
     width: 250px;
     height: 60px;
     font-size: 22px;
