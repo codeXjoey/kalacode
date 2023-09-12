@@ -223,8 +223,8 @@ createText();
 //-------------------------------------------- Ray caster ---------------------------------
 const raycaster = new THREE.Raycaster();
 
-window.addEventListener('click', (event)=>{
-    
+const qrCodeOnClick = (event)=>{
+    console.log(event);
     const clickCoord = new THREE.Vector2(
         (event.clientX/sizes.width-0.5)*2,
         -(event.clientY/sizes.height-0.5)*2,
@@ -246,12 +246,15 @@ window.addEventListener('click', (event)=>{
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -1});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
-        
     
         // mouseIntersects[0].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
 
     }
-})
+    
+}
+window.addEventListener('click', (event)=>{qrCodeOnClick(event)});
+window.addEventListener('touchstart', (event)=>{qrCodeOnClick(event)});
+
 //-------------------------------------------- Animation ----------------------------------
 
 //Scroll event
