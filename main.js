@@ -185,7 +185,7 @@ const loaded = ()=>{
     setTimeout(()=>startButton.classList.add('button_start-experience--active'), 500)
 }
 
-startButton.addEventListener('click', ()=>{
+startButton.addEventListener('pointerdown', ()=>{
     overlay.classList.add('overlay--inactive');
     setTimeout(()=>{
         overlay.style.display = "none";
@@ -201,10 +201,10 @@ startButton.addEventListener('click', ()=>{
 
 })
 
-buttonGenerateThen.addEventListener('click', ()=>{
+buttonGenerateThen.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
 })
-buttonGenerateThenActive.addEventListener('click', ()=>{
+buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
 })
 
