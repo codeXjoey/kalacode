@@ -253,8 +253,9 @@ const qrCodeOnClick = (event)=>{
     }   
 }
  
-window.addEventListener('click', qrCodeOnClick);
-window.addEventListener('touchend', qrCodeOnClick);
+window.addEventListener('pointerdown', qrCodeOnClick);
+// window.addEventListener('touchend', qrCodeOnClick);
+// window.addEventListener('touch', qrCodeOnClick);
 
 //-------------------------------------------- Animation ----------------------------------
 
