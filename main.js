@@ -80,6 +80,9 @@ let qrCodeMaterial  = null;
 
 let texts = null;
 
+// let currentIntersect = false;
+let mouseIntersects = null;
+
 
 //-------------------------------- Utils ----------------------------------------------------------
 //Sizes 
@@ -215,6 +218,20 @@ createQrCodes();
 
 createText();
 
+//-------------------------------------------- Ray caster ---------------------------------
+const raycaster = new THREE.Raycaster();
+
+window.addEventListener('click', ()=>{
+    if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35){
+        // console.log(mouseIntersects)
+        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, x: 0});
+        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, y: 0});
+        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, z: -1});
+    
+        // mouseIntersects[0].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
+
+    }
+})
 //-------------------------------------------- Animation ----------------------------------
 
 //Scroll event
@@ -226,15 +243,13 @@ window.addEventListener('scroll', (event)=>{
 })
 
 //Animate
-const cursor = {
-    x: 0,
-    y: 0,
-}
+const cursor = new THREE.Vector2();
 
 window.addEventListener('mousemove', (event)=>{
-    cursor.x = -((event.clientX/ sizes.width)-0.5);
-    cursor.y = -((event.clientY/ sizes.height)-0.5);  
+    cursor.x = ((event.clientX/ sizes.width)-0.5)*2;
+    cursor.y = -((event.clientY/ sizes.height)-0.5)*2;  
 })
+
 
 const clock = new THREE.Clock();
 let previousTime = 0;
@@ -251,8 +266,8 @@ const tick = ()=>{
     buttonGenerateThenActive.style.clipPath = `polygon(${buttonPercentage}% 0, ${buttonPercentage}% 100%, 0 100%, 0 0)`;
 
     //Parallax Effect
-    const parallaxX = -cursor.x*1;
-    const parallaxY = cursor.y*1;
+    const parallaxX = cursor.x*0.5;
+    const parallaxY = cursor.y*0.5;
 
     cameraGroup.position.x += (parallaxX - cameraGroup.position.x)*2 * deltaTime;
     cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
@@ -260,10 +275,16 @@ const tick = ()=>{
     //Animating QrCodes 
     if(qrCodesArray && timeLine.t > 700){
         for (let i = 0; i < qrCodesArray.length; i++){
-                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
+            qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
+            qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
         }
-        qrCodesGroup.position.z = (timeLine.t*0.25)-225;
+        // qrCodesGroup.position.z = (timeLine.t*0.25)-225;
     }
+
+    //QrCodes interaction
+    raycaster.setFromCamera(cursor, camera);
+    mouseIntersects = raycaster.intersectObjects(qrCodesArray);
+
 
     //Animating text
     if (experienceStarted){
@@ -467,14 +488,11 @@ function createQrCodes(){
         const qrCodeMesh = new THREE.Mesh(qrCodeGeometry, qrCodeMaterial)
         qrCodeMesh.position.x = randomPositions[i*3+0]/2
         qrCodeMesh.position.y = randomPositions[i*3+1]/2
-        qrCodeMesh.position.z = randomPositions[i*3+2]*12;
-
-        qrCodesGroup.add(qrCodeMesh);
+        qrCodeMesh.position.z = 5;
+        
+        scene.add(qrCodeMesh);
         qrCodesArray.push(qrCodeMesh);      
-    }
-
-    qrCodesGroup.position.z = -1000;
-    scene.add(qrCodesGroup);
+    }    
 }
 
 
