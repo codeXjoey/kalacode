@@ -62,7 +62,7 @@ let qrCodes = [
         'id': '1'
     },
     {
-        'image': '/textures/QrCode.png',
+        'image': '/textures/QrCode1.jpeg',
         'prompt': 'The best Qr Ever',
         'id': '1'
     },
@@ -224,7 +224,6 @@ createText();
 const raycaster = new THREE.Raycaster();
 
 const qrCodeOnClick = (event)=>{
-    console.log(event);
     const clickCoord = new THREE.Vector2(
         (event.clientX/sizes.width-0.5)*2,
         -(event.clientY/sizes.height-0.5)*2,
@@ -235,7 +234,7 @@ const qrCodeOnClick = (event)=>{
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
     console.log(mouseIntersects);
 
-    if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35){
+    if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 ){
         qrCodeSelected = mouseIntersects[0].object;
         
         qrCodeSelected.isSelected = true;
@@ -244,16 +243,18 @@ const qrCodeOnClick = (event)=>{
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -1});
+
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: 0})
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0})
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0})
+
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
-    
-        // mouseIntersects[0].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
-
-    }
-    
+    }   
 }
-window.addEventListener('click', (event)=>{qrCodeOnClick(event)});
-window.addEventListener('touchstart', (event)=>{qrCodeOnClick(event)});
+ 
+window.addEventListener('click', qrCodeOnClick);
+window.addEventListener('touchend', qrCodeOnClick);
 
 //-------------------------------------------- Animation ----------------------------------
 
@@ -300,7 +301,9 @@ const tick = ()=>{
         for (let i = 0; i < qrCodesArray.length; i++){
             if(!qrCodesArray[i].isSelected){
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
-                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
+                qrCodesArray[i].actualRotation = (((timeLine.t+i)*0.2)+elapsedTime)*0.1
+                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), qrCodesArray[i].actualRotation);
+            
             }
         }
         // qrCodesGroup.position.z = (timeLine.t*0.25)-225;
