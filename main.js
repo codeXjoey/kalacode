@@ -74,7 +74,6 @@ let qrCodes = [
 ]
 
 const qrCodeGeometry = new THREE.PlaneGeometry(0.5, 0.5);
-let qrCodesGroup = new THREE.Group();
 let qrCodesArray = [];
 let qrCodeMaterial  = null;
 
@@ -83,6 +82,7 @@ let texts = null;
 // let currentIntersect = false;
 let mouseIntersects = null;
 let isObjectSelected = false;
+let qrCodeSelected = null;
 
 
 //-------------------------------- Utils ----------------------------------------------------------
@@ -223,16 +223,27 @@ createText();
 //-------------------------------------------- Ray caster ---------------------------------
 const raycaster = new THREE.Raycaster();
 
-window.addEventListener('click', ()=>{
+window.addEventListener('click', (event)=>{
+    
+    const clickCoord = new THREE.Vector2(
+        (event.clientX/sizes.width-0.5)*2,
+        -(event.clientY/sizes.height-0.5)*2,
+    )
+
+    // console.log(clickCoord);
+    raycaster.setFromCamera(clickCoord, camera);
+    mouseIntersects = raycaster.intersectObjects(qrCodesArray);
+    console.log(mouseIntersects);
+
     if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35){
-        const qrCode = mouseIntersects[0].object;
+        qrCodeSelected = mouseIntersects[0].object;
         
-        qrCode.isSelected = true;
+        qrCodeSelected.isSelected = true;
         isObjectSelected = true;
 
-        gsap.to(qrCode.position, {duration: 0.5, delay: 0, x: 0});
-        gsap.to(qrCode.position, {duration: 0.5, delay: 0, y: 0});
-        gsap.to(qrCode.position, {duration: 0.5, delay: 0, z: -1});
+        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
+        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
+        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -1});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
         
@@ -292,8 +303,8 @@ const tick = ()=>{
     }
 
     //QrCodes interaction
-    raycaster.setFromCamera(cursor, camera);
-    mouseIntersects = raycaster.intersectObjects(qrCodesArray);
+    // raycaster.setFromCamera(cursor, camera);
+    // mouseIntersects = raycaster.intersectObjects(qrCodesArray);
 
 
     //Animating text
