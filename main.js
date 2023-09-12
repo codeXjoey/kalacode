@@ -202,10 +202,10 @@ startButton.addEventListener('click', ()=>{
 })
 
 buttonGenerateThen.addEventListener('click', ()=>{
-    window.scrollTo(0, 7500);
+    window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
 })
 buttonGenerateThenActive.addEventListener('click', ()=>{
-    window.scrollTo(0, 7500);
+    window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
 })
 
 
@@ -259,6 +259,7 @@ let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
+    console.log(scrollY);
 })
 
 //Animate
