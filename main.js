@@ -82,6 +82,7 @@ let texts = null;
 
 // let currentIntersect = false;
 let mouseIntersects = null;
+let isObjectSelected = false;
 
 
 //-------------------------------- Utils ----------------------------------------------------------
@@ -154,6 +155,7 @@ const cameraGroup = new THREE.Group()
 scene.add(cameraGroup)
 
 const camera = new THREE.PerspectiveCamera(50, sizes.width/sizes.height, 0.01, 50);
+camera.position.set(0, 0, 0);
 cameraGroup.add(camera)
 
 //Renderer
@@ -223,10 +225,17 @@ const raycaster = new THREE.Raycaster();
 
 window.addEventListener('click', ()=>{
     if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35){
-        // console.log(mouseIntersects)
-        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, x: 0});
-        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, y: 0});
-        gsap.to(mouseIntersects[0].object.position, {duration: 1, delay: 0, z: -1});
+        const qrCode = mouseIntersects[0].object;
+        
+        qrCode.isSelected = true;
+        isObjectSelected = true;
+
+        gsap.to(qrCode.position, {duration: 0.5, delay: 0, x: 0});
+        gsap.to(qrCode.position, {duration: 0.5, delay: 0, y: 0});
+        gsap.to(qrCode.position, {duration: 0.5, delay: 0, z: -1});
+        gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
+        gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+        
     
         // mouseIntersects[0].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
 
@@ -237,19 +246,16 @@ window.addEventListener('click', ()=>{
 //Scroll event
 let timeLine = { t : 0 };
 let scrollVelocity = null;
-
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
 })
 
 //Animate
 const cursor = new THREE.Vector2();
-
 window.addEventListener('mousemove', (event)=>{
     cursor.x = ((event.clientX/ sizes.width)-0.5)*2;
     cursor.y = -((event.clientY/ sizes.height)-0.5)*2;  
 })
-
 
 const clock = new THREE.Clock();
 let previousTime = 0;
@@ -269,14 +275,18 @@ const tick = ()=>{
     const parallaxX = cursor.x*0.5;
     const parallaxY = cursor.y*0.5;
 
-    cameraGroup.position.x += (parallaxX - cameraGroup.position.x)*2 * deltaTime;
-    cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
+    if(!isObjectSelected){
+        cameraGroup.position.x += (parallaxX - cameraGroup.position.x)*2 * deltaTime;
+        cameraGroup.position.y += (parallaxY - cameraGroup.position.y)*2 * deltaTime;
+    }
 
     //Animating QrCodes 
     if(qrCodesArray && timeLine.t > 700){
         for (let i = 0; i < qrCodesArray.length; i++){
-            qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
-            qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
+            if(!qrCodesArray[i].isSelected){
+                qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
+                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), (((timeLine.t+i)*0.2)+elapsedTime)*0.1);
+            }
         }
         // qrCodesGroup.position.z = (timeLine.t*0.25)-225;
     }
@@ -489,6 +499,7 @@ function createQrCodes(){
         qrCodeMesh.position.x = randomPositions[i*3+0]/2
         qrCodeMesh.position.y = randomPositions[i*3+1]/2
         qrCodeMesh.position.z = 5;
+        qrCodeMesh.isSelected = false;
         
         scene.add(qrCodeMesh);
         qrCodesArray.push(qrCodeMesh);      
