@@ -174,7 +174,6 @@ renderer.setSize(sizes.width, sizes.height);
 //---------------------------------------------- Overlay------------------------------
 
 const startButton = document.querySelector('.button_start-experience')
-const overlay = document.querySelector('.overlay');
 const scrollContainer = document.querySelector('.scrollable-container');
 
 const buttonGenerateThenActive = document.querySelector('.button_generate-then--active')
@@ -182,13 +181,7 @@ const buttonGenerateThen = document.querySelector('.button_generate-then')
 
 
 const loaded = ()=>{
-    setTimeout(()=>startButton.classList.add('button_start-experience--active'), 500)
-}
-
-startButton.addEventListener('pointerdown', ()=>{
-    overlay.classList.add('overlay--inactive');
     setTimeout(()=>{
-        overlay.style.display = "none";
         experienceStarted = true;
     }, 500)
     if(sizes.width > 700){
@@ -198,8 +191,9 @@ startButton.addEventListener('pointerdown', ()=>{
         scrollVelocity = 0.075;
         scrollContainer.style.height = '44000px';
     }
+}
 
-})
+
 
 buttonGenerateThen.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
@@ -207,6 +201,7 @@ buttonGenerateThen.addEventListener('pointerdown', ()=>{
 buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
 })
+
 
 
 
@@ -271,7 +266,6 @@ let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-    // console.log(scrollY);
     if(qrCodeSelected){
         isObjectSelected = false;
         qrCodeSelected.isSelected = false;
@@ -319,28 +313,24 @@ const tick = ()=>{
         // qrCodesGroup.position.z = (timeLine.t*0.25)-225;
     }
 
-    //QrCodes interaction
-    // raycaster.setFromCamera(cursor, camera);
-    // mouseIntersects = raycaster.intersectObjects(qrCodesArray);
-
 
     //Animating text
-    if (experienceStarted){
-        for (const text of texts){
-            //Animating position
-            text.position.z = Math.pow(((timeLine.t*text.speed)-text.appearTime), text.staticTime)-text.distance;
-    
-            //Adding perspective 
-            const scale = -1.0 * (1.0/ text.position.z)
-            if(text.position.z < -0.01 && text.position.z > -15){
-                text.element.style.display = 'flex';
-                text.element.style.scale = scale;
-                text.element.style.opacity = 2/Math.abs((text.position.z));
-            }else{
-                text.element.style.display = 'none';
-            }   
-        }
+
+    for (const text of texts){
+        //Animating position
+        text.position.z = Math.pow(((timeLine.t*text.speed)-text.appearTime), text.staticTime)-text.distance;
+
+        //Adding perspective 
+        const scale = -1.0 * (1.0/ text.position.z)
+        if(text.position.z < -0.01 && text.position.z > -15){
+            text.element.style.display = 'flex';
+            text.element.style.scale = scale;
+            text.element.style.opacity = 2/Math.abs((text.position.z));
+        }else{
+            text.element.style.display = 'none';
+        }   
     }
+    
 
     //Update materials 
     fingerprintParticlesMaterial.uniforms.uTimeLine.value = timeLine.t;
@@ -540,7 +530,7 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-0'),
-            appearTime: 2,
+            appearTime: 0,
             speed: 0.03,
             distance: 1,
             staticTime: 3
@@ -548,7 +538,7 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-1'),
-            appearTime: 4,
+            appearTime: 2.5,
             speed: 0.03,
             distance: 1,
             staticTime: 3
@@ -556,7 +546,7 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-2'),
-            appearTime: 6,
+            appearTime: 5,
             speed: 0.03,
             distance: 1,
             staticTime: 3
@@ -564,7 +554,7 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-3'),
-            appearTime: 8,
+            appearTime: 7.5,
             speed: 0.03,
             distance: 1,
             staticTime: 3

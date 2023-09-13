@@ -1,7 +1,8 @@
 :root {
-  --fontsize-s: 18px;
-  --fontsize-m: 34px;
-  --fontsize-l: 80px;
+  --fontsize-xs: 22px;
+  --fontsize-s: 32px;
+  --fontsize-m: 64px;
+  --fontsize-l: 96px;
 }
 
 * {
@@ -22,8 +23,8 @@ html, body {
 }
 
 .scrollable-container {
-    /* Altura deseada para el contenedor eliminar cuando este termiando*/
-    height: 25000px;
+    /* Altura deseada para el contenedor eliminar cuando este termiando
+    height: 25000px; */
 
   overflow:visible;
   font-family: 'Courier Prime', monospace;
@@ -42,7 +43,7 @@ html, body {
 
 .navbar > img{
   width: 150px;
-  padding-left: 18px;
+  padding-left: 24px;
 }
 
 .navbar > button{
@@ -50,70 +51,10 @@ html, body {
   border: none;
   color: white;
   font-family: 'Courier Prime', monospace;
-  font-size: var(--fontsize-m);
-  padding-right: 18px;
+  font-size: var(--fontsize-s);
+  padding-right: 24px;
   cursor: pointer;
   /* padding-right: 80px; */
-}
-
-
-.overlay { 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  /* backdrop-filter: blur(10px);   */
-  color: white;
-}
-
-.overlay > image {
-  opacity: 0.5;
-}
-
-.overlay--inactive{
-  transition: opacity 0.5s;
-  opacity: 0;
-}
-
-.overlay > header{ 
-  margin-top: 48px;
-  display: flex;
-  justify-content: center
-}
-
-.overlay > p{ 
-  display: flex;
-  justify-content: center;
-  font-size: 50px;
-  text-align: center;
-}
-
-.overlay > footer{ 
-  display: flex;
-  justify-content: center;
-  margin-bottom: 48px;
-  
-
-}
-
-.button_start-experience{ 
-  font-family: 'Courier Prime', monospace;
-  cursor: pointer;
-  width: 300px;
-  height: 75px;
-  font-size: 30px;
-  border-radius: 60px;
-  background-color: black;
-  color: white;
-  border: solid 1px white;
-  opacity: 0;
-}
-.button_start-experience--active{
-  transition: opacity 0.25s;
-  opacity: 1;
 }
 
 .text {
@@ -125,93 +66,122 @@ html, body {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 50px;
+  font-size: var(--fontsize-l);;
   text-align: center;
   transition: opacity 0.5s;
 }
 
-.text-4 > div {
-  font-size: 80px;
+.text-0{
+  display: flex;
+  flex-direction: column;
+}
+
+.text-0 > footer {
+  font-size: var(--fontsize-s);
+  border: solid 1px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 364px;
+  height: 64px;
+  position: fixed;
+  bottom: 264px;
 }
 
 .text-4 > div > footer {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.generate-now{
+  display: flex;
+  align-items: center;
+  width: 364px;
+  height: 64px;
+  padding: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.5);  
 }
 
 .button_generate-now{
-  font-family: 'Courier Prime', monospace;
-  cursor: pointer;
-  width: 300px;
-  height: 80px;
-  font-size: 30px;
-  border-radius: 60px;
-  margin-top: 24px;
-  background-color: #e17209;
-  color: white;
+  background-color: white;
+  width: 80%;
+  height: 100%;
   border: none;
+  align-items: center;
+  text-align: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: var(--fontsize-s);
+  cursor: pointer;
+
 }
 
-.text-4 > div > footer > div > button{
-  font-family: 'Courier Prime', monospace;
+.generate-now > svg{
+  width: 20%;
+  height: 100%;
+  background-color: #e17209;
   cursor: pointer;
-  width: 300px;
-  height: 80px;
-  font-size: 30px;
-  border-radius: 60px;
-  margin-top: 24px;
-  
+
+}
+
+
+.generate-then{
+  width: 364px;
+  height: 64px;
+  display: flex;
+  position: relative; /* Establece el contenedor en posición relativa */
+
 }
 
 .button_generate-then{
+  width: 100%;
+  height: 100%;
+  border: none;
   background-color: transparent;
-  backdrop-filter: blur(1px);
   color: white;
-  border: solid 1px white;
+  font-family: 'Courier Prime', monospace;
+  font-size: var(--fontsize-s);
   position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  
 }
 
 .button_generate-then--active {
+  width: 100%;
+  height: 100%;
   border: none;
   background-color: white;
-  color: black;
-  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
+  font-family: 'Courier Prime', monospace;
+  font-size: var(--fontsize-s);
+  position: absolute;
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {
-  .overlay > p {
-    font-size: 25px;
+  .text{
+    font-size: var(--fontsize-s);
   }
-  .overlay > footer {
-    scale: 0.75;
-  }
-  .text {
-    font-size: 30px;
-  }
-  .text-4 > div {
-    font-size: 35px;
-  }
-  .text-4 > div > footer {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
+  .text-0 > footer {
+    font-size: var(--fontsize-xs);
+    width: 60%;
+    height: 64px;
+    bottom: 64px;
   }
-  .text-4 > div > footer > button{
-    width: 250px;
-    height: 60px;
-    font-size: 22px;
-    /* padding-bottom: 5; */
+
+  .text-4{
+    font-size: var(--fontsize-s);
+  }
+  .text-4 > div > footer{
+    flex-direction: column;
   }
   .text-4 > div > footer > div > button{
-    width: 250px;
-    height: 60px;
-    font-size: 22px;
-    /* padding-bottom: 5; */
+    font-size: var(--fontsize-xs);
   }
-  .overlay > footer{ 
-    margin-bottom: 94px;
+  .generate-then{
+    margin-top: 24px;
   }
-
-
 }
