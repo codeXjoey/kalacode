@@ -252,8 +252,8 @@ function qrCodeToCero(){
     gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
     gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5});
 
-    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x:  3.14159  })
-    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y:  3.14159 })
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x:  0})
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y:  3.14159})
     gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z:  0})
 
     gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
@@ -311,6 +311,11 @@ const tick = ()=>{
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
+    //Animating Particles Position
+    if(timeLine.t > 400){
+        randomParticles.position.z = (timeLine.t - 400)*0.25;
+    }
+
     //Animating buttons
     const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - 400)/(600 - 400)))*100;
     buttonGenerateThenActive.style.clipPath = `polygon(${buttonPercentage}% 0, ${buttonPercentage}% 100%, 0 100%, 0 0)`;
@@ -331,7 +336,6 @@ const tick = ()=>{
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
                 qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
                 qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
-                qrCodesArray[i].actualPosition = new THREE.Vector3(qrCodesArray[i].position.x, qrCodesArray[i].position.y, qrCodesArray[i].position.z);
             }
         }
 
@@ -532,9 +536,11 @@ function createQrCodes(){
         }else{
             randomImage = Math.floor(Math.random()*qrCodesTextures.length)
         }
+
         qrCodeMaterial = new THREE.MeshBasicMaterial({
             side: THREE.DoubleSide,
-            map: qrCodesTextures[randomImage]
+            map: qrCodesTextures[randomImage],
+            color: new THREE.Color(randomColors[i*3+0],randomColors[i*3+1], randomColors[i*3+2]),
         });
 
         const qrCodeMesh = new THREE.Mesh(qrCodeGeometry, qrCodeMaterial)
