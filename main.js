@@ -562,10 +562,10 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-4'),
-            appearTime: 4,
+            appearTime: 3.75,
             speed: 0.008,
             distance: 1,
-            staticTime: 17 
+            staticTime: 13
         },
     ];
 }
