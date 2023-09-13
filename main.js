@@ -30,12 +30,12 @@ const debug = {
     fingerprintBaseColor3: '#1d5ef7',
     fingerprintWidth: 10,
     fingerprintHeight: 14,
-    fingerprintResolution: 190,
-    fingerprintParticlesSize : 50,
+    fingerprintResolution: 110,
+    fingerprintParticlesSize : 60,
     fingerprintparticlesRandomOffset: 0.3,
 
     //Random particles 
-    ranodmCount: 2500,
+    ranodmCount: 2000,
     randomSize: 20,
     randomParticlesDepth: 50,
 
@@ -227,36 +227,57 @@ const qrCodeOnClick = (event)=>{
     raycaster.setFromCamera(clickCoord, camera);
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
 
-    if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 ){
+    if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected){
         qrCodeSelected = mouseIntersects[0].object;
         
         qrCodeSelected.isSelected = true;
         isObjectSelected = true;
         const i = qrCodesArray.indexOf(qrCodeSelected);
-        console.log(qrCodeSelected.rotation.x);
         // qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), 0);
         
+        qrCodeToCero();
 
-        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
-        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
-        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5});
 
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: 0 })
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0 })
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0 })
-
-        gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
-        gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+        console.log(qrCodeSelected.actualRotation);
     } else {
         if(isObjectSelected){
-            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: qe })
-            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0 })
-            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0 })
+            qrCodeToPrevious();
         }
     }
 } 
 window.addEventListener('pointerdown', qrCodeOnClick);
 
+function qrCodeToCero(){
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5});
+
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x:  3.14159  })
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y:  3.14159 })
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z:  0})
+
+    gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
+    gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+}
+
+function qrCodeToPrevious(){
+    setTimeout(()=>{
+        qrCodeSelected.isSelected = false;
+        isObjectSelected = false;
+    }, 500);
+    const i = qrCodesArray.indexOf(qrCodeSelected)
+
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: randomPositions[i*3+0]/2});
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: randomPositions[i*3+1]/2});
+    gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: (timeLine.t*0.25+randomPositions[i*3+2]*12)-160});
+
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: qrCodeSelected.actualRotation.x})
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: qrCodeSelected.actualRotation.y})
+    gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: qrCodeSelected.actualRotation.z})
+
+    gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
+    gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+}
 
 //-------------------------------------------- Animation ----------------------------------
 
@@ -264,11 +285,12 @@ window.addEventListener('pointerdown', qrCodeOnClick);
 let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
-    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-    console.log(scrollY)
-    if(qrCodeSelected){
-        isObjectSelected = false;
-        qrCodeSelected.isSelected = false;
+    if(!isObjectSelected){
+        gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
+        // console.log(scrollY)
+        if(qrCodeSelected){
+            qrCodeToPrevious();
+        }
     }
 })
 
@@ -308,9 +330,11 @@ const tick = ()=>{
             if(!qrCodesArray[i].isSelected){
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
                 qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
+                qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
+                qrCodesArray[i].actualPosition = new THREE.Vector3(qrCodesArray[i].position.x, qrCodesArray[i].position.y, qrCodesArray[i].position.z);
             }
         }
-        // qrCodesGroup.position.z = (timeLine.t*0.25)-225;
+
     }
 
 
