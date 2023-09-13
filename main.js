@@ -29,9 +29,9 @@ const debug = {
     fingerprintBaseColor2: '#ffffff',
     fingerprintBaseColor3: '#1d5ef7',
     fingerprintWidth: 10,
-    fingerprintHeight: 12,
-    fingerprintResolution: 150,
-    fingerprintParticlesSize : 35,
+    fingerprintHeight: 14,
+    fingerprintResolution: 190,
+    fingerprintParticlesSize : 50,
     fingerprintparticlesRandomOffset: 0.3,
 
     //Random particles 
@@ -132,7 +132,7 @@ loadingManager.onLoad = ()=>{
 
 
 //Fingerprint
-const fingerprintTexture = textureLoader.load('/textures/fingerprint.jpg');
+const fingerprintTexture = textureLoader.load('/textures/fingerprint2.jpg');
 
 //QrCodes
 const qrCodesTextures = [];
@@ -232,30 +232,37 @@ const qrCodeOnClick = (event)=>{
     // console.log(clickCoord);
     raycaster.setFromCamera(clickCoord, camera);
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
-    console.log(mouseIntersects);
 
     if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 ){
         qrCodeSelected = mouseIntersects[0].object;
         
         qrCodeSelected.isSelected = true;
         isObjectSelected = true;
+        const i = qrCodesArray.indexOf(qrCodeSelected);
+        console.log(qrCodeSelected.rotation.x);
+        // qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), 0);
+        
 
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
-        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -1});
+        gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5});
 
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: 0})
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0})
-        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0})
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: 0 })
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0 })
+        gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0 })
 
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
         gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
-    }   
-}
- 
+    } else {
+        if(isObjectSelected){
+            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: qe })
+            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: 0 })
+            // gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: 0 })
+        }
+    }
+} 
 window.addEventListener('pointerdown', qrCodeOnClick);
-// window.addEventListener('touchend', qrCodeOnClick);
-// window.addEventListener('touch', qrCodeOnClick);
+
 
 //-------------------------------------------- Animation ----------------------------------
 
@@ -264,7 +271,11 @@ let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-    console.log(scrollY);
+    // console.log(scrollY);
+    if(qrCodeSelected){
+        isObjectSelected = false;
+        qrCodeSelected.isSelected = false;
+    }
 })
 
 //Animate
@@ -302,9 +313,7 @@ const tick = ()=>{
         for (let i = 0; i < qrCodesArray.length; i++){
             if(!qrCodesArray[i].isSelected){
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
-                qrCodesArray[i].actualRotation = (((timeLine.t+i)*0.2)+elapsedTime)*0.1
-                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), qrCodesArray[i].actualRotation);
-            
+                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
             }
         }
         // qrCodesGroup.position.z = (timeLine.t*0.25)-225;

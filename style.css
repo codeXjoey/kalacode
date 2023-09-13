@@ -1,3 +1,9 @@
+:root {
+  --fontsize-s: 18px;
+  --fontsize-m: 34px;
+  --fontsize-l: 80px;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -16,11 +22,40 @@ html, body {
 }
 
 .scrollable-container {
-   /* Altura deseada para el contenedor */
+    /* Altura deseada para el contenedor eliminar cuando este termiando*/
+    height: 25000px;
+
   overflow:visible;
   font-family: 'Courier Prime', monospace;
   
 }
+
+.navbar{
+  position: fixed;
+  display: flex ;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  height: 102px;
+  opacity: 0.5;
+}
+
+.navbar > img{
+  width: 150px;
+  padding-left: 18px;
+}
+
+.navbar > button{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: 'Courier Prime', monospace;
+  font-size: var(--fontsize-m);
+  padding-right: 18px;
+  cursor: pointer;
+  /* padding-right: 80px; */
+}
+
 
 .overlay { 
   display: flex;
@@ -30,8 +65,12 @@ html, body {
   width: 100%;
   height: 100vh;
   position: fixed;
-  backdrop-filter: blur(10px);  
+  /* backdrop-filter: blur(10px);   */
   color: white;
+}
+
+.overlay > image {
+  opacity: 0.5;
 }
 
 .overlay--inactive{
