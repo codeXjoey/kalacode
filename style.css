@@ -1,8 +1,8 @@
 :root {
-  --fontsize-xs: 22px;
-  --fontsize-s: 32px;
-  --fontsize-m: 64px;
-  --fontsize-l: 96px;
+  --fontsize-xs: 18px;
+  --fontsize-s: 28px;
+  --fontsize-m: 48px;
+  --fontsize-l: 64px;
 }
 
 * {
@@ -100,8 +100,8 @@ html, body {
   display: flex;
   color: black;
   align-items: center;
-  width: 364px;
-  height: 64px;
+  width: 316px;
+  height: 58px;
   padding: 1px;
   border: 1px solid rgba(255, 255, 255, 0.5);  
 }
@@ -130,8 +130,8 @@ html, body {
 
 
 .generate-then{
-  width: 364px;
-  height: 64px;
+  width: 316px;
+  height: 58px;
   display: flex;
   position: relative; /* Establece el contenedor en posición relativa */
 
@@ -163,7 +163,7 @@ html, body {
   cursor: pointer;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .text{
     font-size: var(--fontsize-s);
   }
@@ -175,8 +175,9 @@ html, body {
     bottom: 128px;
   }
 
-  .text-4{
+  .text-4 > div{
     font-size: var(--fontsize-s);
+    width: 100%;
   }
   .text-4 > div > footer{
     flex-direction: column;
@@ -186,5 +187,12 @@ html, body {
   }
   .generate-then{
     margin-top: 24px;
+    width: 60%;
+    height: 48px;
+  }
+  .generate-now{
+    margin-top: 24px;
+    width: 60%;
+    height: 48px;
   }
 }

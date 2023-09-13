@@ -114,10 +114,10 @@ window.addEventListener('resize', ()=>{
     //Scroll speed update
     if(sizes.width > 700){
         scrollVelocity = 0.12;
-        scrollContainer.style.height = '28000px';    
+        scrollContainer.style.height = '26000px';    
     }else{
         scrollVelocity = 0.075;
-        scrollContainer.style.height = '44000px';
+        scrollContainer.style.height = '40500px';
     }
 });
 
@@ -173,7 +173,6 @@ renderer.setSize(sizes.width, sizes.height);
 
 //---------------------------------------------- Overlay------------------------------
 
-const startButton = document.querySelector('.button_start-experience')
 const scrollContainer = document.querySelector('.scrollable-container');
 
 const buttonGenerateThenActive = document.querySelector('.button_generate-then--active')
@@ -186,20 +185,20 @@ const loaded = ()=>{
     }, 500)
     if(sizes.width > 700){
         scrollVelocity = 0.12;
-        scrollContainer.style.height = '28000px';    
+        scrollContainer.style.height = '26000px';    
     }else{
         scrollVelocity = 0.075;
-        scrollContainer.style.height = '44000px';
+        scrollContainer.style.height = '40500px';
     }
 }
 
 
 
 buttonGenerateThen.addEventListener('pointerdown', ()=>{
-    window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
+    window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
 })
 buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
-    window.scrollTo(0, sizes.width > 700 ? 7500 : 12000);
+    window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
 })
 
 
@@ -266,6 +265,7 @@ let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
     gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
+    console.log(scrollY)
     if(qrCodeSelected){
         isObjectSelected = false;
         qrCodeSelected.isSelected = false;
@@ -290,7 +290,7 @@ const tick = ()=>{
     previousTime = elapsedTime;
 
     //Animating buttons
-    const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - 400)/(850 - 400)))*100;
+    const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - 400)/(600 - 400)))*100;
     buttonGenerateThenActive.style.clipPath = `polygon(${buttonPercentage}% 0, ${buttonPercentage}% 100%, 0 100%, 0 0)`;
 
     //Parallax Effect
@@ -303,10 +303,10 @@ const tick = ()=>{
     }
 
     //Animating QrCodes 
-    if(qrCodesArray && timeLine.t > 700){
+    if(qrCodesArray && timeLine.t > 400){
         for (let i = 0; i < qrCodesArray.length; i++){
             if(!qrCodesArray[i].isSelected){
-                qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-225 
+                qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
                 qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
             }
         }
@@ -562,8 +562,8 @@ function createText(){
         {
             position: new THREE.Vector3(0, 0, 0),
             element: document.querySelector('.text-4'),
-            appearTime: 2.5,
-            speed: 0.004,
+            appearTime: 4,
+            speed: 0.008,
             distance: 1,
             staticTime: 17 
         },
