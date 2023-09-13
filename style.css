@@ -98,6 +98,7 @@ html, body {
 
 .generate-now{
   display: flex;
+  color: black;
   align-items: center;
   width: 364px;
   height: 64px;
@@ -107,6 +108,7 @@ html, body {
 
 .button_generate-now{
   background-color: white;
+  color: black;
   width: 80%;
   height: 100%;
   border: none;
@@ -154,6 +156,7 @@ html, body {
   height: 100%;
   border: none;
   background-color: white;
+  color: black;
   font-family: 'Courier Prime', monospace;
   font-size: var(--fontsize-s);
   position: absolute;
