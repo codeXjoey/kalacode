@@ -334,7 +334,10 @@ const tick = ()=>{
         for (let i = 0; i < qrCodesArray.length; i++){
             if(!qrCodesArray[i].isSelected){
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
-                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
+                // qrCodesArray[i].rotation.x = ((timeLine.t+i)*0.2+elapsedTime)*0.1
+                // qrCodesArray[i].rotation.y = ((timeLine.t+i)*0.2+elapsedTime)*0.1
+                // qrCodesArray[i].rotation.z = ((timeLine.t+i)*0.2+elapsedTime)*0.1
+                qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomPositions[i*3+1], randomPositions[i*3+2], randomPositions[i*3+2]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
                 qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
             }
         }
@@ -350,10 +353,10 @@ const tick = ()=>{
 
         //Adding perspective 
         const scale = -1.0 * (1.0/ text.position.z)
-        if(text.position.z < -0.01 && text.position.z > -15){
+        if(text.position.z < -0.01 && text.position.z > -40){
             text.element.style.display = 'flex';
             text.element.style.scale = scale;
-            text.element.style.opacity = 2/Math.abs((text.position.z));
+            // text.element.style.opacity = 1/Math.abs(Math.pow(text.position.z, 3));
         }else{
             text.element.style.display = 'none';
         }   
@@ -529,7 +532,7 @@ function createRandomParticles(){
 }
 
 function createQrCodes(){
-    for (let i = 0; i < 300; i++){
+    for (let i = 0; i < 400; i++){
         let randomImage = 0;
         if(i <= qrCodesTextures.length){
            randomImage = i;
@@ -563,7 +566,7 @@ function createText(){
             appearTime: 0,
             speed: 0.03,
             distance: 1,
-            staticTime: 3
+            staticTime: 5
         },
         {
             position: new THREE.Vector3(0, 0, 0),
@@ -571,7 +574,7 @@ function createText(){
             appearTime: 2.5,
             speed: 0.03,
             distance: 1,
-            staticTime: 3
+            staticTime: 5
         },
         {
             position: new THREE.Vector3(0, 0, 0),
@@ -579,7 +582,7 @@ function createText(){
             appearTime: 5,
             speed: 0.03,
             distance: 1,
-            staticTime: 3
+            staticTime: 5
         },
         {
             position: new THREE.Vector3(0, 0, 0),
@@ -587,7 +590,7 @@ function createText(){
             appearTime: 7.5,
             speed: 0.03,
             distance: 1,
-            staticTime: 3
+            staticTime: 5
         },
         {
             position: new THREE.Vector3(0, 0, 0),
