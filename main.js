@@ -1,8 +1,6 @@
 import './style.css';
 
 import * as THREE from 'three';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import fingerprintParticlesVS from '/resources/shaders/fingerprintShader/vertex.glsl'
 import fingerprintParticlesFS from '/resources/shaders/fingerprintShader/fragment.glsl'
@@ -11,18 +9,11 @@ import randomParticlesVS from '/resources/shaders/randomParticlesShader/vertex.g
 import randomParticlesFS from '/resources/shaders/randomParticlesShader/fragment.glsl'
 
 import gsap from 'gsap';
-import GUI from 'lil-gui';
-import Stats from 'stats.js';
 
-console.time('Threejs')
-
-
-//Stats
-// const stats = new Stats()
-// stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-// document.body.appendChild(stats.dom)
 
 //------------------------- Variables 
+
+//Particles configuration
 const debug = {
     //Fingerprint
     fingerprintBaseColor1: '#e17209',
@@ -64,15 +55,16 @@ let qrCodes = [
     {
         'image': '/textures/QrCode1.jpeg',
         'prompt': 'The best Qr Ever',
-        'id': '1'
+        'id': '2'
     },
     {
         'image': '/textures/QrCode.png',
         'prompt': 'The best Qr Ever',
-        'id': '1'
+        'id': '3'
     }
 ]
 
+let countQrCodes = 400;
 const qrCodeGeometry = new THREE.PlaneGeometry(0.5, 0.5);
 let qrCodesArray = [];
 let qrCodeMaterial  = null;
@@ -136,13 +128,15 @@ const fingerprintTexture = textureLoader.load('/textures/fingerprint2.jpg');
 
 //QrCodes
 const qrCodesTextures = [];
-for(let i = 0; i < (qrCodes.length > 300 ? 300 : qrCodes.length ); i++){
+//Function will fill QrCodesTextures array wich will be used to generate each QrCode with random textures
+for(let i = 0; i < (qrCodes.length > countQrCodes ? countQrCodes : qrCodes.length ); i++){
     const texture = textureLoader.load(qrCodes[i].image)
     texture .generateMipmaps = false;
     texture.magFilter = THREE.NearestFilter;
     texture.minFilter = THREE.NearestFilter;
     qrCodesTextures.push(texture)
 }
+
 
 //--------------------------------------------- Setup ----------------------------
 
@@ -202,9 +196,6 @@ buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
 })
 
-
-
-
 //-------------------------------------------- Creating elements ---------------------------
 
 createFingerprint();
@@ -238,8 +229,6 @@ const qrCodeOnClick = (event)=>{
         
         qrCodeToCero();
 
-
-        console.log(qrCodeSelected.actualRotation);
     } else {
         if(isObjectSelected){
             qrCodeToPrevious();
@@ -262,9 +251,9 @@ function qrCodeToCero(){
 }
 
 function qrCodeToPrevious(){
+    isObjectSelected = false;
     setTimeout(()=>{
         qrCodeSelected.isSelected = false;
-        isObjectSelected = false;
         qrCodeSelected = null;
     }, 500);
     const i = qrCodesArray.indexOf(qrCodeSelected)
@@ -287,12 +276,11 @@ function qrCodeToPrevious(){
 let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
-    if(true || !isObjectSelected){
-        gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-        if(qrCodeSelected){
-            qrCodeToPrevious();
-        }
+    gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
+    if(isObjectSelected){
+        qrCodeToPrevious();
     }
+    
 })
 
 //Animate
@@ -318,7 +306,9 @@ const tick = ()=>{
     }
 
     //Animating buttons
-    const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - 400)/(600 - 400)))*100;
+    const timeStart = 400
+    const timeEnds = 600
+    const buttonPercentage = Math.max(0 ,Math.min(1, (timeLine.t - timeStart)/(timeEnds - timeStart)))*100;
     buttonGenerateThenActive.style.clipPath = `polygon(${buttonPercentage}% 0, ${buttonPercentage}% 100%, 0 100%, 0 0)`;
 
     //Parallax Effect
@@ -335,9 +325,6 @@ const tick = ()=>{
         for (let i = 0; i < qrCodesArray.length; i++){
             if(!qrCodesArray[i].isSelected){
                 qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
-                // qrCodesArray[i].rotation.x = ((timeLine.t+i)*0.2+elapsedTime)*0.1
-                // qrCodesArray[i].rotation.y = ((timeLine.t+i)*0.2+elapsedTime)*0.1
-                // qrCodesArray[i].rotation.z = ((timeLine.t+i)*0.2+elapsedTime)*0.1
                 qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomPositions[i*3+1], randomPositions[i*3+2], randomPositions[i*3+2]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
                 qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
             }
@@ -357,7 +344,6 @@ const tick = ()=>{
         if(text.position.z < -0.01 && text.position.z > -40){
             text.element.style.display = 'flex';
             text.element.style.scale = scale;
-            // text.element.style.opacity = 1/Math.abs(Math.pow(text.position.z, 3));
         }else{
             text.element.style.display = 'none';
         }   
@@ -376,7 +362,6 @@ const tick = ()=>{
     // stats.end()
 } 
 
-console.timeEnd('Threejs')
 tick();
 
 //---------------------------------------- Functions ------------------------------
@@ -424,12 +409,6 @@ function createFingerprint(){
         
         let l = 0;
         l =  ((Math.random()-0.5)*0.2)+baseColor.l;
-        
-        // if(baseColor.l > 0.75 || baseColor.l < 0.25){
-        //     l = baseColor.l
-        // }else{
-        // }
-
         
         const finalColor = new THREE.Color().setHSL( baseColor.h, baseColor.s, l);
         randomColors[x] = finalColor.r
@@ -533,13 +512,18 @@ function createRandomParticles(){
 }
 
 function createQrCodes(){
-    for (let i = 0; i < 400; i++){
+
+    //Will create the Qr Codes
+    for (let i = 0; i < countQrCodes; i++){
         let randomImage = 0;
+
+        //This takes all the textures that where loaded, once they all used,then will start tu use random textures from the same qrCodesTextures array 
         if(i <= qrCodesTextures.length){
            randomImage = i;
         }else{
             randomImage = Math.floor(Math.random()*qrCodesTextures.length)
         }
+
 
         qrCodeMaterial = new THREE.MeshBasicMaterial({
             side: THREE.DoubleSide,
@@ -558,8 +542,9 @@ function createQrCodes(){
     }    
 }
 
-
 function createText(){
+
+
     texts = [
         {
             position: new THREE.Vector3(0, 0, 0),
@@ -603,35 +588,3 @@ function createText(){
         },
     ];
 }
-
-function addDebugUI(){
-    const gui = new GUI();
-    
-    const fingerprintGui = gui.addFolder('Finger print').close().onFinishChange(()=>{
-        createFingerprint();
-        createRandomParticles();
-    })
-
-    fingerprintGui.addColor(debug, 'fingerprintBaseColor1').name('Random Color 1');
-    fingerprintGui.addColor(debug, 'fingerprintBaseColor2').name('Random Color 2');
-    fingerprintGui.addColor(debug, 'fingerprintBaseColor3').name('Random Color 3');
-    fingerprintGui.add(debug, 'fingerprintWidth', 0, 20, 1);
-    fingerprintGui.add(debug, 'fingerprintHeight', 0, 20, 1);
-    fingerprintGui.add(debug, 'fingerprintResolution', 0, 400, 1);
-    fingerprintGui.add(debug, 'fingerprintParticlesSize', 0, 200);
-    fingerprintGui.add(debug, 'fingerprintparticlesRandomOffset', 0, 2).name('Random offset');
-
-    const randomParticlesGui = gui.addFolder('Random Particles').close().onFinishChange(()=>{
-        createFingerprint();
-        createRandomParticles();
-    })
-
-    randomParticlesGui.add(debug, 'ranodmCount', 100, 10000, 1);
-    randomParticlesGui.add(debug, 'randomSize', 1, 150, 1);
-    randomParticlesGui.add(debug, 'randomParticlesDepth', 1, 150, 1);
-
-}
-
-// Una pasion no es mas que la interseccion entre multiples curiosidades. Averigua que tienen en comun esas cosas que realmente te interesan y habras encontrado una pasion
-// Conecta esa pasion con un problema existente en el mundo que quieras resolver y habras encontrado un propositio
-// Alinea es e poropositoi con cualquier tectnologia o servicio emergente y tendras el mapa para cualquier negocio a largo plazo
