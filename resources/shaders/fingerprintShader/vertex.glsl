@@ -44,7 +44,7 @@ void main (){
     gl_PointSize = uPointSize;
 
     //Perspective & pixelRatio fix
-    gl_PointSize *= clamp(1.0/ -viewPosition.z, 0.0, 0.5);
+    gl_PointSize *= clamp(1.0/ -viewPosition.z, 0.0, 0.25);
     gl_PointSize *= uPixelRatio;
 
 

@@ -31,11 +31,11 @@ const debug = {
     fingerprintWidth: 10,
     fingerprintHeight: 14,
     fingerprintResolution: 110,
-    fingerprintParticlesSize : 60,
+    fingerprintParticlesSize : 70,
     fingerprintparticlesRandomOffset: 0.3,
 
     //Random particles 
-    ranodmCount: 2000,
+    ranodmCount: 500,
     randomSize: 20,
     randomParticlesDepth: 50,
 
@@ -193,11 +193,12 @@ const loaded = ()=>{
 }
 
 
-
 buttonGenerateThen.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
+    // gsap.to(window, {duration: 1, delay: 0, scrollY: 5300})
 })
 buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
+    // gsap.to(window, {duration: 1, delay: 0, scrollY: 5300})
     window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
 })
 
@@ -207,14 +208,14 @@ buttonGenerateThenActive.addEventListener('pointerdown', ()=>{
 //-------------------------------------------- Creating elements ---------------------------
 
 createFingerprint();
-// // fingerprintParticles.visible = false;
+// fingerprintParticles.visible = false;
 createRandomParticles();
 // randomParticles.visible = false;
 createQrCodes();
 
 createText();
 
-//-------------------------------------------- Ray caster ---------------------------------
+//-------------------------------------------- Ray caster & Qr Interaction ---------------------
 const raycaster = new THREE.Raycaster();
 
 const qrCodeOnClick = (event)=>{
@@ -264,6 +265,7 @@ function qrCodeToPrevious(){
     setTimeout(()=>{
         qrCodeSelected.isSelected = false;
         isObjectSelected = false;
+        qrCodeSelected = null;
     }, 500);
     const i = qrCodesArray.indexOf(qrCodeSelected)
 
@@ -285,9 +287,8 @@ function qrCodeToPrevious(){
 let timeLine = { t : 0 };
 let scrollVelocity = null;
 window.addEventListener('scroll', (event)=>{
-    if(!isObjectSelected){
+    if(true || !isObjectSelected){
         gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-        // console.log(scrollY)
         if(qrCodeSelected){
             qrCodeToPrevious();
         }
