@@ -1,8 +1,5 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The react implementation is the component Exp.jsx this component uses the files inside the /src/assets/... (index.html, main.js, style.css) and the public folder for work. I hope this is a good solution.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Also the Experience.jsx and Fingerprint.jsx components are my attempts to port my native Three.js code to React Three Fiber. Since I'm not very familiar with it, I don't think I can implement it this way.
