@@ -1,23 +1,16 @@
-import reactLogo from './assets/react.svg'
+/* eslint-disable no-unused-vars */
 import './App.css'
-import Experience from './components/Experience.jsx'
-import { Canvas } from '@react-three/fiber'
-import Exp from './components/Exp'
+import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter as Router
+import Routers from './router/Routers'
 
 
 function App() {
 
   return (
-    <>
-    {/* <Canvas
-    gl={{
-      alpha: false
-    }}
-    >
-      <Experience/>
-    </Canvas> */}
-      
-      <Exp></Exp>
+    <>   
+      <Router>
+        <Routers />
+      </Router>
 
     </>
   )

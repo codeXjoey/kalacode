@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 :root {
   --fontsize-xs: 18px;
   --fontsize-s: 28px;
   --fontsize-m: 48px;
   --fontsize-l: 64px;
 }
-
 * {
   margin: 0px;
   padding: 0px;
@@ -25,12 +25,14 @@ html, body {
 .scrollable-container {
     /* Altura deseada para el contenedor eliminar cuando este termiando
     height: 25000px; */
-
+    font-family: 'Open Sans', sans-serif;
   overflow:visible;
-  font-family: 'Courier Prime', monospace;
   
 }
+.typo-font{
+  font-family: 'Courier Prime', monospace;
 
+}
 .navbar{
   position: fixed;
   display: flex ;
@@ -66,24 +68,29 @@ html, body {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: var(--fontsize-l);;
+  font-size: 20px;
   text-align: center;
   transition: opacity 0.5s;
+}
+
+p{
+  font-size: 36px;
 }
 
 .text-0{
   display: flex;
   flex-direction: column;
+  font-size: 28px;
 }
 
 .text-0 > footer {
-  font-size: var(--fontsize-s);
+  font-size: var(--fontsize-xs);
   border: solid 1px white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 364px;
+  width: 300px;
   height: 64px;
   position: fixed;
   bottom: 264px;
@@ -100,10 +107,10 @@ html, body {
   display: flex;
   color: black;
   align-items: center;
-  width: 316px;
+  width: 300px;
   height: 58px;
+  margin-right: 20px;
   padding: 1px;
-  border: 1px solid rgba(255, 255, 255, 0.5);  
 }
 
 .button_generate-now{
@@ -115,22 +122,28 @@ html, body {
   align-items: center;
   text-align: center;
   font-family: 'Courier Prime', monospace;
-  font-size: var(--fontsize-s);
+  font-size: var(--fontsize-xs);
   cursor: pointer;
 
 }
 
-.generate-now > svg{
+.generate-now  svg{
   width: 20%;
-  height: 100%;
+  margin-left: 55px;
+  top: 1px;
+  height: 97%;
   background-color: #e17209;
   cursor: pointer;
+}
 
+.terms-btns{
+  margin-left: 20px;
+  line-height: 20px;
 }
 
 
 .generate-then{
-  width: 316px;
+  width: 300px;
   height: 58px;
   display: flex;
   position: relative; /* Establece el contenedor en posición relativa */
@@ -144,9 +157,8 @@ html, body {
   background-color: transparent;
   color: white;
   font-family: 'Courier Prime', monospace;
-  font-size: var(--fontsize-s);
+  font-size: var(--fontsize-xs);
   position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
   
 }
@@ -158,7 +170,7 @@ html, body {
   background-color: white;
   color: black;
   font-family: 'Courier Prime', monospace;
-  font-size: var(--fontsize-s);
+  font-size: var(--fontsize-xs);
   position: absolute;
   cursor: pointer;
 }

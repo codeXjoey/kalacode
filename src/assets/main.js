@@ -166,7 +166,7 @@ const scrollContainer = document.querySelector('.scrollable-container');
 
 const buttonGenerateThenActive = document.querySelector('.button_generate-then--active')
 const buttonGenerateThen = document.querySelector('.button_generate-then')
-
+const generate = document.querySelector('.button_generate-now');
 
 const loaded = ()=>{
     setTimeout(()=>{
@@ -181,6 +181,10 @@ const loaded = ()=>{
     }
 }
 
+
+// generate.addEventListener('pointerdown',()=> {
+//     window.scrollTo(0, sizes.width > 21700 ? 35300 : 18400);
+// })
 
 buttonGenerateThen.addEventListener('pointerdown', ()=>{
     window.scrollTo(0, sizes.width > 700 ? 5300 : 8400);
