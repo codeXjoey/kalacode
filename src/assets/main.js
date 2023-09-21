@@ -44,12 +44,12 @@ let randomPositions = null;
 let qrCodes = [
     {
         'image': '/textures/QrCode.png',
-        'prompt': 'The best Qr Ever',
+        'prompt': 'The best Qr Ever 1',
         'id': '1'
     },
     {
         'image': '/textures/QrCode1.jpeg',
-        'prompt': 'The best Qr Ever',
+        'prompt': 'The best Qr Ever 2',
         'id': '2'
     },
     {
@@ -208,30 +208,33 @@ createText();
 //-------------------------------------------- Ray caster & Qr Interaction ---------------------
 const raycaster = new THREE.Raycaster();
 
+const qrCodeInfo = document.querySelector('.QrCodeInfo')
+const qrCodePrompt = document.getElementById('QrCodeInfo__prompt')
+
+
 const qrCodeOnClick = (event)=>{
     const clickCoord = new THREE.Vector2(
         (event.clientX/sizes.width-0.5)*2,
         -(event.clientY/sizes.height-0.5)*2,
     )
 
-    // console.log(clickCoord);
     raycaster.setFromCamera(clickCoord, camera);
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
 
     if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected){
         qrCodeSelected = mouseIntersects[0].object;
-        
         qrCodeSelected.isSelected = true;
         isObjectSelected = true;
         const i = qrCodesArray.indexOf(qrCodeSelected);
-        // qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomColors[i*3+2], randomColors[i*3+1], randomColors[i*3+0]).normalize(), 0);
         
+        qrCodeInfo.classList.add('QrCodeInfo--active')
+        qrCodePrompt.textContent = qrCodes[qrCodeSelected.index].prompt;
+
         qrCodeToCero();
 
-    } else {
-        if(isObjectSelected){
-            qrCodeToPrevious();
-        }
+    } else if (isObjectSelected) {
+        qrCodeInfo.classList.remove('QrCodeInfo--active')
+        qrCodeToPrevious();    
     }
 } 
 window.addEventListener('pointerdown', qrCodeOnClick);
@@ -250,6 +253,9 @@ function qrCodeToCero(){
 }
 
 function qrCodeToPrevious(){
+    qrCodeInfo.classList.remove('QrCodeInfo--active')
+
+
     isObjectSelected = false;
     setTimeout(()=>{
         qrCodeSelected.isSelected = false;
@@ -268,6 +274,7 @@ function qrCodeToPrevious(){
     gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
     gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
 }
+
 
 //-------------------------------------------- Animation ----------------------------------
 
@@ -686,6 +693,7 @@ function createQrCodes(){
         qrCodeMesh.position.y = randomPositions[i*3+1]/2
         qrCodeMesh.position.z = 5;
         qrCodeMesh.isSelected = false;
+        qrCodeMesh.index = randomImage;
         
         scene.add(qrCodeMesh);
         qrCodesArray.push(qrCodeMesh);      
