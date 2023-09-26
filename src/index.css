@@ -189,6 +189,7 @@ p{
   display: flex;
   flex-direction: column;
   justify-content: space-between ;
+  top: 0px;
   right: -400px;
   height: 100vh;
   width: 400px;
