@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import React, { useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 const Exp = () => {
   useEffect(()=>{
 
@@ -45,7 +45,8 @@ const Exp = () => {
         <div>
           <p>POWER AT YOUR FINGERTIPS</p>
           <footer>
-            <a style={{textDecoration: "none"}} href="/generate">
+            <Link to={'/generate'}>
+              
               <div
                 style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
                 className="generate-now">
@@ -68,7 +69,7 @@ const Exp = () => {
 
                 </button>
               </div>
-            </a>
+              </Link>
               <div style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", outlineOffset: "2px"}}
                 className="generate-then">
                 <button className="button_generate-then ">GENERATE THEN
