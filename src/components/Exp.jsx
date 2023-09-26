@@ -15,7 +15,118 @@ const Exp = () => {
     closeButton.addEventListener("click", function () {
       fullscreenMenu.style.display = "none";
     });
-    //------------------------- Variables 
+
+    initExperience(); 
+  })
+
+  return <>
+    <div className="scrollable-container">
+      <canvas className='experience'></canvas>
+      
+      {/* ----Text--- */}
+      <div className="text text-0">
+        <p>POWER AT YOUR FINGER TIPS</p>
+        <footer className="typo-font">SCROLL TO START
+          <div className="corner-button"></div>
+            <div className="corner-button"></div>
+            <div className="corner-button"></div>
+            <div className="corner-button"></div>
+        </footer>
+      </div>
+      <div className='text text-1'><p>HELLO USER</p></div>
+      <div className="text text-2">
+        <p>WE'RE ABOUT TO GO ON A JOURNEY OF CREATING PERSONALIZED ARTISTIC QR CODES FOR YOUR PERSONAL AND BUDINESS NEEDS</p>
+      </div>
+      <div className="text text-3">
+        <p>WE HOPE YOU LOVE IT</p>
+      </div>
+  
+      <div className="text text-4">
+        <div>
+          <p>POWER AT YOUR FINGERTIPS</p>
+          <footer>
+            <a style={{textDecoration: "none"}} href="/generate">
+              <div
+                style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
+                className="generate-now">
+                <button className="button_generate-now ">GENERATE NOW
+
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <svg style={{position: "absolute"}}  viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                        strokeLinejoin="round" transform="translate(9 6)"></path>
+                    </g>
+                  </svg>
+                  {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
+
+                </button>
+              </div>
+            </a>
+              <div style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", outlineOffset: "2px"}}
+                className="generate-then">
+                <button className="button_generate-then ">GENERATE THEN
+                  <div className="corner-button-then"></div>
+                  <div className="corner-button-then"></div>
+                  <div className ="corner-button-then"></div>
+                  <div className="corner-button-then"></div>
+                </button>
+                <button className="button_generate-then--active">GENERATE THEN</button>
+              </div>
+          </footer>
+        </div>
+      </div>
+
+      <nav className='navbar'>
+        <img src='/images/Group 80.png' alt='logo'></img>
+        <button className='btn'>MENU</button>
+      </nav>   
+
+      <div id="fullscreen-menu">
+        <div id="card">
+          <img src="./qr-images/qr-2.png" alt="" className="image"/>
+          <p>Services</p>
+        </div>
+        <div id="card">
+          <img src="./qr-images/qr-3.png" alt="" className="image"/>
+          <p>Contact Us</p>
+  
+        </div>
+        <div id="card">
+          <img src="./qr-images/qr-4.png" alt="" className="image"/>
+          <p>Services</p>
+        </div>
+        <button id="close-menu">Close</button>
+      </div>
+    </div>
+
+    <aside className="QrCodeInfo">
+      <header>
+        <svg width="64px" height="64px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+      </header>
+      <main>
+        <p>Prompt:</p>
+        <p id="QrCodeInfo__prompt">The best qrcode ever</p>
+      </main>
+      <footer>
+      </footer>
+    </aside>
+
+    <div className="terms-btns">
+      <a href="/">Terms And Conditions</a>
+      <a href="/">Cookies Policies</a>
+    </div>
+  </>
+}
+ 
+function initExperience (){
+  //------------------------- Variables 
     //Particles configuration
     const debug = {
       //Fingerprint
@@ -753,112 +864,6 @@ const Exp = () => {
           },
       ];
     }
-  })
-
-  return <>
-    <div className="scrollable-container">
-      <canvas className='experience'></canvas>
-      
-      {/* ----Text--- */}
-      <div className="text text-0">
-        <p>POWER AT YOUR FINGER TIPS</p>
-        <footer className="typo-font">SCROLL TO START
-          <div className="corner-button"></div>
-            <div className="corner-button"></div>
-            <div className="corner-button"></div>
-            <div className="corner-button"></div>
-        </footer>
-      </div>
-      <div className='text text-1'><p>HELLO USER</p></div>
-      <div className="text text-2">
-        <p>WE'RE ABOUT TO GO ON A JOURNEY OF CREATING PERSONALIZED ARTISTIC QR CODES FOR YOUR PERSONAL AND BUDINESS NEEDS</p>
-      </div>
-      <div className="text text-3">
-        <p>WE HOPE YOU LOVE IT</p>
-      </div>
-  
-      <div className="text text-4">
-        <div>
-          <p>POWER AT YOUR FINGERTIPS</p>
-          <footer>
-            <a style={{textDecoration: "none"}} href="/generate">
-              <div
-                style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
-                className="generate-now">
-                <button className="button_generate-now ">GENERATE NOW
-
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <svg style={{position: "absolute"}}  viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
-
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                      <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
-                        strokeLinejoin="round" transform="translate(9 6)"></path>
-                    </g>
-                  </svg>
-                  {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
-
-                </button>
-              </div>
-            </a>
-              <div style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", outlineOffset: "2px"}}
-                className="generate-then">
-                <button className="button_generate-then ">GENERATE THEN
-                  <div className="corner-button-then"></div>
-                  <div className="corner-button-then"></div>
-                  <div className ="corner-button-then"></div>
-                  <div className="corner-button-then"></div>
-                </button>
-                <button className="button_generate-then--active">GENERATE THEN</button>
-              </div>
-          </footer>
-        </div>
-      </div>
-
-      <nav className='navbar'>
-        <img src='/images/Group 80.png' alt='logo'></img>
-        <button className='btn'>MENU</button>
-      </nav>   
-
-      <div id="fullscreen-menu">
-        <div id="card">
-          <img src="/src/assets/qr-images/qr-2.png" alt="" className="image"/>
-          <p>Services</p>
-        </div>
-        <div id="card">
-          <img src="/src/assets/qr-images/qr-3.png" alt="" className="image"/>
-          <p>Contact Us</p>
-  
-        </div>
-        <div id="card">
-          <img src="/src/assets/qr-images/qr-4.png" alt="" className="image"/>
-          <p>Services</p>
-        </div>
-        <button id="close-menu">Close</button>
-      </div>
-    </div>
-
-    <aside className="QrCodeInfo">
-      <header>
-        <svg width="64px" height="64px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
-      </header>
-      <main>
-        <p>Prompt:</p>
-        <p id="QrCodeInfo__prompt">The best qrcode ever</p>
-      </main>
-      <footer>
-      </footer>
-    </aside>
-
-    <div className="terms-btns">
-      <a href="/">Terms And Conditions</a>
-      <a href="/">Cookies Policies</a>
-    </div>
-  </>
 }
- 
+
 export default Exp;
