@@ -248,9 +248,32 @@ p{
 }
 
 @media (max-width: 700px) {
+
   .QrCodeInfo{
     width: 100%;
+    background-color: transparent;
+    height: 20%;
+    backdrop-filter: blur(10px); /* Ajusta el valor para controlar la intensidad del desenfoque */
+    right: 0;
+    right: -800px;
+    
   }
+
+  .QrCodeInfo--active{
+    width: 100%;
+    background-color: transparent;
+    height: 20%;
+    backdrop-filter: blur(10px); /* Ajusta el valor para controlar la intensidad del desenfoque */
+    transform: translateX(-800px);
+    transition: transform 0.5s;
+  }
+
+  .QrCodeInfo--active > footer{
+    display: none;
+  }
+
+
+
   .generate-now svg {
     width: 20%;
     margin-left: 12.65rem;
