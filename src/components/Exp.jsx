@@ -189,6 +189,7 @@ function initExperience (){
     const qrCodeGeometry = new THREE.PlaneGeometry(0.5, 0.5);
     let qrCodesArray = [];
     let qrCodeMaterial  = null;
+    let qrCodesGroup = new THREE.Group();
   
     let texts = null;
   
@@ -367,7 +368,7 @@ function initExperience (){
     function qrCodeToCero(){
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: 0});
-      gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5});
+      gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: -2.5 - qrCodesGroup.position.z});
     
       gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x:  0})
       gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y:  3.14159})
@@ -390,7 +391,7 @@ function initExperience (){
     
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: randomPositions[i*3+0]/2});
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: randomPositions[i*3+1]/2});
-      gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: (timeLine.t*0.25+randomPositions[i*3+2]*12)-160});
+      gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: (timeLine.t*0.25+randomPositions[i*3+2]*12)-160 - qrCodesGroup.position.z});
     
       gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: qrCodeSelected.actualRotation.x})
       gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: qrCodeSelected.actualRotation.y})
@@ -455,13 +456,17 @@ function initExperience (){
       if(qrCodesArray && timeLine.t > 400){
           for (let i = 0; i < qrCodesArray.length; i++){
               if(!qrCodesArray[i].isSelected){
-                  qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
-                  qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomPositions[i*3+1], randomPositions[i*3+2], randomPositions[i*3+2]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime)*0.1);                
+                  // qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
+                  qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomPositions[i*3+1], randomPositions[i*3+2], randomPositions[i*3+2]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime*0)*0.1);                
                   qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
               }
-          }
-        
+          }  
       }
+
+      if(qrCodesArray){
+        qrCodesGroup.position.z = (timeLine.t * 0.25)-160
+      }
+
     
     
       //Animating text
@@ -816,13 +821,15 @@ function initExperience (){
           const qrCodeMesh = new THREE.Mesh(qrCodeGeometry, qrCodeMaterial)
           qrCodeMesh.position.x = randomPositions[i*3+0]/2
           qrCodeMesh.position.y = randomPositions[i*3+1]/2
-          qrCodeMesh.position.z = 5;
+          qrCodeMesh.position.z = randomPositions[i*3+2]*12;
           qrCodeMesh.isSelected = false;
           qrCodeMesh.index = randomImage;
         
-          scene.add(qrCodeMesh);
+          qrCodesGroup.add(qrCodeMesh);
+          // qrCodesGroup.position.z = 
           qrCodesArray.push(qrCodeMesh);      
       }    
+      scene.add(qrCodesGroup);
     }
   
     function createText(){
