@@ -25,20 +25,26 @@ const Exp = () => {
       
       {/* ----Text--- */}
       <div className="text text-0">
-        <p>POWER AT YOUR FINGER TIPS</p>
-        <footer className="typo-font">SCROLL TO START
+        <p>POWER TO TRANSFORM</p>
+        <p>by Hudbil Private Limited</p>
+        <footer className="typo-font">
+          SCROLL TO START
           <div className="corner-button"></div>
             <div className="corner-button"></div>
             <div className="corner-button"></div>
             <div className="corner-button"></div>
         </footer>
       </div>
-      <div className='text text-1'><p>HELLO USER</p></div>
+      <div className='text text-1'>
+        <p>We can help you generate artistic QR Code</p>
+      </div>
       <div className="text text-2">
-        <p>WE'RE ABOUT TO GO ON A JOURNEY OF CREATING PERSONALIZED ARTISTIC QR CODES FOR YOUR PERSONAL AND BUDINESS NEEDS</p>
+        <p>OF YOUR CHOICE FOR FREE</p>
+        <p>"Powered By Ai Tool"</p>
       </div>
       <div className="text text-3">
-        <p>WE HOPE YOU LOVE IT</p>
+        <p>WE'RE ABOUT TO GO UN A JOURNEY</p>
+        <p>OF CREATING PERSONALIZED QR CODES FOR YOUR PERSONAL & BUSINESS NEED</p>
       </div>
   
       <div className="text text-4">
