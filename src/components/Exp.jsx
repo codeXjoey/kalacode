@@ -39,12 +39,12 @@ const Exp = () => {
         <p>We can help you generate artistic QR Code</p>
       </div>
       <div className="text text-2">
-        <p>OF YOUR CHOICE FOR FREE</p>
+        <p>Of your choice for free</p>
         <p>"Powered By Ai Tool"</p>
       </div>
       <div className="text text-3">
-        <p>WE'RE ABOUT TO GO UN A JOURNEY</p>
-        <p>OF CREATING PERSONALIZED QR CODES FOR YOUR PERSONAL & BUSINESS NEED</p>
+        <p>We're about to go on a journey</p>
+        <p>Of creating personalized QR codes for your personal & business need</p>
       </div>
   
       <div className="text text-4">
@@ -75,7 +75,7 @@ const Exp = () => {
 
                 </button>
               </div>
-              </Link>
+            </Link>
               <div style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", outlineOffset: "2px"}}
                 className="generate-then">
                 <button className="button_generate-then ">GENERATE THEN
