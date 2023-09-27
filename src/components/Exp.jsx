@@ -346,6 +346,7 @@ function initExperience (){
       mouseIntersects = raycaster.intersectObjects(qrCodesArray);
       
       if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected){
+          console.log(mouseIntersects)
           qrCodeSelected = mouseIntersects[0].object;
           qrCodeSelected.isSelected = true;
           isObjectSelected = true;
@@ -384,16 +385,16 @@ function initExperience (){
       setTimeout(()=>{
           qrCodeSelected.isSelected = false;
           qrCodeSelected = null;
-      }, 500);
+      }, 250);
       const i = qrCodesArray.indexOf(qrCodeSelected)
     
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, x: randomPositions[i*3+0]/2});
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, y: randomPositions[i*3+1]/2});
       gsap.to(qrCodeSelected.position, {duration: 0.5, delay: 0, z: (timeLine.t*0.25+randomPositions[i*3+2]*12)-160 - qrCodesGroup.position.z});
     
-      gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, x: qrCodeSelected.actualRotation.x})
-      gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, y: qrCodeSelected.actualRotation.y})
-      gsap.to(qrCodeSelected.rotation, {duration: 0.5, delay: 0, z: qrCodeSelected.actualRotation.z})
+      gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, x: qrCodeSelected.actualRotation.x})
+      gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, y: qrCodeSelected.actualRotation.y})
+      gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, z: qrCodeSelected.actualRotation.z})
     
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
@@ -454,7 +455,6 @@ function initExperience (){
       if(qrCodesArray && timeLine.t > 400){
           for (let i = 0; i < qrCodesArray.length; i++){
               if(!qrCodesArray[i].isSelected){
-                  // qrCodesArray[i].position.z = (timeLine.t*0.25+randomPositions[i*3+2]*12)-160
                   qrCodesArray[i].setRotationFromAxisAngle(new THREE.Vector3(randomPositions[i*3+1], randomPositions[i*3+2], randomPositions[i*3+2]).normalize(),  (((timeLine.t+i)*0.2)+elapsedTime*0)*0.1);                
                   qrCodesArray[i].actualRotation = new THREE.Vector3(qrCodesArray[i].rotation.x, qrCodesArray[i].rotation.y, qrCodesArray[i].rotation.z);
               }
