@@ -396,7 +396,8 @@ p{
   display: flex;
   flex-direction: column;
   gap: 12px;
-  top: 85vh;
+  top: 90vh;
+  opacity: 0.5;
   margin-left: 3-2px;
 }
 

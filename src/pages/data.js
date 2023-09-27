@@ -1,12 +1,12 @@
-import qr1 from '../assets/qr-images/qr-1.png';
-import qr2 from '../assets/qr-images/qr-2.png'
-import qr3 from '../assets/qr-images/qr-3.png'
-import qr4 from '../assets/qr-images/qr-4.png'
-import qr5 from '../assets/qr-images/qr-5.png'
-import qr6 from '../assets/qr-images/qr-6.png'
-import qr7 from '../assets/qr-images/qr-7.png'
-import qr8 from '../assets/qr-images/qr-8.png'
-import qr9 from '../assets/qr-images/qr-9.png'
+import qr1 from '/qr-images/qr-1.png';
+import qr2 from '/qr-images/qr-2.png'
+import qr3 from '/qr-images/qr-3.png'
+import qr4 from '/qr-images/qr-4.png'
+import qr5 from '/qr-images/qr-5.png'
+import qr6 from '/qr-images/qr-6.png'
+import qr7 from '/qr-images/qr-7.png'
+import qr8 from '/qr-images/qr-8.png'
+import qr9 from '/qr-images/qr-9.png'
 
 const images = [
     {

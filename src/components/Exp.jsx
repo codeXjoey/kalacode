@@ -95,16 +95,16 @@ const Exp = () => {
 
       <div id="fullscreen-menu">
         <div id="card">
-          <img src="src/assets/qr-images/qr-2.png" alt="" className="image"/>
+          <img src="/qr-images/qr-2.png" alt="" className="image"/>
           <p>Services</p>
         </div>
         <div id="card">
-          <img src="src/assets/qr-images/qr-3.png" alt="" className="image"/>
+          <img src="/qr-images/qr-3.png" alt="" className="image"/>
           <p>Contact Us</p>
   
         </div>
         <div id="card">
-          <img src="src/assets/qr-images/qr-4.png" alt="" className="image"/>
+          <img src="/qr-images/qr-4.png" alt="" className="image"/>
           <p>Services</p>
         </div>
         <button id="close-menu">Close</button>
