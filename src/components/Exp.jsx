@@ -432,9 +432,9 @@ function initExperience (){
       previousTime = elapsedTime;
     
       //Animating Particles Position
-      if(timeLine.t > 400){
-          randomParticles.position.z = (timeLine.t - 400)*0.25;
-      }
+      // if(timeLine.t > 400){
+      //     randomParticles.position.z = (timeLine.t - 400)*0.25;
+      // }
     
       //Animating buttons
       const timeStart = 400
@@ -791,13 +791,13 @@ function initExperience (){
       }
     })
   
-      randomParticles = new THREE.Points(randomParticlesGeometry, randomParticlesMaterial);
-      scene.add(randomParticles);
+      // randomParticles = new THREE.Points(randomParticlesGeometry, randomParticlesMaterial);
+      // scene.add(randomParticles);
   
     }
   
     function createQrCodes(){
-    
+      const colors = ['#e17209', '#ffffff', '#1d5ef7'];
       //Will create the Qr Codes
       for (let i = 0; i < countQrCodes; i++){
           let randomImage = 0;
@@ -813,7 +813,7 @@ function initExperience (){
           qrCodeMaterial = new THREE.MeshBasicMaterial({
               side: THREE.DoubleSide,
               map: qrCodesTextures[randomImage],
-              color: new THREE.Color(randomColors[i*3+0],randomColors[i*3+1], randomColors[i*3+2]),
+              color: new THREE.Color(colors[Math.floor(Math.random()*3)]),
           });
         
           const qrCodeMesh = new THREE.Mesh(qrCodeGeometry, qrCodeMaterial)
@@ -824,7 +824,6 @@ function initExperience (){
           qrCodeMesh.index = randomImage;
         
           qrCodesGroup.add(qrCodeMesh);
-          // qrCodesGroup.position.z = 
           qrCodesArray.push(qrCodeMesh);      
       }    
       scene.add(qrCodesGroup);
