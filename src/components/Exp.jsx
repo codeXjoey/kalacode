@@ -52,7 +52,6 @@ const Exp = () => {
           <p>POWER AT YOUR FINGERTIPS</p>
           <footer>
             <Link to={'/generate'}>
-              
               <div
                 style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
                 className="generate-now">
@@ -72,7 +71,6 @@ const Exp = () => {
                     </g>
                   </svg>
                   {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
-
                 </button>
               </div>
             </Link>

@@ -248,6 +248,17 @@ p{
 }
 
 @media (max-width: 700px) {
+  .QrCodeInfo{
+    width: 100%;
+  }
+  .generate-now svg {
+    width: 20%;
+    margin-left: 12.65rem;
+    top: 1px;
+    height: 97%;
+    background-color: #e17209;
+    cursor: pointer;
+}
   .text{
     font-size: var(--fontsize-s);
   }
@@ -271,14 +282,15 @@ p{
   }
   .generate-then{
     margin-top: 24px;
-    width: 60%;
+    width: 255.5px;
     height: 48px;
   }
   .generate-now{
-    width: 60%;
+    width: 255.5px;
+    margin-left: 20px;
   }
   .button_generate-now{
-    width: 100%;
+    width: 80%;
     height: 100%;
   }
 }
