@@ -912,9 +912,8 @@ function initExperience (){
       // scene.add(randomParticles);
   
     }
-  
     function createQrCodes(){
-      const colors = ['#e17209', '#ffffff', '#1d5ef7'];
+      const colors = [new THREE.Color(debug.fingerprintBaseColor1), new THREE.Color(debug.fingerprintBaseColor2), new THREE.Color(debug.fingerprintBaseColor3)];
       //Will create the Qr Codes
       for (let i = 0; i < countQrCodes; i++){
           let randomImage = 0;
@@ -930,7 +929,7 @@ function initExperience (){
           qrCodeMaterial = new THREE.MeshBasicMaterial({
               side: THREE.DoubleSide,
               map: qrCodesTextures[randomImage],
-              color: new THREE.Color(colors[Math.floor(Math.random()*3)]),
+              color: colors[Math.floor(Math.random()*3)],
           });
         
           const qrCodeMesh = new THREE.Mesh(qrCodeGeometry, qrCodeMaterial)
