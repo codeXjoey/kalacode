@@ -700,7 +700,7 @@ function initExperience (){
             //Create animation
             float originalPosition = position.z;
             float randomDistance = aRandom*2.0;
-            float frameOrigin = 300.0;
+            float frameOrigin = 350.0;
             float newTimeLine = abs(uTimeLine-frameOrigin)*-1.0+frameOrigin;
             // float newTimeLine = (pow((uTimeLine-frameOrigin)*0.1, 3.0)*+100.0);
             float x = newTimeLine*0.5; //-5.0 used to make the values of x can go bellow 0
