@@ -29,11 +29,7 @@ const Exp = () => {
         <p>POWER TO TRANSFORM</p>
         <p>by Hudbil Private Limited</p>
         <footer className="typo-font">
-          SCROLL TO START
-          <div className="corner-button"></div>
-            <div className="corner-button"></div>
-            <div className="corner-button"></div>
-            <div className="corner-button"></div>
+          <div className='icon-scroll'></div>
         </footer>
       </div>
       <div className='text text-1'>

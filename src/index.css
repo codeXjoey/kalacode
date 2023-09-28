@@ -92,19 +92,39 @@ p{
   font-size: var(--fontsize-m);
 }
 
+
 .text-0 > footer {
   font-size: var(--fontsize-xs);
   border: solid 1px rgba(108, 106, 106, 0.655);
   display: flex;
+  border-radius: 15px;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 300px;
+  width: 30px;
   height: 64px;
   position: fixed;
-  bottom: 264px;
+  bottom: 184px;
+  padding: 5px 0;
 }
 
+.icon-scroll {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+  animation: scrollAnimation 2s ease infinite;
+}
+
+@keyframes scrollAnimation {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(40px);
+    opacity: 0.75;
+  }
+}
 
 .text-0 p:nth-child(2){
   font-size: var(--fontsize-s);
