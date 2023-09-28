@@ -137,7 +137,7 @@ function initExperience (){
       fingerprintBaseColor3: '#1d5ef7',
       fingerprintWidth: 10,
       fingerprintHeight: 14,
-      fingerprintResolution: 80,
+      fingerprintResolution: 70,
       fingerprintParticlesSize : 70,
       fingerprintparticlesRandomOffset: 0.3,
     

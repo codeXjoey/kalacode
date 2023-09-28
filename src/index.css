@@ -120,7 +120,7 @@ p{
     transform: translateY(0);
     opacity: 0.25;
   }
-  50% {
+  20% {
     transform: translateY(40px);
     opacity: 0.75;
   }
@@ -308,8 +308,6 @@ p{
 
   .text-0 > footer {
     font-size: var(--fontsize-xs);
-    width: 60%;
-    height: 64px;
     bottom: 128px;
   }
 
