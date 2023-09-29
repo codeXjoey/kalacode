@@ -910,6 +910,19 @@ function initExperience (){
     }
     function createQrCodes(){
       const colors = [new THREE.Color(debug.fingerprintBaseColor1), new THREE.Color(debug.fingerprintBaseColor2), new THREE.Color(debug.fingerprintBaseColor3)];
+      
+      colors[0].getHSL(colors[0], THREE.LinearSRGBColorSpace);
+      colors[1].getHSL(colors[1], THREE.LinearSRGBColorSpace);
+      colors[2].getHSL(colors[2], THREE.LinearSRGBColorSpace);
+
+      colors[0].setHSL(colors[0].h, colors[0].s, 0.1);
+      colors[1].setHSL(colors[1].h, colors[1].s, 1);
+      colors[2].setHSL(colors[2].h, colors[2].s, 0.1);
+      console.log(colors);
+      
+
+      // console.log(getHSL(colors[0]));
+      
       //Will create the Qr Codes
       for (let i = 0; i < countQrCodes; i++){
           let randomImage = 0;
