@@ -26,22 +26,22 @@ const Exp = () => {
       
       {/* ----Text--- */}
       <div className="text text-0">
-        <p>POWER TO TRANSFORM</p>
+        <p style={{letterSpacing: "16px"}}>POWER TO TRANSFORM</p>
         <p>by Hudbil Private Limited</p>
         <footer className="typo-font">
           <div className='icon-scroll'></div>
         </footer>
       </div>
       <div className='text text-1'>
-        <p>We can help you generate artistic QR Code</p>
+        <p>We can help you generate artistic QR Codes</p>
       </div>
       <div className="text text-2">
         <p>Of your choice for free</p>
-        <p>"Powered By Ai Tool"</p>
+        <p>"Powered By AI Tool"</p>
       </div>
       <div className="text text-3">
         <p>We're about to go on a journey</p>
-        <p>Of creating personalized QR codes for your personal & business need</p>
+        <p>Of creating personalized QR codes for your personal & business needs</p>
       </div>
   
       <div className="text text-4">
