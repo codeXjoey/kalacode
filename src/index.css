@@ -223,11 +223,13 @@ p{
   cursor: pointer;
 }
 
+/* -----------------------------------------Qr Code info----------------------------------------- */
+
 .QrCodeInfo{
   position: fixed; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between ;
+  justify-content: space-evenly ;
   top: 0px;
   right: -400px;
   height: 100vh;
@@ -243,17 +245,30 @@ p{
   transition: transform 0.5s;
 }
 
-.QrCodeInfo > header {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.QrCodeInfo > header > svg{
+.QrCodeInfo > svg{
+  position: absolute;
+  top: 32px;
+  right: 32px;
   border-radius: 50%;
   border: solid 2px white;
   box-sizing: border-box;
   cursor: pointer;
+}
+
+.QrCodeInfo > header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  color: white;
+}
+
+#QrCodeInfo__name{
+  font-size: var(--fontsize-m);
+}
+
+#QrCodeInfo__id{
+  font-size: var(--fontsize-s);
 }
 
 
@@ -265,8 +280,16 @@ p{
   color: white;
   font-size: var(--fontsize-m);
 }
+
+.QrCodeInfo > main > div{
+  position: relative;  
+}
+
 #QrCodeInfo__prompt {
   font-size: var(--fontsize-s);
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
 
 

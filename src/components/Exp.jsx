@@ -109,15 +109,51 @@ const Exp = () => {
     </div>
 
     <aside className="QrCodeInfo">
+      <svg width="42px" height="42px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+      
       <header>
-        <svg width="64px" height="64px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+        <h1 id='QrCodeInfo__name'>Name</h1>
+        <p id='QrCodeInfo__id'>#5464256465</p>
       </header>
-      <main>
+      
+      <main>        
         <p>Prompt:</p>
-        <p id="QrCodeInfo__prompt">The best qrcode ever</p>
+        <div
+          style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
+        >
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+
+          <p id='QrCodeInfo__prompt'></p>
+        </div>
       </main>
+      
       <footer>
+        <Link to={'/generate'}>
+          <div
+            style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
+            className="generate-now">
+            <button className="button_generate-now ">GENERATE NOW
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <svg style={{position: "absolute"}}  viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                    strokeLinejoin="round" transform="translate(9 6)"></path>
+                </g>
+              </svg>
+              {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
+            </button>
+          </div>
+        </Link>
       </footer>
+    
     </aside>
 
     <div className="terms-btns">
@@ -277,7 +313,7 @@ function initExperience (){
     const canvas = document.querySelector('.experience')
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas, 
-      alpha:true
+      antialias: true,
     }); 
   
     renderer.setClearAlpha = 0;
@@ -348,7 +384,6 @@ function initExperience (){
       mouseIntersects = raycaster.intersectObjects(qrCodesArray);
       
       if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected){
-          console.log(mouseIntersects)
           qrCodeSelected = mouseIntersects[0].object;
           qrCodeSelected.isSelected = true;
           isObjectSelected = true;
@@ -421,7 +456,6 @@ function initExperience (){
     let scrollVelocity = null;
     window.addEventListener('scroll', (event)=>{
       gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-      console.log(timeLine.t)
       if(isObjectSelected){
           qrCodeToPrevious();
       }
