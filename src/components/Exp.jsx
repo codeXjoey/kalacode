@@ -335,6 +335,7 @@ function initExperience (){
   
     const qrCodeInfo = document.querySelector('.QrCodeInfo')
     const qrCodePrompt = document.getElementById('QrCodeInfo__prompt')
+    let qrCodesPreviousColor = null;
   
   
     const qrCodeOnClick = (event)=>{
@@ -376,6 +377,11 @@ function initExperience (){
     
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+
+      qrCodesPreviousColor = {r: qrCodeSelected.material.color.r, g:qrCodeSelected.material.color.g , b: qrCodeSelected.material.color.b};
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, r: 1})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, g: 1})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, b: 1})
     }
   
     function qrCodeToPrevious(){
@@ -396,9 +402,15 @@ function initExperience (){
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, x: qrCodeSelected.actualRotation.x})
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, y: qrCodeSelected.actualRotation.y})
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, z: qrCodeSelected.actualRotation.z})
-    
+      
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+      
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, r: qrCodesPreviousColor.r})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, g: qrCodesPreviousColor.g})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, b: qrCodesPreviousColor.b})
+
+
     }
   
   
