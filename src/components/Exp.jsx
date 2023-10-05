@@ -69,26 +69,39 @@ const Exp = () => {
 
   return <>
         {showCookiePopup && (
-        <div className="fixed bg-[#1e011d] bottom-0 left-0 w-full h-40 z-50">
+        <div className="fixed bg-[#e17209] bottom-0 left-0 w-full h-52    z-50">
           <div className="relative flex justify-between h-full">
-            <div className="p-4 w-3/4">
+            <div className="p-4 py-16 px-10 w-3/4">
               <h1 className="text-sm footer-text mb-2 text-white">Personalize your experience</h1>
-              <p className="text-sm footer-text text-white">
+              <p className="text-sm footer-text opacity-90 text-white">
                 We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
               </p>
             </div>
             <div className="p-8 flex max-h-24 gap-8 items-center my-auto w-1/4">
               <button
-                className="flex-1 outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-2 px-5"
+                className="flex-1  outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-5"
                 onClick={handleAcceptAll}
               >
+                <div className="corner-button-then"></div>
+                  <div className="corner-button-then"></div>
+                  <div className ="corner-button-then"></div>
+                  <div className="corner-button-then"></div>
                 Accept all
               </button>
               <button
-                className="relative flex-1 bg-transparent opa outline outline-1 outline-gray-50 outline-offset-1 py-2 px-5"
+                className="overflow-hidden flex-1 btn relative button  text-white hover:bg-white/10 text-center px-5 py-3  transition duration-500 ease-in-out"
                 onClick={handleDeny}
               >
-                Deny
+              <div className="corner-button-deny"></div>
+              <div className="  corner-button-deny "></div>
+              <div className="  corner-button-deny "></div>
+              <div className="  corner-button-deny "></div>
+                  <span className="btn-content ">
+                      <span className="btn-inner-content">
+                        <span>Deny</span>
+                      </span>
+                    </span>
+                   
               </button>
             </div>
             <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
