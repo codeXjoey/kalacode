@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/public/fonts/Casta-Thin.otf') format('otf');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 @tailwind base;
 @tailwind components;
@@ -38,9 +47,41 @@ html, body {
   overflow:visible;
   
 }
-.typo-font{
-  font-family: 'Courier Prime', monospace;
 
+/* Style for the custom close button */
+.custom-close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the circular container */
+.circle {
+  width: 40px;
+  height: 40px;
+  background-color: #e17209;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  margin-top: 10px;
+
+}
+
+/* Style for the close icon */
+.close-icon {
+  color: white;
+  font-size: 20px; /* Adjust the font size as needed */
+
+}
+
+.typo-font{
+  font-family: 'Open Sans', sans-serif;
 }
 .navbar{
   position: fixed;
@@ -49,11 +90,11 @@ html, body {
   width: 100%;
   align-items: center;
   height: 102px;
-  opacity: 0.5;
 }
 
 .navbar > img{
   width: 150px;
+  z-index: 100000;
   padding-left: 24px;
 }
 
@@ -61,8 +102,8 @@ html, body {
   background-color: transparent;
   border: none;
   color: white;
-  font-family: 'Courier Prime', monospace;
-  font-size: var(--fontsize-s);
+  font-family: 'Open Sans', sans-serif;
+    font-size: var(--fontsize-s);
   padding-right: 24px;
   cursor: pointer;
   /* padding-right: 80px; */
@@ -80,6 +121,8 @@ html, body {
   font-size: 20px;
   text-align: center;
   transition: opacity 0.5s;
+  font-weight: 600;
+  letter-spacing: 9px;
 }
 
 p{
@@ -161,7 +204,7 @@ p{
   border: none;
   align-items: center;
   text-align: center;
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Open Sans', sans-serif;
   font-size: var(--fontsize-xs);
   cursor: pointer;
 
@@ -172,8 +215,13 @@ p{
   margin-left: 14.97rem;
   top: 1px;
   height: 97%;
-  background-color: #e17209;
+  background-color: #e7d8cb;
   cursor: pointer;
+  transition: all 0.5s;
+}
+
+ .generate-now:hover svg{
+  background-color: #e17209;
 }
 
 .terms-btns{
@@ -196,7 +244,7 @@ p{
   border: none;
   background-color: transparent;
   color: white;
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Open Sans', sans-serif;
   font-size: var(--fontsize-xs);
   position: absolute;
   cursor: pointer;
@@ -209,7 +257,7 @@ p{
   border: none;
   background-color: white;
   color: black;
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Open Sans', sans-serif;
   font-size: var(--fontsize-xs);
   position: absolute;
   cursor: pointer;
@@ -303,6 +351,7 @@ p{
     cursor: pointer;
 }
   .text{
+    text-transform:uppercase;
     font-size: var(--fontsize-s);
   }
 
@@ -426,16 +475,55 @@ p{
 
 #card {
   width: 250px;
-  aspect-ratio: 3 / 4;
+  max-height: 300px;
   border-radius: 2px;
   padding: 10px;
   background-color: azure;
   presentation-level: preserve-3d;
   flex-shrink: 0;
+  position: relative;
   overflow: hidden;
-  transform: translatez(50px) scale(1) rotatex(45deg) rotatez(-30deg);
   box-shadow: 0px 20px 50px #ffffff10;
   transition: 400ms ease;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  
+}
+.slide-in {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.card.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.footer-text{
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+#card:nth-child(1){
+  top: 80px;
+  transform: rotate(-15deg);
+
+}
+#card:nth-child(2){
+  transform: rotate(15deg);
+  top: 350px;
+  
+}
+#card:nth-child(3){
+  transform: rotate(4.142deg);
+  top: 90px;
+}
+
+#card:nth-child(4){
+  transform: rotate(-7.224deg);
+  top: 350px;
+
 }
 
 #fullscreen-menu {
@@ -445,17 +533,16 @@ p{
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.73);
+  background-color: rgba(0, 0, 0, 0.862);
   z-index: 999;
   justify-content: center;
-  align-items: center;
   text-align: center;
   width: 100vw;
   height: 100vh;
+  gap: 100px;
   overflow: hidden;
-  gap: 90px;
-  perspective: 1000px;
-  perspective-origin: 50% 50%;
+  /* perspective: 1000px; */
+  /* perspective-origin: 50% 50%; */
 }
 
 #card {
@@ -466,11 +553,12 @@ p{
 }
 
 #card .image {
-  width: 80%;
-  height: 80%;
+  width: 100%;
   border-radius: inherit;
   object-fit: cover;
   opacity: 1;
+  border: 1.586px solid rgba(0, 0, 0, 0.34);
+background: url(<path-to-image>), lightgray 50% / cover no-repeat;
   transition: 200ms ease;
 }
 

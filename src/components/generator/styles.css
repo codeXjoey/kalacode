@@ -6,6 +6,13 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.bg-particle-image{
+  background-size: 900px ;
+  background-image: url('../../assets/bg.png');
+  background-position: top center;
+  background-repeat: repeat;
+}
+
 
 .corner-button-generator {
   position: absolute;
@@ -29,6 +36,13 @@
   border-left-width: 0;
 }
 
+.glassy-background {
+  background: #ffffff14; /* Adjust the alpha value (0.5) for transparency */
+  backdrop-filter: blur(100px); /* Apply a blur effect to the background */
+  padding: 10px; /* Adjust padding as needed */
+  border: 1px solid #ffffff4e;
+}
+
 
 .corner-button-generator:nth-child(3) {
   bottom: -7px;
@@ -44,41 +58,41 @@
   border-left-width: 0;
 }
 
-.corner-button {
+.corner-button-generate {
   position: absolute;
   width: 5px;
   height: 5px;
-  border: 2px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
+  border: 1px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
 }
 
 
 
-.corner-button:nth-child(1) {
-  top: -3.2px;
-  left: -3.2px;
+.corner-button-generate:nth-child(1) {
+  top: -2.5px;
+  left: -2.5px;
   border-bottom-width: 0;
   border-right-width: 0;
 }
 
 
-.corner-button:nth-child(2) {
-  top: -3.2px;
-  right: -3.2px;
+.corner-button-generate:nth-child(2) {
+  top: -2.5px;
+  right: -2.5px;
   border-bottom-width: 0;
   border-left-width: 0;
 }
 
 
-.corner-button:nth-child(3) {
-  bottom: -3.2px;
-  left: -3.2px;
+.corner-button-generate:nth-child(3) {
+  bottom: -2.5px;
+  left: -2.5px;
   border-top-width: 0;
   border-right-width: 0;
 }
 
-.corner-button:nth-child(4) {
-  bottom: -3.2px;
-  right: -3.2px;
+.corner-button-generate:nth-child(4) {
+  bottom: -2.5px;
+  right: -2.5px;
   border-top-width: 0;
   border-left-width: 0;
 }
@@ -155,4 +169,31 @@
   right: -2px;
   border-top-width: 0;
   border-left-width: 0;
+}
+
+/* Add this to your styles.css or an appropriate CSS file */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Adjust the opacity (0.7) as needed */
+  z-index: 49; /* Ensure this is lower than the modal's z-index */
+  display: none; /* Initially hidden */
+}
+
+
+.qr-gen-form{
+  width: 961px;
+flex-shrink: 0;
+border: 2.183px solid rgba(255, 255, 255, 0.40);
+background: rgba(0, 0, 0, 0.34);
+backdrop-filter: blur(5px);
+}
+
+
+.qr-border{
+  border: 0.646px solid rgba(0, 0, 0, 0.34);
+background: lightgray 50% / cover no-repeat;
 }

@@ -1,9 +1,56 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Timeline } from 'gsap/gsap-core';
+import { FiX } from 'react-icons/fi'; // Import the close (X) icon from react-icons
+import { FaBars } from 'react-icons/fa';
+
 const Exp = () => {
+
+  const [showCard1, setShowCard1] = useState(false);
+  const [showCard2, setShowCard2] = useState(false);
+  const [showCard3, setShowCard3] = useState(false);
+  const [showCard4, setShowCard4] = useState(false);
+  const [showCookiePopup, setShowCookiePopup] = useState(true);
+
+  const handleAcceptAll = () => {
+    // Handle the logic for accepting cookies here
+    // You can set cookies or perform other actions
+    setShowCookiePopup(false);
+  };
+
+  const handleDeny = () => {
+    // Handle the logic for denying cookies here
+    setShowCookiePopup(false);
+  };
+  useEffect(() => {
+    // Trigger the animation for each card with a different delay
+    const animationTimeout1 = setTimeout(() => {
+      setShowCard1(true);
+    }, 500);
+
+    const animationTimeout2 = setTimeout(() => {
+      setShowCard2(true);
+    }, 800);
+
+    const animationTimeout3 = setTimeout(() => {
+      setShowCard3(true);
+    }, 1100);
+
+    const animationTimeout4 = setTimeout(() => {
+      setShowCard4(true);
+    }, 1400);
+
+    // Clean up the timeouts when the component unmounts
+    return () => {
+      clearTimeout(animationTimeout1);
+      clearTimeout(animationTimeout2);
+      clearTimeout(animationTimeout3);
+      clearTimeout(animationTimeout4);
+    };
+  }, []);
+  
   useEffect(()=>{
 
     //------------------ Menu buttons
@@ -21,27 +68,60 @@ const Exp = () => {
   })
 
   return <>
-    <div className="scrollable-container">
+        {showCookiePopup && (
+        <div className="fixed bg-[#1e011d] bottom-0 left-0 w-full h-40 z-50">
+          <div className="relative flex justify-between h-full">
+            <div className="p-4 w-3/4">
+              <h1 className="text-sm footer-text mb-2 text-white">Personalize your experience</h1>
+              <p className="text-sm footer-text text-white">
+                We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
+              </p>
+            </div>
+            <div className="p-8 flex max-h-24 gap-8 items-center my-auto w-1/4">
+              <button
+                className="flex-1 outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-2 px-5"
+                onClick={handleAcceptAll}
+              >
+                Accept all
+              </button>
+              <button
+                className="relative flex-1 bg-transparent opa outline outline-1 outline-gray-50 outline-offset-1 py-2 px-5"
+                onClick={handleDeny}
+              >
+                Deny
+              </button>
+            </div>
+            <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
+              <span className="sr-only">Close popup</span>
+              <span className="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 8 8" width="10" height="10">
+                  <path d="M2,8H0L3,4,0,0H2L4,2.67,6,0H8L5,4,8,8H6L4,5.33Z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+    <div className="scrollable-container uppercase  ">
       <canvas className='experience'></canvas>
       
       {/* ----Text--- */}
       <div className="text text-0">
         <p>POWER TO TRANSFORM</p>
-        <p>by Hudbil Private Limited</p>
+        <p className='tracking-wider'>by Hudbil Private Limited</p>
         <footer className="typo-font">
           <div className='icon-scroll'></div>
         </footer>
       </div>
-      <div className='text text-1'>
-        <p>We can help you generate artistic QR Code</p>
+      <div className='text text-1 '>
+        <p>Generate artistic qr codes of your choice for free</p>
       </div>
       <div className="text text-2">
         <p>Of your choice for free</p>
-        <p>"Powered By Ai Tool"</p>
+        <p>powered by ai and stable diffusion</p>
       </div>
       <div className="text text-3">
-        <p>We're about to go on a journey</p>
-        <p>Of creating personalized QR codes for your personal & business need</p>
+        <p>create amazing custom qr codes for  your personal and business needs</p>
       </div>
   
       <div className="text text-4">
@@ -86,25 +166,37 @@ const Exp = () => {
       </div>
 
       <nav className='navbar'>
-        <img src='/images/Group 80.png' alt='logo'></img>
-        <button className='btn'>MENU</button>
-      </nav>   
+      <img src='/images/Group 80.png' alt='logo'></img>
+      <button className='btn'>
+        <FaBars /> {/* Add the hamburger icon here */}
+      </button>
+    </nav>  
 
       <div id="fullscreen-menu">
-        <div id="card">
+        <div id="card" className={`card ${showCard1 ? 'slide-in show' : ''}`}>
           <img src="/qr-images/qr-2.png" alt="" className="image"/>
-          <p>Services</p>
+          <p className='text-sm  mt-2' > #2023000282 <br />  <span className='text-2xl  font-bold '> About Us  </span> </p>
         </div>
-        <div id="card">
+        <div id="card" >
           <img src="/qr-images/qr-3.png" alt="" className="image"/>
-          <p>Contact Us</p>
+          <p className='text-sm  mt-2'>  #2023000282 <br /> <span className='text-2xl font-bold '> Contact Us  </span> </p>
   
         </div>
         <div id="card">
           <img src="/qr-images/qr-4.png" alt="" className="image"/>
-          <p>Services</p>
+          <p className='text-sm  mt-2'> #2023000282 <br /> <span className='text-2xl font-bold '> Services  </span> </p>
         </div>
-        <button id="close-menu">Close</button>
+        <div id="card">
+          <img src="/qr-images/qr-3.png" alt="" className="image"/>
+          <p className='text-sm  mt-2'> #2023000282 <br /> <span className='text-2xl font-bold '> Contact Us  </span> </p>
+  
+        </div>
+
+        <button id="close-menu" className="custom-close-button">
+        <div className="circle">
+          <FiX className="close-icon" /> {/* Add the close icon here */}
+        </div>
+      </button>
       </div>
     </div>
 
@@ -120,10 +212,13 @@ const Exp = () => {
       </footer>
     </aside>
 
-    <div className="terms-btns">
+
+
+
+    {/* <div className="terms-btns">
       <a href="/">Terms And Conditions</a>
       <a href="/">Cookies Policies</a>
-    </div>
+    </div> */}
   </>
 }
  

@@ -13,7 +13,7 @@ const Generate = () => {
   const [linkValue, setLinkValue] = useState('https://kalacode.com/');
   const [imageUrl, setimageUrl] = useState('');
   const [loading, setLoading] = useState(false);
-  const data = images.slice(4,8);
+  const data = images.slice(4,6);
   const [isSelected, setisSelected] = useState(data[0])
   const [promptValue, setPromptValue] = useState(data[0].description);
 
@@ -100,7 +100,7 @@ const Generate = () => {
 
 
   return (
-    <div className='h-full bg-black '>
+    <div className='h-full bg-particle-image'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
             <Link to={'/'}>
@@ -115,11 +115,9 @@ const Generate = () => {
         
         <div className="flex flex-col items-center justify-center">
           {showForm && (
-            <div className="z-10 text-white">
-        
+            <div className="z-10 qr-gen-form sm:mt-[-50px] text-white">
                 <div className="px-1  sm:px-4 w-[90%] sm:w-full form-text relative mx-auto max-w-screen-lg">
-
-                  <h1 className="text-2xl  sm:text-5xl uppercase text-center">
+                  <h1 className="text-2xl  sm:py-4 sm:text-5xl uppercase text-center">
                     Artistic QR Code Generator
                   </h1>
                   <p className="sm:mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
@@ -134,7 +132,7 @@ const Generate = () => {
                           id="link"
                           type="text"
                           placeholder="https://kalacode.com/"
-                          className="w-full p-1 sm:mt-2 text-[12px] mb-2 bg-black border-2 border-gray-400 text-white/80 outline-none"
+                          className="w-full px-3 py-2 sm:mt-2 text-[16px] mb-2 bg-black border-2 border-gray-400 text-white/80 outline-none"
                           value={linkValue}
                           onChange={(e) => setLinkValue(e.target.value)}
                         />
@@ -144,20 +142,24 @@ const Generate = () => {
                         <textarea
                           id="prompt"
                           rows={5}
-                          className="w-full p-1 sm:mt-2 text-[12px] bg-black mb-5 text-white/80 border-2 border-gray-400 outline-none"
+                          className="w-full px-4 py-2 sm:mt-2 text-[16px] bg-black mb-5 text-white/80 border-2 border-gray-400 outline-none"
                           placeholder="a detailed painting of a quaint cottage in the british countryside on a summers day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)"
                           value={promptValue}
                           onChange={(e) => setPromptValue(e.target.value)}
                         ></textarea>
                       </div>
 
-                      <div className='flex gap-4 w-[90%] mx-auto'>
+                      <div className='flex gap-4 w-[50%]  mx-auto'>
                         {data.map((image,index) => (
-                          <div key={index} onClick={() => setPromptInput(image)}  className={ `w-30 bg-white p-2 cursor-pointer h-30 ${isSelected  === image ? 'opacity-100' : 'opacity-40'}`}>
-                                <img className='object-cover border border-1 border-black' src={image.src} alt="" />
-                                <p className='text-black text-center'>Snow City</p>
+                          <div key={index} onClick={() => setPromptInput(image)}  className={ `w-30 bg-white p-1 cursor-pointer h-30 ${isSelected  === image ? 'opacity-100' : 'opacity-40'}`}>
+                                <img className='object-cover qr-border' src={image.src} alt="" />
+                                <p className='text-black text-[8px]  text-center'> #2023000282 <br /> <span className='text-lg'>Hulk</span></p>
                           </div>
                         ))}
+                        <div className=' w-30   px-8 cursor-pointer flex justify-center items-center   h-30 glassy-background'>
+                            <p className='text-white text-xs text-center'>Explore More</p>
+                          </div>
+
                       </div>
 
                       <div className="text-center mt-5 relative">
@@ -166,34 +168,16 @@ const Generate = () => {
 
                           >
 
-                          <div className="corner-button"></div>
-                          <div className="corner-button"></div>
-                          <div className="corner-button"></div>
-                          <div className="corner-button"></div>
+                          <div className="corner-button-generate"></div>
+                          <div className="corner-button-generate"></div>
+                          <div className="corner-button-generate"></div>
+                          <div className="corner-button-generate"></div>
                           Generate Now
                         </button>
                       </div>
                     </form>
                   </div>
-                </div>
-                  
-              <div id="power-buttons" className="flex w-[200px]   sm:flex-col sm:relative z-50 left-[58rem] top-[-9rem]">
-                <button className="relative px-10 py-2 text-white border-2 border-gray-50/20 bg-transparent mb-10 sm:mb-4" >
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  OUR SERVICES
-                </button>
-
-                <button className="relative px-12 py-2 text-white border-2 border-gray-50/20 bg-transparent" onClick={handleGeneratedThen} >
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  <div className="corner-button"></div>
-                  Contact Us
-                </button>
-              </div>
+                </div>  
             </div>
           )}
           {showModal && (
