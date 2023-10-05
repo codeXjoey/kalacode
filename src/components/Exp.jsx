@@ -108,20 +108,21 @@ const Exp = () => {
       {/* ----Text--- */}
       <div className="text text-0">
         <p>POWER TO TRANSFORM</p>
-        <p className='tracking-wider'>by Hudbil Private Limited</p>
+        <p>by Hudbil Private Limited</p>
         <footer className="typo-font">
           <div className='icon-scroll'></div>
         </footer>
       </div>
-      <div className='text text-1 '>
-        <p>Generate artistic qr codes of your choice for free</p>
+      <div className='text text-1'>
+        <p>We can help you generate artistic QR Code</p>
       </div>
       <div className="text text-2">
         <p>Of your choice for free</p>
-        <p>powered by ai and stable diffusion</p>
+        <p>"Powered By Ai Tool"</p>
       </div>
       <div className="text text-3">
-        <p>create amazing custom qr codes for  your personal and business needs</p>
+        <p>We're about to go on a journey</p>
+        <p>Of creating personalized QR codes for your personal & business need</p>
       </div>
   
       <div className="text text-4">
@@ -201,15 +202,51 @@ const Exp = () => {
     </div>
 
     <aside className="QrCodeInfo">
+      <svg width="42px" height="42px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+      
       <header>
-        <svg width="64px" height="64px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+        <h1 id='QrCodeInfo__name'>Name</h1>
+        <p id='QrCodeInfo__id'>#5464256465</p>
       </header>
-      <main>
+      
+      <main>        
         <p>Prompt:</p>
-        <p id="QrCodeInfo__prompt">The best qrcode ever</p>
+        <div
+          style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
+        >
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+          <div className="corner-button"></div>
+
+          <p id='QrCodeInfo__prompt'></p>
+        </div>
       </main>
+      
       <footer>
+        <Link to={'/generate'}>
+          <div
+            style={{position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px"}}
+            className="generate-now">
+            <button className="button_generate-now ">GENERATE NOW
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <svg style={{position: "absolute"}}  viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                    strokeLinejoin="round" transform="translate(9 6)"></path>
+                </g>
+              </svg>
+              {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
+            </button>
+          </div>
+        </Link>
       </footer>
+    
     </aside>
 
 
@@ -372,7 +409,7 @@ function initExperience (){
     const canvas = document.querySelector('.experience')
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas, 
-      alpha:true
+      antialias: true,
     }); 
   
     renderer.setClearAlpha = 0;
@@ -430,6 +467,7 @@ function initExperience (){
   
     const qrCodeInfo = document.querySelector('.QrCodeInfo')
     const qrCodePrompt = document.getElementById('QrCodeInfo__prompt')
+    let qrCodesPreviousColor = null;
   
   
     const qrCodeOnClick = (event)=>{
@@ -442,7 +480,6 @@ function initExperience (){
       mouseIntersects = raycaster.intersectObjects(qrCodesArray);
       
       if(mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected){
-          console.log(mouseIntersects)
           qrCodeSelected = mouseIntersects[0].object;
           qrCodeSelected.isSelected = true;
           isObjectSelected = true;
@@ -471,6 +508,11 @@ function initExperience (){
     
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+
+      qrCodesPreviousColor = {r: qrCodeSelected.material.color.r, g:qrCodeSelected.material.color.g , b: qrCodeSelected.material.color.b};
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, r: 1})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, g: 1})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.5, delay: 0, b: 1})
     }
   
     function qrCodeToPrevious(){
@@ -491,9 +533,15 @@ function initExperience (){
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, x: qrCodeSelected.actualRotation.x})
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, y: qrCodeSelected.actualRotation.y})
       gsap.to(qrCodeSelected.rotation, {duration: 0.2, delay: 0, z: qrCodeSelected.actualRotation.z})
-    
+      
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, x: 0});
       gsap.to(cameraGroup.position, {duration: 0.5, delay: 0, y: 0});
+      
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, r: qrCodesPreviousColor.r})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, g: qrCodesPreviousColor.g})
+      gsap.to(qrCodeSelected.material.color, {duration: 0.25, delay: 0, b: qrCodesPreviousColor.b})
+
+
     }
   
   
@@ -504,7 +552,6 @@ function initExperience (){
     let scrollVelocity = null;
     window.addEventListener('scroll', (event)=>{
       gsap.to(timeLine, {duration:1, delay: 0, t: scrollY*scrollVelocity});
-      console.log(timeLine.t)
       if(isObjectSelected){
           qrCodeToPrevious();
       }
