@@ -4,7 +4,7 @@ import { BiLogoInstagram } from 'react-icons/bi'
 import qr from '../assets/Frame 89.png'
 import bg from '../assets/bg.png'
 import { Link } from 'react-router-dom'
-import {HiOutlineMail} from 'react-icons/Hi'
+import {LuMail} from 'react-icons/lu'
 import {FaLinkedin} from 'react-icons/fa'
 const Contact = () => {
     const backgroundStyle = {
@@ -55,7 +55,7 @@ const Contact = () => {
                                             <h1 className='text-2xl'>Contact</h1>
                                             <div className="icon flex flex-col gap-4 text-2xl">
                                             <div className="flex items-center text-2xl">
-                                                <HiOutlineMail />
+                                                <LuMail />
                                                 <h1 className='text-lg ml-2'>info@hudbil.com</h1>
                                                 </div>                                                
                                                 <h1 className='text-lg'>123-456-789</h1>
