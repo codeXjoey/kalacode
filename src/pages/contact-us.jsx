@@ -1,11 +1,11 @@
 import React from 'react'
 import logo from '../assets/Group 80.png'
-import { BsInstagram } from 'react-icons/Bs'
+import { BiLogoInstagram } from 'react-icons/bi'
 import qr from '../assets/Frame 89.png'
 import bg from '../assets/bg.png'
 import { Link } from 'react-router-dom'
 import {HiOutlineMail} from 'react-icons/Hi'
-import {BsLinkedin} from 'react-icons/Bs'
+import {FaLinkedin} from 'react-icons/fa'
 const Contact = () => {
     const backgroundStyle = {
         backgroundImage: `url(${bg})`,
@@ -44,10 +44,10 @@ const Contact = () => {
                                         <div className="gap-5 flex flex-col sm:mx-0  w-20 h-20">
                                             <h1 className='text-2xl'>Socials</h1>
                                             <div className="icon flex flex-col gap-4 text-lg">
-                                                <BsInstagram/>
+                                                <BiLogoInstagram/>
                                             </div>
                                             <div className="icon textxl">
-                                                <BsLinkedin/>
+                                                <FaLinkedin/>
                                             </div>
 
                                         </div>
