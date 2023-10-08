@@ -5,7 +5,58 @@
   position: relative;
   
 }
+.generate-now-svg-services{
+  display: flex;
+  color: black;
+  align-items: center;
+  width: 40%;
+  height: 48px;
+  margin-right: 20px;
+  padding: 1px;
+}
 
+.button_generate-now-services{
+  background-color: white;
+  color: black;
+  width: 80%;
+  height: 100%;
+  border: none;
+  align-items: center;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--fontsize-xs);
+  cursor: pointer;
+  letter-spacing: 2px;
+
+}
+
+.generate-now-svg-services  svg{
+  width: 20%;
+  margin-left: 12.9rem;
+  top: 1px;
+  height: 97%;
+  background-color: #e17209;
+
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+ .generate-now-svg-services:hover svg{
+  background-color: #3f3a3a;
+
+}
+
+@media screen and (max-width:768px) {
+  .generate-now-svg-services{
+    width: 80%;
+    margin: 0px auto;
+  }
+  .generate-now-svg-services svg{
+    margin-left: 13.3rem;
+    height: 97%;
+
+  }
+}
 
 .btn:before, .btn:after {
   content: "";
@@ -82,7 +133,7 @@
 
 
 h1,p{
-  font-family: 'Source Code Pro', monospace;
+  /* font-family: 'Source Code Pro', monospace; */
   font-weight: normal;
 } 
 
@@ -147,6 +198,9 @@ h1,p{
   #power-text {
     display: none; /* Hide the text for screens smaller than 600px */
   }
+  .button_generate-now-services{
+    width: 80%;
+  }
 }
 
 #power-buttons{
@@ -157,6 +211,7 @@ h1,p{
   #power-buttons {
     display: none; /* Hide the text for screens smaller than 600px */
   }
+
 }
 
 .image-modal textarea {

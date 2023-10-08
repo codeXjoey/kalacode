@@ -4,8 +4,9 @@ import { Route, BrowserRouter as Router, Routes,Link } from 'react-router-dom'; 
 
 import Generate from '../components/generator/Generator';
 import GenerateThen from '../components/generatedThen/GenerateThen';
-import Exp from '../components/Exp';
-
+import Exp from '../components/exp/Exp';
+import Services from '../pages/Services.jsx';
+import Contact from '../pages/contact-us';
 
 const Routers = () => {
   return (
@@ -14,6 +15,8 @@ const Routers = () => {
       <Route path='/' element={<Exp />} />
       <Route path='/generate' element={<Generate/>}/>
       <Route path='/generated-then' element={<GenerateThen/>}/>
+      <Route path='/services' element={<Services/>}/>
+      <Route path='/contact-us' element={<Contact/>}/>
     </Routes>
   );
 };
