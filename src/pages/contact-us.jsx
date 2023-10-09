@@ -33,10 +33,7 @@ const Contact = () => {
                             <div className="grid gap-14 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                                 <div className="flex gap-10 sm:gap-20 flex-col justify-center items-center sm:items-start">
                                     <div className="text-gray-50">
-                                        <p className="text-7xl sm:text-8xl uppercase">Say <br />Hello .</p>
-                                    </div>
-                                    <div className='sm:h-[300px]'>
-                                        <img className='h-full' src={qr} alt="" />
+                                        <p className="text-7xl sm:text-7xl  uppercase">Tell us about <br />your project or idea.</p>
                                     </div>
                                 </div>
                                 <div className="lg:col-span-2 sm:mt-10 text-white">

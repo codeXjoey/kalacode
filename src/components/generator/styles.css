@@ -187,15 +187,30 @@
 
 
 .qr-gen-form{
-  width: 961px;
+/* width: 961px; */
 flex-shrink: 0;
-border: 2.183px solid rgba(255, 255, 255, 0.40);
+border: 2.183px solid rgba(255, 255, 255, 0.111);
 background: rgba(0, 0, 0, 0.34);
 backdrop-filter: blur(5px);
 }
+
+
 
 
 .qr-border{
   border: 0.646px solid rgba(0, 0, 0, 0.34);
 background: lightgray 50% / cover no-repeat;
 }
+
+
+/* @media screen and (max-width:768px) {
+  .qr-gen-form{
+    width: 90%;
+    flex-shrink: 0;
+    border: 2.183px solid rgba(255, 255, 255, 0.40);
+    background: rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(5px);
+    }
+    
+     */
+/* } */

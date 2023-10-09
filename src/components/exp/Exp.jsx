@@ -78,17 +78,17 @@ const Exp = () => {
 
   return <>
     {showCookiePopup && !hasAcceptedCookies && (
-      <div className="fixed bg-[#e1710987] bottom-0 left-0 w-full sm:h-52  z-50">
+      <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
         <div className="relative flex sm:flex-row flex-col justify-between h-full">
-          <div className="p-4 sm:py-16 sm:px-10 sm:w-3/4">
-            <h1 className="text-sm footer-text mb-2 text-white">Personalize your experience</h1>
+          <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
+            <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
             <p className="text-sm footer-text opacity-90 text-white">
               We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
             </p>
           </div>
-          <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-8 items-center my-auto sm:w-1/4">
+          <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
             <button
-              className="flex-1  outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-28 sm:px-5"
+              className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
               onClick={handleAcceptAll}
             >
               <div className="corner-button-then"></div>
@@ -98,7 +98,7 @@ const Exp = () => {
               Accept all
             </button>
             <button
-              className="overflow-hidden flex-1 btn relative button  text-white hover:bg-white/10 text-center px-32 sm:px-5 py-3  transition duration-500 ease-in-out"
+              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-24 sm:px-5 py-3  transition duration-500 ease-in-out"
               onClick={handleDeny}
             >
               <div className="corner-button-deny"></div>
@@ -107,7 +107,7 @@ const Exp = () => {
               <div className="  corner-button-deny "></div>
               <span className="btn-content ">
                 <span className="btn-inner-content">
-                  <span>Deny</span>
+                  <span>More Info</span>
                 </span>
               </span>
 
@@ -128,21 +128,21 @@ const Exp = () => {
       <canvas className='experience'></canvas>
 
       {/* ----Text--- */}
-      <div className="text text-0">
-        <p>POWER TO TRANSFORM</p>
-        <p>by Hudbil Private Limited</p>
+      <div className="text px-10 m-auto text-0">
+        <p className='sm:text-[48px] text-[28px]'>POWER TO TRANSFORM</p>
+        <p className='sm:text-[30px] text-[20px] text-center'>by Hudbil Private Limited</p>
         <footer className="typo-font">
           <div className='icon-scroll'></div>
         </footer>
       </div>
       <div className='text text-1'>
-        <p>Generate artistic qr codes of your choice for free</p>
+        <p className='sm:text-[30px] text-[20px] text-center'>Generate artistic qr codes of your choice for free</p>
       </div>
       <div className="text text-2">
-        <p>powered by "ai and stable diffusion"</p>
+        <p className='sm:text-[30px] text-[20px] text-center'>powered by "ai and stable diffusion"</p>
       </div>
       <div className="text text-3">
-        <p>Create amazing custom qr codes for  your <br /> personal and business needs</p>
+        <p className='sm:text-[30px] text-[20px] text-center'>Create amazing custom qr codes for  your <br /> personal and business needs</p>
       </div>
 
       <div className="text text-4">
@@ -174,7 +174,7 @@ const Exp = () => {
             </Link>
             <div style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", outlineOffset: "2px" }}
               className="generate-then">
-              <button className="button_generate-then ">GENERATE THEN
+              <button className="button_generate-then bg-black/70">GENERATE THEN
                 <div className="corner-button-then"></div>
                 <div className="corner-button-then"></div>
                 <div className="corner-button-then"></div>
@@ -197,19 +197,19 @@ const Exp = () => {
       <div id="fullscreen-menu">
         <div id="card1" className={`card ${showCard1 ? 'slide-in show' : ''}`}>
           <img src="/qr-images/qr-2.png" alt="" className="image" />
-          <p className='text-sm  mt-2' > #2023000282 <br />  <span className='text-2xl  font-bold '> About Us  </span> </p>
+          <p className='text-sm  mt-2' > #2023000282 <br />  <span className='sm:text-2xl  font-bold '> About Us  </span> </p>
         </div>
           <div id="card2" className={`card ${showCard2 ? 'slide-in show' : ''}`}>
         <Link to={'/contact-us'}>
             <img src="/qr-images/qr-3.png" alt="" className="image" />
-            <p className='text-sm  mt-2'>  #2023000282 <br /> <span className='text-2xl font-bold '> Contact Us  </span> </p>
+            <p className='text-sm  mt-2'>  #2023000282 <br /> <span className='sm:text-2xl font-bold '> Contact Us  </span> </p>
         </Link>
           </div>
 
           <div id="card3" className={`card ${showCard3 ? 'slide-in show' : ''}`}>
         <Link to={'/services'}>
             <img src="/qr-images/qr-4.png" alt="" className="image" />
-            <p className='text-sm  mt-2'> #2023000282 <br /> <span className='text-2xl font-bold '> Services  </span> </p>
+            <p className='text-sm  mt-2'> #2023000282 <br /> <span className='sm:text-2xl font-bold '> Services  </span> </p>
         </Link>
           </div>
 {/*         
@@ -289,7 +289,7 @@ function initExperience() {
   //Particles configuration
   const debug = {
     //Fingerprint
-    fingerprintBaseColor1: '#e17209',
+    fingerprintBaseColor1: '#fe7272',
     fingerprintBaseColor2: '#ffffff',
     fingerprintBaseColor3: '#1d5ef7',
     fingerprintWidth: 10,

@@ -21,7 +21,7 @@
     left: 0;
     height: 1px;
     width: 100%;
-    background-color: #252525;
+    background-color: #eeeeee;
 }
 
 .btn:before {
@@ -49,7 +49,7 @@
     top: 0;
     height: 100%;
     width: 1px;
-    background-color: #252525;
+    background-color: #fefefe;
 }
 
 .btn>*:before {
@@ -112,8 +112,8 @@
 
 :root {
     --fontsize-xs: 18px;
-    --fontsize-s: 28px;
-    --fontsize-m: 48px;
+    --fontsize-s: 20px;
+    --fontsize-m: 49px;
     --fontsize-l: 64px;
 }
 
@@ -160,7 +160,7 @@ body {
 .circle {
     width: 40px;
     height: 40px;
-    background-color: #e17209;
+    background-color: #FE7272;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -271,9 +271,7 @@ p {
     }
 }
 
-.text-0 p:nth-child(2) {
-    font-size: var(--fontsize-s);
-}
+
 
 .text-2 {
     flex-direction: column;
@@ -320,7 +318,7 @@ p {
     margin-left: 14.97rem;
     top: 1px;
     height: 97%;
-    background-color: #e17209;
+    background-color: #FE7272;
 
     cursor: pointer;
     transition: all 0.5s;
@@ -426,7 +424,25 @@ p {
 }
 
 @media (max-width: 700px) {
-
+    .card {
+        width: 150px !important;
+        max-height: 200px !important;
+        border-radius: 2px;
+        padding: 10px;
+        background-color: azure;
+        presentation-level: preserve-3d;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0px 20px 50px #ffffff10;
+        transform: none;
+        transition: none;
+        /* opacity: 0; */
+    
+    }
+    .text{
+        letter-spacing: 4px;
+    }
     .QrCodeInfo {
         width: 100%;
         background-color: transparent;
@@ -459,7 +475,7 @@ p {
         margin-left: 12.65rem;
         top: 1px;
         height: 97%;
-        background-color: #e17209;
+        background-color: #FE7272;
         cursor: pointer;
     }
 
@@ -709,7 +725,31 @@ p {
     #fullscreen-menu {
         flex-direction: column;
         gap: 10px;
+        justify-content: center;
+        align-items: center;
     }
+    .card:nth-child(1) {
+        top: 0px;
+        transform: none;
+    
+    }
+    
+    .card:nth-child(2) {
+        transform: none;
+        top: 0px;
+    
+    }
+    
+    .card:nth-child(3) {
+        transform: none;
+        top: 0px;
+    }
+    
+    /* .card:nth-child(4) {
+        transform: rotate(-7.224deg);
+        top: 350px;
+    
+    } */
 }
 
 

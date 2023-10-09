@@ -100,6 +100,7 @@ const Generate = () => {
 
 
   return (
+    <>
     <div className='h-full bg-particle-image'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
@@ -115,48 +116,51 @@ const Generate = () => {
         
         <div className="flex flex-col items-center justify-center">
           {showForm && (
-            <div className="z-10 qr-gen-form sm:mt-[-50px] text-white">
-                <div className="px-1  sm:px-4 w-[90%] sm:w-full form-text relative mx-auto max-w-screen-lg">
-                  <h1 className="text-2xl  sm:py-4 sm:text-5xl uppercase text-center">
+            <div className="z-10 relative mt-5 qr-gen-form w-[90%] sm:w-full sm:mt-[-50px] text-white">
+               <div className="corner-border-generated"></div>
+                        <div className="corner-border-generated"></div>
+                        <div className="corner-border-generated"></div>
+                        <div className="corner-border-generated"></div>
+                <div className="px-1  sm:px-4 w-full form-text relative mx-auto max-w-screen-lg">
+                  <h1 className="text-xl mt-5 sm:py-4 sm:text-5xl uppercase text-center">
                     Artistic QR Code Generator
                   </h1>
-                  <p className="sm:mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
-                    This experience leverages 'Artificial Intelligence' to generate artistic QR code of your choice.<br />
-                    Key in the required information below and hang in there to download!
+                  <p className="mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
+                    Create AI powered qr codes for free, just key in the info below and get started
                   </p>
-                  <div className="sm:mt-2 p-6 pt-2 bg-transparent shadow-lg max-w-3xl mx-auto">
+                  <div className="sm:mt-2 p-3 pt-2 bg-transparent shadow-lg max-w-3xl mx-auto">
                     <form>
-                      <div className="mb-8 sm:mb-4">
-                        <label htmlFor="link" className="block text-[12px] text-white/100 sm:text-lg">Add your link</label>
+                      <div className="mb-4 sm:mb-4">
+                        <label htmlFor="link" className="block text-[14px] text-white/100 sm:text-lg">Add your link</label>
                         <input
                           id="link"
                           type="text"
                           placeholder="https://kalacode.com/"
-                          className="w-full px-3 py-2 sm:mt-2 text-[16px] mb-2 bg-black border-2 border-gray-400 text-white/80 outline-none"
+                          className="w-full px-3 py-2 sm:mt-2 text-[12px] sm:text-[16px] bg-black border-2 border-gray-400/50 text-white/80 outline-none"
                           value={linkValue}
                           onChange={(e) => setLinkValue(e.target.value)}
                         />
                       </div>
                       <div className="sm:mb-2">
-                        <label htmlFor="prompt" className="block pb-1 text-[12px] text-white/100 sm:text-lg">Add your prompt</label>
+                        <label htmlFor="prompt" className="block pb-1 text-[14px] text-white/100 sm:text-lg">Add your prompt</label>
                         <textarea
                           id="prompt"
                           rows={5}
-                          className="w-full px-4 py-2 sm:mt-2 text-[16px] bg-black mb-5 text-white/80 border-2 border-gray-400 outline-none"
+                          className="w-full px-4 py-2 sm:mt-2 text-[12px] sm:text-[16px]  bg-black mb-5 text-white/80 border-2 border-gray-400/50 outline-none"
                           placeholder="a detailed painting of a quaint cottage in the british countryside on a summers day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)"
                           value={promptValue}
                           onChange={(e) => setPromptValue(e.target.value)}
                         ></textarea>
                       </div>
 
-                      <div className='flex gap-4 w-[50%]  mx-auto'>
+                      <div className='flex gap-4 sm:w-[50%]  mx-auto'>
                         {data.map((image,index) => (
                           <div key={index} onClick={() => setPromptInput(image)}  className={ `w-30 bg-white p-1 cursor-pointer h-30 ${isSelected  === image ? 'opacity-100' : 'opacity-40'}`}>
                                 <img className='object-cover qr-border' src={image.src} alt="" />
                                 <p className='text-black text-[8px]  text-center'> #2023000282 <br /> <span className='text-lg'>Hulk</span></p>
                           </div>
                         ))}
-                        <div className=' w-30   px-8 cursor-pointer flex justify-center items-center   h-30 glassy-background'>
+                        <div className=' w-30 px-6   sm:px-8 cursor-pointer flex justify-center items-center   h-30 glassy-background'>
                             <p className='text-white text-xs text-center'>Explore More</p>
                           </div>
 
@@ -251,6 +255,7 @@ const Generate = () => {
           )} */}
         </div>
     </div>
+    </>
   );
 };
 
