@@ -20,9 +20,9 @@ const Services = () => {
         </div>
       </div>
  
-      <div className='flex sm:h-[85vh] h-full  sm:flex-row flex-col sm:mt-5 sm:px-20 justify-center gap-20 items-center'>
+      <div className='flex sm:h-[85vh] h-full   sm:flex-row flex-col mt-5 sm:px-20 justify-center gap-20 items-center'>
         <div className='sm:w-1/2 w-[90%] h-full m-auto text-white border-dashed  border-2    border-gray-600'>
-          <h1 className="text-2xl  sm:py-4 sm:text-4xl uppercase text-center">
+          <h1 className="text-2xl py-4 sm:text-4xl uppercase text-center">
             AUGMENTED REALITY
           </h1>
           <p className="sm:mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
@@ -57,7 +57,7 @@ const Services = () => {
           </div>
         </div>
         <div className='sm:w-1/2 w-[90%] h-full m-auto text-white border-dashed border-2 border-gray-600'>
-          <h1 className="text-2xl  sm:py-4 sm:text-4xl uppercase text-center">
+          <h1 className="text-2xl py-4 sm:text-4xl uppercase text-center">
           ARTIFICIAL INTELLIGENCE
           </h1>
           <p className="sm:mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">

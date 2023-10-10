@@ -82,7 +82,7 @@ const Exp = () => {
         <div className="relative flex sm:flex-row flex-col justify-between h-full">
           <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
             <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
-            <p className="text-lg footer-text opacity-90 text-white">
+            <p className="text-sm sm:text-lg footer-text opacity-90 text-white">
               We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
             </p>
           </div>
@@ -98,7 +98,7 @@ const Exp = () => {
               Accept all
             </button>
             <button
-              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5.3rem] sm:px-5 py-3  transition duration-500 ease-in-out"
+              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
               onClick={handleDeny}
             >
               <div className="corner-button-deny"></div>
