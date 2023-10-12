@@ -5,23 +5,15 @@ import qr from '../assets/Frame 89.png'
 import house from '../../public/qr-images/untitled 2.png'
 import './pages.css'
 import { FaBars } from 'react-icons/fa'
+import NavbarAndFullscreenMenu from '../components/menu/menu'
 const Services = () => {
   return (
     <>
-      <div className="flex  justify-between z-50 items-center px-4 sm:px-12 ">
-        <div className="sm:w-auto  z-50 w-full ">
-          <Link to={'/'}>
-            <img
-              src={logo}
-              className="sm:w-[8rem] mt-5 bg-none w-[5rem] cursor-pointer"
-              alt="logo"
-            />
-          </Link>
-        </div>
-      </div>
- 
-      <div className='flex sm:h-[85vh] h-full   sm:flex-row flex-col mt-5 sm:px-20 justify-center gap-20 items-center'>
-        <div className='sm:w-1/2 w-[90%] h-full m-auto text-white border-dashed  border-2    border-gray-600'>
+    <NavbarAndFullscreenMenu/>
+     
+
+      <div className='flex sm:h-[85vh] h-full sm:flex-row flex-col sm:px-20 justify-center gap-20 items-center'>
+        <div className='sm:w-1/2 w-[90%]  mt-24 h-full m-auto text-white border-dashed  border-2    border-gray-600'>
           <h1 className="text-2xl py-4 sm:text-4xl uppercase text-center">
             AUGMENTED REALITY
           </h1>
@@ -44,11 +36,12 @@ const Services = () => {
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
-                <svg style={{ position: "absolute" }} className='' viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
-                    <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                    <path d="m.5 7 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
                       strokeLinejoin="round" transform="translate(9 6)"></path>
                   </g>
                 </svg>
@@ -56,9 +49,9 @@ const Services = () => {
             </div>
           </div>
         </div>
-        <div className='sm:w-1/2 w-[90%] h-full m-auto text-white border-dashed border-2 border-gray-600'>
+        <div className='sm:w-1/2 w-[90%] mt-24 h-full m-auto text-white border-dashed border-2 border-gray-600'>
           <h1 className="text-2xl py-4 sm:text-4xl uppercase text-center">
-          ARTIFICIAL INTELLIGENCE
+            ARTIFICIAL INTELLIGENCE
           </h1>
           <p className="sm:mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
             Artificial intelligence is the simulation of human intelligence processes by machines, especially computer systems. Specific applications of AI include expert systems, natural language processing, speech recognition and machine vision. We use deep learning, natural language process, AI technologies to meet the ever-growing business need for AI-powered products & services.          </p>
@@ -78,11 +71,12 @@ const Services = () => {
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
-                <svg style={{ position: "absolute" }} viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
-                    <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                    <path d="m.5 7 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
                       strokeLinejoin="round" transform="translate(9 6)"></path>
                   </g>
                 </svg>

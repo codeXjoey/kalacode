@@ -237,7 +237,7 @@ p {
 
 .text-0>footer {
     font-size: var(--fontsize-xs);
-    border: solid 1px rgba(108, 106, 106, 0.655);
+    border: solid 2px #FE7272;
     display: flex;
     border-radius: 15px;
     justify-content: center;
@@ -252,7 +252,7 @@ p {
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: white;
+    background-color: #DB1F1E;
     position: relative;
     animation: scrollAnimation 2s ease infinite;
 }
@@ -325,7 +325,7 @@ p {
 }
 
 .generate-now:hover svg {
-    background-color: #3f3a3a;
+    background-color: #BA8F6F;
 
 }
 

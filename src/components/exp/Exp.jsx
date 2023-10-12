@@ -1,37 +1,16 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Timeline } from 'gsap/gsap-core';
-import { FiX } from 'react-icons/fi'; // Import the close (X) icon from react-icons
-import { FaBars } from 'react-icons/fa';
 import './exp.css'
+import NavbarAndFullscreenMenu from '../menu/menu';
 const Exp = () => {
 
-  const [showCard1, setShowCard1] = useState(false);
-  const [showCard2, setShowCard2] = useState(false);
-  const [showCard3, setShowCard3] = useState(false);
-  // const [showCard4, setShowCard4] = useState(false);
+
   const [showCookiePopup, setShowCookiePopup] = useState(true);
   const [hasAcceptedCookies, setHasAcceptedCookies] = useState(false);
-  const slideInCard = (cardId, direction) => {
-    gsap.from(cardId, {
-      x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : '0',
-      y: direction === 'top' ? '-100%' : direction === 'bottom' ? '100%' : '0',
-      duration: 0.2,
-    });
-  };
-  const handleMenuClick = () => {
-    // Slide in each card with a delay
-    slideInCard('#card1', 'left');
-    slideInCard('#card2', 'bottom');
-    slideInCard('#card3', 'right');
-    slideInCard('#card4', 'top');
+ 
 
-    // Show the fullscreen menu
-    const fullscreenMenu = document.getElementById('fullscreen-menu');
-    fullscreenMenu.style.display = 'flex';
-  };
 
 
   const handleAcceptAll = () => {
@@ -77,6 +56,7 @@ const Exp = () => {
   }, []);
 
   return <>
+  <NavbarAndFullscreenMenu/>
     {showCookiePopup && !hasAcceptedCookies && (
       <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
         <div className="relative flex sm:flex-row flex-col justify-between h-full">
@@ -128,8 +108,8 @@ const Exp = () => {
       <canvas className='experience'></canvas>
 
       {/* ----Text--- */}
-      <div className="text px-10 m-auto text-0">
-        <p className='sm:text-[48px] text-[28px]'>POWER TO TRANSFORM</p>
+      <div className="text px-5 m-auto text-0">
+        <p className='sm:text-[48px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
         <p className='sm:text-[30px] text-[20px] text-center'>by Hudbil Private Limited</p>
         <footer className="typo-font">
           <div className='icon-scroll'></div>
@@ -139,10 +119,10 @@ const Exp = () => {
         <p className='sm:text-[30px] text-[20px] text-center'>Generate artistic qr codes of your choice for free</p>
       </div>
       <div className="text text-2">
-        <p className='sm:text-[30px] text-[20px] text-center'>powered by "ai and stable diffusion"</p>
+        <p className='sm:text-[30px] text-[20px] text-center'>powered by "ai and <br /> stable diffusion"</p>
       </div>
-      <div className="text text-3">
-        <p className='sm:text-[30px] text-[20px] text-center'>Create amazing custom qr codes for  your <br /> personal and business needs</p>
+      <div className="text px-3 text-3">
+        <p className='sm:text-[30px] text-[20px] text-center'>Create custom qr codes for  your  personal and business needs</p>
       </div>
 
       <div className="text text-4">
@@ -159,12 +139,12 @@ const Exp = () => {
                   <div className="corner-button"></div>
                   <div className="corner-button"></div>
                   <div className="corner-button"></div>
-                  <svg style={{ position: "absolute" }} viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                  <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
 
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
-                      <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
+                      <path d="m.5 7 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
                         strokeLinejoin="round" transform="translate(9 6)"></path>
                     </g>
                   </svg>
@@ -186,44 +166,6 @@ const Exp = () => {
         </div>
       </div>
 
-      <nav className='navbar'>
-        <img src='/images/Group 80.png' alt='logo'></img>
-        <button className='menuButton' onClick={() => handleMenuClick()}>
-          <FaBars />
-        </button>
-
-      </nav>
-
-      <div id="fullscreen-menu">
-        <div id="card1" className={`card ${showCard1 ? 'slide-in show' : ''}`}>
-          <img src="/qr-images/qr-2.png" alt="" className="image" />
-          <p className='text-sm  mt-2' > #2023000282 <br />  <span className='sm:text-2xl  font-bold '> About Us  </span> </p>
-        </div>
-          <div id="card2" className={`card ${showCard2 ? 'slide-in show' : ''}`}>
-        <Link to={'/contact-us'}>
-            <img src="/qr-images/qr-3.png" alt="" className="image" />
-            <p className='text-sm  mt-2'>  #2023000282 <br /> <span className='sm:text-2xl font-bold '> Contact Us  </span> </p>
-        </Link>
-          </div>
-
-          <div id="card3" className={`card ${showCard3 ? 'slide-in show' : ''}`}>
-        <Link to={'/services'}>
-            <img src="/qr-images/qr-4.png" alt="" className="image" />
-            <p className='text-sm  mt-2'> #2023000282 <br /> <span className='sm:text-2xl font-bold '> Services  </span> </p>
-        </Link>
-          </div>
-{/*         
-        <div id="card4" className={`card ${showCard4 ? 'slide-in show' : ''}`}>
-          <img src="/qr-images/qr-3.png" alt="" className="image" />
-          <p className='text-sm  mt-2'> #2023000282 <br /> <span className='text-2xl font-bold '> Contact Us  </span> </p>
-        </div> */}
-
-        <button id="close-menu" className="custom-close-button">
-          <div className="circle">
-            <FiX className="close-icon" /> {/* Add the close icon here */}
-          </div>
-        </button>
-      </div>
     </div>
 
     <aside className="QrCodeInfo">
@@ -291,7 +233,7 @@ function initExperience() {
     //Fingerprint
     fingerprintBaseColor1: '#fe7272',
     fingerprintBaseColor2: '#ffffff',
-    fingerprintBaseColor3: '#1d5ef7',
+    fingerprintBaseColor3: '#DB1F1E',
     fingerprintWidth: 10,
     fingerprintHeight: 14,
     fingerprintResolution: 70,

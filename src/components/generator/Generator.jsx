@@ -6,6 +6,7 @@ import logo from '../../assets/Group 80.png'
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import images from '../../pages/data';
+import NavbarAndFullscreenMenu from '../menu/menu';
 
 const Generate = () => {
   const [showForm, setShowForm] = useState(true);
@@ -51,7 +52,7 @@ const Generate = () => {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer ' + 'sk-LlACw9nNNFd00Uwde7QlRyN9vfgxnPz9OUeuMs2AVaMbm78w',
+          Authorization: 'Bearer ' + 'sk-XbxlnLLL6S8doVzqTuhvdqf39pqsg9Sds4SXE7OedJH7ajCG',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
@@ -101,21 +102,16 @@ const Generate = () => {
 
   return (
     <>
-      <div className='h-full bg-particle-image'>
+    <NavbarAndFullscreenMenu/>
+      <div className='h-screen bg-particle-image'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
-            <Link to={'/'}>
-              <img
-                src={logo}
-                className="sm:w-[8rem] mt-5 bg-none w-[5rem] cursor-pointer"
-                alt="logo"
-              />
-            </Link>
+       
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex h-[90vh] sm:h-[100vh]   flex-col items-center justify-center">
           {showForm && !showModal && (
-            <div className="z-10 relative mt-5 qr-gen-form w-[90%] max-w-5xl sm:w-full sm:mt-[-20px] text-white">
+            <div className="z-10 relative mt-40 flex flex-col justify-center h-full  qr-gen-form w-[90%] max-w-5xl sm:w-full text-white">
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
@@ -163,7 +159,7 @@ const Generate = () => {
                         <p className='text-white text-xs text-center'>Explore More</p>
                       </div>
                     </div>
-                    <div className="text-center mt-5 relative">
+                    <div className="text-center mt-8 sm:my-10 relative">
                       <button className="relative px-14 py-2 text-white border-2 border-gray-50/20 bg-transparent mb-2"
                         onClick={handleGenerateButtonClick} // Use the new function here
 
@@ -182,7 +178,7 @@ const Generate = () => {
             </div>
           )}
           {showModal && (
-            // <div className="fixed backdrop-blur-sm inset-0 flex modal-text z-50 items-center justify-center ">
+            <div className="fixed  inset-0 flex modal-text items-center justify-center ">
 
               <div className="w-full backdrop-blur-sm max-w-7xl mt-6 sm:mt-0 p-2 mx-auto rounded" id="myModal">
                 <div className="flex flex-col items-center justify-center w-full z-50 ">
@@ -240,7 +236,7 @@ const Generate = () => {
                   )}
                 </div>
               </div>
-            // </div>
+            </div>
           )}
         </div>
       </div>
