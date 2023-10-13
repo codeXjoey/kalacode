@@ -111,8 +111,19 @@ const Exp = () => {
       <div className="text px-5 m-auto text-0">
         <p className='sm:text-[48px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
         <p className='sm:text-[30px] text-[20px] text-center'>by Hudbil Private Limited</p>
-        <footer className="typo-font">
-          <div className='icon-scroll'></div>
+        <footer className="icon-scroll">
+          <div className="icon-scroll--active"/>
+          <div className='icon-scroll__dot' />
+          <div className='icon-scroll__lines--right'>
+            <div className='icon-scroll__lines__1'/>
+            <div className='icon-scroll__lines__2'/>
+            <div className='icon-scroll__lines__3'/>
+          </div>
+          <div className='icon-scroll__lines--left'>
+            <div className='icon-scroll__lines__1'/>
+            <div className='icon-scroll__lines__2'/>
+            <div className='icon-scroll__lines__3'/>
+          </div>
         </footer>
       </div>
       <div className='text text-1'>
