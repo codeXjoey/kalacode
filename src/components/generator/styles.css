@@ -135,6 +135,21 @@
   border-top-width: 0;
   border-left-width: 0;
 }
+.fade-in {
+  animation-name: fadeIn;
+  animation-duration: 1s; /* You can adjust the duration as needed */
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 
 .corner-border-generated{

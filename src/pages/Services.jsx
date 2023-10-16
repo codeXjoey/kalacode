@@ -36,8 +36,8 @@ const Services = () => {
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
                 <div className="corner-button"></div>
-                <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
 
+                <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">

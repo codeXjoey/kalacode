@@ -18,6 +18,7 @@ const Generate = () => {
   const [isSelected, setisSelected] = useState(data[0])
   const [promptValue, setPromptValue] = useState(data[0].description);
 
+
   const downloadImage = (imageUrl) => {
     const link = document.createElement('a');
     link.href = imageUrl;
@@ -97,6 +98,8 @@ const Generate = () => {
   }
 
 
+
+
   // const seelectedImage =
 
 
@@ -109,24 +112,24 @@ const Generate = () => {
        
           </div>
         </div>
-        <div className="flex h-[90vh] sm:h-[100vh]   flex-col items-center justify-center">
+        <div className="flex h-[86vh] sm:h-[90vh] mt-20 sm:mt-12  flex-col items-center justify-center">
           {showForm && !showModal && (
-            <div className="z-10 relative mt-40 flex flex-col justify-center h-full  qr-gen-form w-[90%] max-w-5xl sm:w-full text-white">
+            <div className={`z-10 relative flex flex-col justify-center h-full qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm && !showModal ? 'fade-in active' : ''}`}>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="px-1  sm:px-4 w-full form-text relative mx-auto max-w-screen-lg">
-                <h1 className="text-xl mt-5 sm:py-2 sm:text-5xl uppercase text-center">
+                <h1 className="text-xl mt-2 sm:py-2 sm:text-5xl uppercase text-center">
                   Artistic QR Code Generator
                 </h1>
-                <p className="mt-3 sm:px-20 opacity-70 text-sm text-center  pb-5 px-5">
+                <p className="mt-3 sm:px-20 opacity-70 text-sm text-center  pb-3 px-5">
                   Create AI powered qr codes for free, just key in the info below and get started
                 </p>
                 <div className="sm:mt-2 p-3 pt-2 bg-transparent shadow-lg max-w-3xl mx-auto">
                   <form>
-                    <div className="mb-4 sm:mb-4">
-                      <label htmlFor="link" className="block text-[14px] text-white/100 sm:text-lg">Add your link</label>
+                    <div className="mb-4 sm:mb-3">
+                      <label htmlFor="link" className="block text-[14px] text-white/100 sm:text-[1rem]">Add your link</label>
                       <input
                         id="link"
                         type="text"
@@ -137,7 +140,7 @@ const Generate = () => {
                       />
                     </div>
                     <div className="sm:mb-2">
-                      <label htmlFor="prompt" className="block pb-1 text-[14px] text-white/100 sm:text-lg">Add your prompt</label>
+                      <label htmlFor="prompt" className="block pb-1 text-[14px] text-white/100 sm:text-[1rem]">Add your prompt</label>
                       <textarea
                         id="prompt"
                         rows={5}
@@ -159,8 +162,8 @@ const Generate = () => {
                         <p className='text-white text-xs text-center'>Explore More</p>
                       </div>
                     </div>
-                    <div className="text-center mt-8 sm:my-10 relative">
-                      <button className="relative px-14 py-2 text-white border-2 border-gray-50/20 bg-transparent mb-2"
+                    <div className="text-center my-4 relative">
+                      <button className="relative px-14 py-2 text-white border-2 border-gray-50/20 bg-transparent"
                         onClick={handleGenerateButtonClick} // Use the new function here
 
                       >
@@ -190,7 +193,7 @@ const Generate = () => {
                       <div className="corner-border-generated"></div>
                       <div className="corner-border-generated"></div>
                       <div className="corner-border-generated"></div>
-                      <button className="absolute  top-0 left-0 p-2 sm:m-4 text-white" onClick={closeModal}>
+                      <button className="absolute  top-0 right-0 p-2 sm:m-4 text-white" onClick={closeModal}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
