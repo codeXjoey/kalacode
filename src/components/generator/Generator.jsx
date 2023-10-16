@@ -84,11 +84,11 @@ const Generate = () => {
   }
 
   const handleGenerateButtonClick = async (event) => {
+    setShowForm(false);
     setShowModal(true);
     setLoading(true);
     await openModal(event);
     setLoading(false);
-
   };
 
 
@@ -105,16 +105,16 @@ const Generate = () => {
 
   return (
     <>
-    <NavbarAndFullscreenMenu/>
+      <NavbarAndFullscreenMenu />
       <div className='h-screen bg-particle-image'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
-       
+
           </div>
         </div>
         <div className="flex h-[86vh] sm:h-[90vh] mt-20 sm:mt-12  flex-col items-center justify-center">
           {showForm && !showModal && (
-            <div className={`z-10 relative flex flex-col justify-center h-full qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm && !showModal ? 'fade-in active' : ''}`}>
+            <div className={`z-10 relative flex flex-col justify-center h-full qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm ? 'fade-in' : 'fade-out'}`}>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
@@ -181,14 +181,14 @@ const Generate = () => {
             </div>
           )}
           {showModal && (
-            <div className="fixed  inset-0 flex modal-text items-center justify-center ">
+            <div className={`fixed inset-0 flex modal-text items-center justify-center ${showModal ? 'fade-in' : 'fade-out'}`}>
 
               <div className="w-full backdrop-blur-sm max-w-7xl mt-6 sm:mt-0 p-2 mx-auto rounded" id="myModal">
                 <div className="flex flex-col items-center justify-center w-full z-50 ">
                   {loading ? (
                     <div className="loader animate-spin w-12 h-12  rounded-full border-4 border-blue-500 border-t-transparent"></div>
                   ) : (
-                    <div className="bg-black  pb-5 sm:py-6  outline outline-offset-0 outline-white/5  bg-opacity-20 sm:w-[60rem] flex justify-center items-center flex-col relative">
+                    <div className={`bg-black  pb-5 sm:py-6  outline outline-offset-0 outline-white/5  bg-opacity-20 sm:w-[60rem] flex justify-center items-center flex-col relative ${showModal ? 'fade-in' : 'fade-out'}`}>
                       <div className="corner-border-generated"></div>
                       <div className="corner-border-generated"></div>
                       <div className="corner-border-generated"></div>
