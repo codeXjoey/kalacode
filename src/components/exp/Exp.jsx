@@ -15,37 +15,18 @@ const Exp = () => {
 
   const [selectedQrCodeId, setSelectedQrCodeId] = useState('');
 
-
-
-  const handleAcceptAll = () => {
-    // Handle the logic for accepting cookies here
-    // You can set cookies or perform other actions
-
-    // Set a flag indicating that the user has accepted cookies
-    localStorage.setItem('acceptedCookies', 'true');
-
-    setShowCookiePopup(false);
-    setHasAcceptedCookies(true);
-  };
-
-  const handleDeny = () => {
-    // Handle the logic for denying cookies here
-    setShowCookiePopup(false);
-  };
-
-
   useEffect(() => {
 
     //------------------ Menu buttons
-    const menuButton = document.querySelector(".menuButton");
-    const fullscreenMenu = document.getElementById("fullscreen-menu");
-    const closeButton = document.getElementById("close-menu");
-    menuButton.addEventListener("click", function () {
-      fullscreenMenu.style.display = "flex";
-    });
-    closeButton.addEventListener("click", function () {
-      fullscreenMenu.style.display = "none";
-    });
+    // const menuButton = document.querySelector(".menuButton");
+    // const fullscreenMenu = document.getElementById("fullscreen-menu");
+    // const closeButton = document.getElementById("close-menu");
+    // menuButton.addEventListener("click", function () {
+    //   fullscreenMenu.style.display = "flex";
+    // });
+    // closeButton.addEventListener("click", function () {
+    //   fullscreenMenu.style.display = "none";
+    // });
 
     initExperience();
   })
@@ -1072,6 +1053,21 @@ const Exp = () => {
     }
   }
 
+  const handleAcceptAll = () => {
+
+    localStorage.setItem('acceptedCookies', 'true');
+
+    setShowCookiePopup(false);
+    setHasAcceptedCookies(true);
+  };
+
+  const handleDeny = () => {
+    setShowCookiePopup(false);
+  };
+
+
+
+
 
   useEffect(() => {
     // Check if the user has previously accepted cookies
@@ -1082,70 +1078,65 @@ const Exp = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const fullscreenMenu = document.getElementById('fullscreen-menu');
-    setIsNavbarOpen(fullscreenMenu.style.display === 'flex');
-  }, []);
+
 
   return <>
     <NavbarAndFullscreenMenu />
     {showCookiePopup && !hasAcceptedCookies && (
-      <div className={`scrollable-container  ${isNavbarOpen ? 'resized-exp' : ''}`}>
-        <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
-          <div className="relative flex sm:flex-row flex-col justify-between h-full">
-            <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
-              <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
-              <p className="text-xs sm:text-sm footer-text opacity-90 text-white">
-                We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy.
-              </p>
-            </div>
-            <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
-              <button
-                className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
-                onClick={handleAcceptAll}
-              >
-                <div className="corner-button-then"></div>
-                <div className="corner-button-then"></div>
-                <div className="corner-button-then"></div>
-                <div className="corner-button-then"></div>
-                Accept all
-              </button>
-              <button
-                className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
-                onClick={handleDeny}
-              >
-                <div className="corner-button-deny"></div>
-                <div className="  corner-button-deny "></div>
-                <div className="  corner-button-deny "></div>
-                <div className="  corner-button-deny "></div>
-                <span className="btn-content ">
-                  <span className="btn-inner-content">
-                    <span>More Info</span>
-                  </span>
+      <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
+        <div className="relative flex sm:flex-row flex-col justify-between h-full">
+          <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
+            <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
+            <p className="text-xs sm:text-sm footer-text opacity-90 text-white">
+              We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy.
+            </p>
+          </div>
+          <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
+            <button
+              className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
+              onClick={handleAcceptAll}
+            >
+              <div className="corner-button-then"></div>
+              <div className="corner-button-then"></div>
+              <div className="corner-button-then"></div>
+              <div className="corner-button-then"></div>
+              Accept all
+            </button>
+            <button
+              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
+              onClick={handleDeny}
+            >
+              <div className="corner-button-deny"></div>
+              <div className="  corner-button-deny "></div>
+              <div className="  corner-button-deny "></div>
+              <div className="  corner-button-deny "></div>
+              <span className="btn-content ">
+                <span className="btn-inner-content">
+                  <span>More Info</span>
                 </span>
-
-              </button>
-            </div>
-            <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
-              <span className="sr-only">Close popup</span>
-              <span className="text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 8 8" width="10" height="10">
-                  <path d="M2,8H0L3,4,0,0H2L4,2.67,6,0H8L5,4,8,8H6L4,5.33Z"></path>
-                </svg>
               </span>
+
             </button>
           </div>
+          <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
+            <span className="sr-only">Close popup</span>
+            <span className="text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 8 8" width="10" height="10">
+                <path d="M2,8H0L3,4,0,0H2L4,2.67,6,0H8L5,4,8,8H6L4,5.33Z"></path>
+              </svg>
+            </span>
+          </button>
         </div>
       </div>
 
     )}
-    <div className="scrollable-container uppercase  ">
+    <div className="scrollable-container   ">
       <canvas className='experience'></canvas>
 
       {/* ----Text--- */}
       <div className="text px-5 m-auto text-0">
-        <p className='sm:text-[40px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
-        <p className='sm:text-[22px] text-[20px] text-center'>by Hudbil Private Limited</p>
+        <p className='sm:text-[40px] text-[34px] mb-3  sm:mb-0'>Power to transform</p>
+        <p className='sm:text-[22px] text-[20px] uppercase text-center'>by Hudbil Private Limited</p>
         <footer className="icon-scroll opacity-50">
           <div className="icon-scroll--active" />
           <div className='icon-scroll__dot' />
@@ -1165,10 +1156,10 @@ const Exp = () => {
         <p className='sm:text-[22px] text-[20px] text-center'>Generate artistic qr codes of your choice for free</p>
       </div>
       <div className="text text-2">
-        <p className='sm:text-[22px] text-[20px] text-center'>powered by "ai and <br /> stable diffusion"</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>Powered by "AI and <br /> Stable diffusion"</p>
       </div>
       <div className="text px-3 text-3">
-        <p className='sm:text-[22px] text-[20px] text-center'>Create custom qr codes for  your  personal and business needs</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>Create custom QR codes for  your  personal and business needs</p>
       </div>
 
       <div className="text text-4">

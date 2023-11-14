@@ -566,7 +566,6 @@ body {
     }
 
     .text {
-        text-transform: uppercase;
         font-size: var(--fontsize-s);
     }
 
