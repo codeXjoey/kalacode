@@ -56,7 +56,7 @@ const NavbarAndFullscreenMenu = () => {
         <div className="flex">
             <nav className="navbar">
                 <Link to={'/'}>
-                    <img className="w-[150px] pl-6" src="/src/assets/logo.png" alt="logo" />
+                    <img className="w-[150px] pl-6" src="/public/images/logo.png" alt="logo" />
                 </Link>
                 <button className="menuButton rotate-90 mr-5 font-black">
                     <FaBars className='text-red-400 text-3xl ' />
