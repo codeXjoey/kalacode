@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&display=swap');
+
 @media (max-width: 700px) {
     #fullscreen-menu {
         flex-direction: column;
@@ -25,22 +27,51 @@
     display: none;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.862);
+    background-color: aqua;
     z-index: 999;
-    justify-content: center;
-    text-align: center;
-    width: 100vw;
     height: 100vh;
-    gap: 100px;
     overflow: hidden;
-    /* perspective: 1000px; */
-    /* perspective-origin: 50% 50%; */
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.vertical-div {
+    background-color: aqua;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 400px;
+    transition: transform 0.3s  infinite;
+}
+.navbar-open .background-component {
+    max-width: 900px;
+}
+.red {
+    background-color: #DB1F1E;
 }
 
 
+
+.yellow {
+    background-color: #F1CFAE;
+}
+
+
+
+.experience2 {
+    height: 100%;
+    width: 100%;
+    max-width: 750px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* outline:none; */
+}
+  
 .navbar {
     position: fixed;
     display: flex;

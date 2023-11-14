@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&display=swap');
 
 .modal-text h1,.form-text h1,.form-text p, .form-text label,.form-text input,.form-text button,.form-text textarea{
-  font-family: 'Open Sans', sans-serif;
+  
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .bg-particle-image{
@@ -18,7 +21,7 @@
   position: absolute;
   width: 15px;
   height: 15px;
-  border: 2px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
+  border: 2px solid rgb(189, 35, 35); /* Adjust the border properties as needed */
 }
 
 .corner-button-generator:nth-child(1) {
@@ -64,7 +67,7 @@
   position: absolute;
   width: 5px;
   height: 5px;
-  border: 1px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
+  border: 1px solid rgb(166, 8, 8); /* Adjust the border properties as needed */
 }
 
 
@@ -103,7 +106,7 @@
   position: absolute;
   width: 20px; /* Adjust the length of the corner borders as needed */
   height: 20px; /* Adjust the length of the corner borders as needed */
-  border: 2px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
+  border: 2px solid rgb(171, 49, 49); /* Adjust the border properties as needed */
 }
 
 
@@ -167,9 +170,9 @@
 
 .corner-border-generated{
   position: absolute;
-  width: 20px; /* Adjust the length of the corner borders as needed */
-  height: 20px; /* Adjust the length of the corner borders as needed */
-  border: 2px solid rgb(255, 255, 255); /* Adjust the border properties as needed */
+  width: 30px; /* Adjust the length of the corner borders as needed */
+  height: 30px; /* Adjust the length of the corner borders as needed */
+  border: 2px solid #FE7272; /* Adjust the border properties as needed */
 }
 
 
@@ -217,7 +220,7 @@
 .qr-gen-form{
 /* width: 961px; */
 /* flex-shrink: 0; */
-border: 2.183px solid rgba(255, 255, 255, 0.111);
+border: 2.183px solid rgba(255, 255, 255, 0);
 background: rgba(0, 0, 0, 0.34);
 backdrop-filter: blur(5px);
 }

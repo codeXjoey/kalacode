@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import images from '../../pages/data';
 import NavbarAndFullscreenMenu from '../menu/menu';
+import CursorAnimation from '../cursor-animation/curosor';
+import { useParams } from 'react-router-dom';
 
 const Generate = () => {
+  const { qrCodeId } = useParams();
   const [showForm, setShowForm] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [linkValue, setLinkValue] = useState('https://kalacode.com/');
@@ -39,8 +42,8 @@ const Generate = () => {
       text_prompt: promptText,
       use_url_shortener: false,
       negative_prompt: 'ugly, disfigured, low quality, blurry, nsfw, text, words',
+      selected_model: "dream_shaper",
     };
-
     const apiUrl =
       'https://api.gooey.ai/v2/art-qr-code/?run_id=l49n5w4p&uid=RMZ2M7e255bQZhBO5XMqpXYb8zO2';
 
@@ -106,7 +109,7 @@ const Generate = () => {
   return (
     <>
       <NavbarAndFullscreenMenu />
-      <div className='h-screen bg-particle-image'>
+      <div className='h-screen z-[100000000]'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
 
@@ -114,7 +117,7 @@ const Generate = () => {
         </div>
         <div className="flex h-[86vh] sm:h-[90vh] mt-20 sm:mt-12  flex-col items-center justify-center">
           {showForm && !showModal && (
-            <div className={`z-10 relative flex flex-col justify-center h-full qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm ? 'fade-in' : 'fade-out'}`}>
+            <div className={`z-10 relative flex flex-col justify-center py-10 qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm ? 'fade-in' : 'fade-out'}`}>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
@@ -150,30 +153,25 @@ const Generate = () => {
                         onChange={(e) => setPromptValue(e.target.value)}
                       ></textarea>
                     </div>
+                    <div className="flex sm:flex-row  flex-col sm:gap-32 justify-center">
+                      <div className="text-center my-4 relative">
+                        <button className="relative px-14 py-2 text-white border-[1px] border-white rounded-xl bg-transparent"
+                          onClick={handleGenerateButtonClick} // Use the new function here
 
-                    <div className='flex gap-4 sm:w-[50%]  mx-auto'>
-                      {data.map((image, index) => (
-                        <div key={index} onClick={() => setPromptInput(image)} className={`w-30 bg-white p-1 cursor-pointer h-30 ${isSelected === image ? 'opacity-100' : 'opacity-40'}`}>
-                          <img className='object-cover qr-border' src={image.src} alt="" />
-                          <p className='text-black text-[8px]  text-center'> #2023000282 <br /> <span className='text-lg'>Hulk</span></p>
-                        </div>
-                      ))}
-                      <div className=' w-30 px-6   sm:px-8 cursor-pointer flex justify-center items-center   h-30 glassy-background'>
-                        <p className='text-white text-xs text-center'>Explore More</p>
+                        >
+
+
+                          Generate Now
+                        </button>
                       </div>
-                    </div>
-                    <div className="text-center my-4 relative">
-                      <button className="relative px-14 py-2 text-white border-2 border-gray-50/20 bg-transparent"
-                        onClick={handleGenerateButtonClick} // Use the new function here
+                      <div className="text-center my-4 relative">
+                        <button className="relative px-14 py-2 text-white border-[1px] rounded-xl border-white bg-transparent"
+                          onClick={handleGenerateButtonClick} // Use the new function here
 
-                      >
-
-                        <div className="corner-button-generate"></div>
-                        <div className="corner-button-generate"></div>
-                        <div className="corner-button-generate"></div>
-                        <div className="corner-button-generate"></div>
-                        Generate Now
-                      </button>
+                        >
+                          Generated Then
+                        </button>
+                      </div>
                     </div>
                   </form>
                 </div>

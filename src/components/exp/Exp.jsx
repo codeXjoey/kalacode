@@ -1,15 +1,17 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './exp.css'
 import NavbarAndFullscreenMenu from '../menu/menu';
+import { useNavigate } from 'react-router-dom';
 const Exp = () => {
-
+  let navigate = useNavigate();
 
   const [showCookiePopup, setShowCookiePopup] = useState(true);
   const [hasAcceptedCookies, setHasAcceptedCookies] = useState(false);
- 
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
 
 
 
@@ -55,54 +57,62 @@ const Exp = () => {
     }
   }, []);
 
-  return <>
-  <NavbarAndFullscreenMenu/>
-    {showCookiePopup && !hasAcceptedCookies && (
-      <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
-        <div className="relative flex sm:flex-row flex-col justify-between h-full">
-          <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
-            <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
-            <p className="text-sm sm:text-lg footer-text opacity-90 text-white">
-              We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
-            </p>
-          </div>
-          <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
-            <button
-              className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
-              onClick={handleAcceptAll}
-            >
-              <div className="corner-button-then"></div>
-              <div className="corner-button-then"></div>
-              <div className="corner-button-then"></div>
-              <div className="corner-button-then"></div>
-              Accept all
-            </button>
-            <button
-              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
-              onClick={handleDeny}
-            >
-              <div className="corner-button-deny"></div>
-              <div className="  corner-button-deny "></div>
-              <div className="  corner-button-deny "></div>
-              <div className="  corner-button-deny "></div>
-              <span className="btn-content ">
-                <span className="btn-inner-content">
-                  <span>More Info</span>
-                </span>
-              </span>
+  useEffect(() => {
+    const fullscreenMenu = document.getElementById('fullscreen-menu');
+    setIsNavbarOpen(fullscreenMenu.style.display === 'flex');
+  }, []);
 
+  return <>
+    <NavbarAndFullscreenMenu />
+    {showCookiePopup && !hasAcceptedCookies && (
+      <div className={`scrollable-container uppercase ${isNavbarOpen ? 'resized-exp' : ''}`}>
+        <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
+          <div className="relative flex sm:flex-row flex-col justify-between h-full">
+            <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
+              <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
+              <p className="text-sm sm:text-lg footer-text opacity-90 text-white">
+                We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
+              </p>
+            </div>
+            <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
+              <button
+                className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
+                onClick={handleAcceptAll}
+              >
+                <div className="corner-button-then"></div>
+                <div className="corner-button-then"></div>
+                <div className="corner-button-then"></div>
+                <div className="corner-button-then"></div>
+                Accept all
+              </button>
+              <button
+                className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
+                onClick={handleDeny}
+              >
+                <div className="corner-button-deny"></div>
+                <div className="  corner-button-deny "></div>
+                <div className="  corner-button-deny "></div>
+                <div className="  corner-button-deny "></div>
+                <span className="btn-content ">
+                  <span className="btn-inner-content">
+                    <span>More Info</span>
+                  </span>
+                </span>
+
+              </button>
+            </div>
+            <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
+              <span className="sr-only">Close popup</span>
+              <span className="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 8 8" width="10" height="10">
+                  <path d="M2,8H0L3,4,0,0H2L4,2.67,6,0H8L5,4,8,8H6L4,5.33Z"></path>
+                </svg>
+              </span>
             </button>
           </div>
-          <button className="absolute top-0 right-0 mt-2 mr-2" type="button" onClick={() => setShowCookiePopup(false)}>
-            <span className="sr-only">Close popup</span>
-            <span className="text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 8 8" width="10" height="10">
-                <path d="M2,8H0L3,4,0,0H2L4,2.67,6,0H8L5,4,8,8H6L4,5.33Z"></path>
-              </svg>
-            </span>
-          </button>
         </div>
       </div>
+
     )}
     <div className="scrollable-container uppercase  ">
       <canvas className='experience'></canvas>
@@ -111,18 +121,18 @@ const Exp = () => {
       <div className="text px-5 m-auto text-0">
         <p className='sm:text-[48px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
         <p className='sm:text-[30px] text-[20px] text-center'>by Hudbil Private Limited</p>
-        <footer className="icon-scroll">
-          <div className="icon-scroll--active"/>
+        <footer className="icon-scroll opacity-50">
+          <div className="icon-scroll--active" />
           <div className='icon-scroll__dot' />
           <div className='icon-scroll__lines--right'>
-            <div className='icon-scroll__lines__1'/>
-            <div className='icon-scroll__lines__2'/>
-            <div className='icon-scroll__lines__3'/>
+            <div className='icon-scroll__lines__1' />
+            <div className='icon-scroll__lines__2' />
+            <div className='icon-scroll__lines__3' />
           </div>
           <div className='icon-scroll__lines--left'>
-            <div className='icon-scroll__lines__1'/>
-            <div className='icon-scroll__lines__2'/>
-            <div className='icon-scroll__lines__3'/>
+            <div className='icon-scroll__lines__1' />
+            <div className='icon-scroll__lines__2' />
+            <div className='icon-scroll__lines__3' />
           </div>
         </footer>
       </div>
@@ -155,7 +165,7 @@ const Exp = () => {
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
-                      <path d="m.5 7 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
+                      <path d="m.5 6 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
                         strokeLinejoin="round" transform="translate(9 6)"></path>
                     </g>
                   </svg>
@@ -179,27 +189,26 @@ const Exp = () => {
 
     </div>
 
-    <aside className="QrCodeInfo">
-      <svg width="42px" height="42px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
+    <aside className="QrCodeInfo z-50 flex justify-between p-6">
 
-      <header>
-        <h1 id='QrCodeInfo__name'>Name</h1>
-        <p id='QrCodeInfo__id'>#5464256465</p>
-      </header>
+      <div>
+          <svg width="42px" height="42px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fillRule="evenodd" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"> <path d="m7.5 7.5 6 6"></path> <path d="m13.5 7.5-6 6"></path> </g> </g></svg>
 
-      <main>
-        <p>Prompt:</p>
-        <div
-          style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px" }}
-        >
-          <div className="corner-button"></div>
-          <div className="corner-button"></div>
-          <div className="corner-button"></div>
-          <div className="corner-button"></div>
 
-          <p id='QrCodeInfo__prompt'></p>
-        </div>
-      </main>
+          <main>
+            <p className='text-2xl text-white mb-2'>Prompt:</p>
+            <div
+              style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px" }}
+            >
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+              <div className="corner-button"></div>
+
+              <p className='text-sm p-2 text-white' id='QrCodeInfo__prompt'></p>
+            </div>
+          </main>
+      </div>
 
       <footer>
         <Link to={'/generate'}>
@@ -219,14 +228,12 @@ const Exp = () => {
                     strokeLinejoin="round" transform="translate(9 6)"></path>
                 </g>
               </svg>
-              {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
             </button>
           </div>
         </Link>
       </footer>
 
     </aside>
-
 
 
 
@@ -238,7 +245,7 @@ const Exp = () => {
 }
 
 function initExperience() {
-  //------------------------- Variables 
+;  //------------------------- Variables 
   //Particles configuration
   const debug = {
     //Fingerprint
@@ -277,19 +284,114 @@ function initExperience() {
 
   let qrCodes = [
     {
-      'image': '/textures/QrCode.png',
-      'prompt': 'The best Qr Ever 1',
+      'image': '/textures/qr-code-1.png',
+      'prompt': 'humanoid android, covered in white porcelain skin, blue eyes, white wispy ghost wearing ornate armour 4k realistic fantasy, insane details, ghost phantom effect, hyper detailed, photoreal, photography, cinematic lighting, hdr, hd, cinematography, realism, fine art digital, HD, Mark Molnar mystical, redshift rendering, 8k –v 4',
       'id': '1'
     },
     {
-      'image': '/textures/QrCode1.jpeg',
-      'prompt': 'The best Qr Ever 2',
+      'image': '/textures/qr-code-2.png',
+      'prompt': 'character design, cyborg shadowrunner watching arm decompose into cybernetic tentacles in the style of live action movie version of appleseed –v 4',
       'id': '2'
     },
     {
-      'image': '/textures/QrCode.png',
-      'prompt': 'The best Qr Ever',
+      'image': '/textures/qr-code-3.png',
+      'prompt': 'twin girls and fawn in moonlit snowy forest by Ray Caesar –v 4',
       'id': '3'
+    }, {
+      'image': '/textures/qr-code-4.png',
+      'prompt': 'cyberpunk girl in jacket, colorful tattoos, harlequin cyberpunk, highly detailed, Anna-Lou Leibovitz, dark environment, neon colors, back lighting, Cinematic scene, Cinematic lighting, movie poster, dramatic color variations, strong contrast lighting, 8K, hypermaximalist, detailed intricate, ray tracing, insane detailse ink illustration',
+      'id': '4'
+    },
+    {
+      'image': '/textures/qr-code-5.png',
+      'prompt': 'fanatic warrior, portrait, Arabic female, bald, determined, ornamental scars, scifi military armor in black and gold, space opera',
+      'id': '5'
+    },
+    {
+      'image': '/textures/qr-code-6.png',
+      'prompt': 'sci-fi cosmic diarama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism',
+      'id': '6'
+    },
+    {
+      'image': '/textures/qr-code-7.png',
+      'prompt': 'maze, Narrow steep staircase, Old Building, Floating buildings, Urban, City rain, art by miyazaki and Ian McQue and Akihiko Yoshida and Katsuya Terada, colorful, trending on artstation, gorgeous, ultra-detailed, realistic, 8k, octane render, hyper detailed, cinematic',
+      'id': '7'
+    },
+    {
+      'image': '/textures/qr-code-8.png',
+      'prompt': ': tree of life intricate, leaf fractal structure, ethereal, fractalpunk, octane render, unreal engine, blender render, immersive detail, enhanced quality',
+      'id': '8'
+    },
+    {
+      'image': '/textures/qr-code-9.png',
+      'prompt': 'anthropomorphic profile of the white snow owl Crystal priestess , art deco painting, pretty and expressive eyes, ornate costume, mythical, ethereal, intricate, elaborate, hyperrealism, hyper detailed, 3D, 8K, Ultra Realistic, high octane, ultra resolution, amazing detail, perfection, In frame, photorealistic, cinematic lighting, visual clarity, shading , Lumen Reflections, Super-Resolution, gigapixel, color grading, retouch, enhanced, PBR, Blender, V-ray, Procreate, zBrush, Unreal Engine 5, cinematic, volumetric, dramatic, neon lighting, wide angle lens',
+      'id': '9'
+    },
+    {
+      'image': '/textures/qr-code-10.png',
+      'prompt': 'an egg covered in a highly intricate filligree pattern in different coours extreme detail photographic quality',
+      'id': '10'
+    },
+    {
+      'image': '/textures/qr-code-11.png',
+      'prompt': 'a cover photography, body and face photo, a beautiful young woman covered in water and liquid, clothes old and ragged, half buried on trash and garbage, hyper realistic, model photography, 500px poses, detailed, intricate',
+      'id': '11'
+    },
+    {
+      'image': '/textures/qr-code-12.png',
+      'prompt': 'double exposure of full portrait of a detailed skull & mushroom hybrid, mossy scales, dark environment, mushroom scales, forest god, bright eyes, sharp fangs and big horns finely detailed, surrounded by forest, cinematic lighting, 4k, 8k, unreal engine 5, octane render',
+      'id': '3'
+    },
+
+    {
+      'image': '/textures/qr-code-15.png',
+      'prompt': 'close-up little cute ginger syberian cat, full body, front facing, samurai armor, anthropomorphic, soft cinematic lighting, 8k',
+      'id': '12'
+    },
+    {
+      'image': '/textures/qr-code-16.png',
+      'prompt': 'belle epoque, christmas, red house in the forest, photo realistic, 8k ',
+      'id': '13'
+    },
+    {
+      'image': '/textures/qr-code-17.png',
+      'prompt': 'tented resort in the desert, rocky and sandy terrain, 5 star hotel, beautiful landscape, landscape photography, depth of view, Fujifilm GFX 100 –uplight',
+      'id': '14'
+    },
+    {
+      'image': '/textures/qr-code-18.png',
+      'prompt': 'Eiffel tower, colorful paining style',
+      'id': '15'
+    },
+    {
+      'image': '/textures/qr-code-19.png',
+      'prompt': 'a painting of a colorful fruit stall in a busy market, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '16'
+    },
+    {
+      'image': '/textures/qr-code-20.png',
+      'prompt': 'masterpiece, best quality, mecha, no humans, black armor, blue eyes, science fiction, fire, laser canon beam, war, conflict, destroyed city background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '17'
+    },
+    {
+      'image': '/textures/qr-code-21.png',
+      'prompt': 'a detailed painting of a showey hillside on a cold winter day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '18'
+    },
+    {
+      'image': '/textures/qr-code-22.png',
+      'prompt': 'majestic knight, portrait, finely detailed armor, cinematic lighting, intricate filigree metal design, 4k, 8k, unreal engine, octane render',
+      'id': '19'
+    },
+    {
+      'image': '/textures/qr-code-23.png',
+      'prompt': 'masterpiece, best quality, mecha, no humans, black armor, blue eyes, science fiction, fire, laser canon beam, war, conflict, destroyed city background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '20'
+    },
+    {
+      'image': '/textures/qr-code-21.png',
+      'prompt': 'a detailed painting of a showey hillside on a cold winter day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '21'
     }
   ]
 
@@ -449,6 +551,10 @@ function initExperience() {
 
 
   const qrCodeOnClick = (event) => {
+    if (event.target.closest('.QrCodeInfo')) {
+      return;
+    }
+
     const clickCoord = new THREE.Vector2(
       (event.clientX / sizes.width - 0.5) * 2,
       -(event.clientY / sizes.height - 0.5) * 2,
@@ -458,22 +564,36 @@ function initExperience() {
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
 
     if (mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected) {
+
+      if (event.target.classList.contains('close-button-class')) {
+        // Do nothing or add any specific behavior for the close button
+        return;
+      }
+
+      // Rest of your code for opening the container
       qrCodeSelected = mouseIntersects[0].object;
       qrCodeSelected.isSelected = true;
       isObjectSelected = true;
       const i = qrCodesArray.indexOf(qrCodeSelected);
-
       qrCodeInfo.classList.add('QrCodeInfo--active')
       qrCodePrompt.textContent = qrCodes[qrCodeSelected.index].prompt;
-
-      qrCodeToCero();
+      console.log();
+      navigate(`/generate/${qrCodes[qrCodeSelected.index].id}`);
+      qrCodeToCero(); 
 
     } else if (isObjectSelected) {
-      qrCodeInfo.classList.remove('QrCodeInfo--active')
-      qrCodeToPrevious();
+      // Check if the clicked object is not the close button
+      if (!event.target.classList.contains('close-button-class')) {
+        // Rest of your code for closing the container
+        qrCodeInfo.classList.remove('QrCodeInfo--active')
+        qrCodeToPrevious();
+      }
     }
   }
+
   window.addEventListener('pointerdown', qrCodeOnClick);
+
+
 
   function qrCodeToCero() {
     gsap.to(qrCodeSelected.position, { duration: 0.5, delay: 0, x: 0 });
