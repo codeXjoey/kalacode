@@ -1090,13 +1090,13 @@ const Exp = () => {
   return <>
     <NavbarAndFullscreenMenu />
     {showCookiePopup && !hasAcceptedCookies && (
-      <div className={`scrollable-container uppercase ${isNavbarOpen ? 'resized-exp' : ''}`}>
+      <div className={`scrollable-container  ${isNavbarOpen ? 'resized-exp' : ''}`}>
         <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
           <div className="relative flex sm:flex-row flex-col justify-between h-full">
             <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
               <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
-              <p className="text-sm sm:text-lg footer-text opacity-90 text-white">
-                We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy
+              <p className="text-xs sm:text-sm footer-text opacity-90 text-white">
+                We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy.
               </p>
             </div>
             <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
@@ -1144,8 +1144,8 @@ const Exp = () => {
 
       {/* ----Text--- */}
       <div className="text px-5 m-auto text-0">
-        <p className='sm:text-[48px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
-        <p className='sm:text-[30px] text-[20px] text-center'>by Hudbil Private Limited</p>
+        <p className='sm:text-[40px] text-[34px] mb-3 sm:mb-0'>POWER TO TRANSFORM</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>by Hudbil Private Limited</p>
         <footer className="icon-scroll opacity-50">
           <div className="icon-scroll--active" />
           <div className='icon-scroll__dot' />
@@ -1162,13 +1162,13 @@ const Exp = () => {
         </footer>
       </div>
       <div className='text text-1'>
-        <p className='sm:text-[30px] text-[20px] text-center'>Generate artistic qr codes of your choice for free</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>Generate artistic qr codes of your choice for free</p>
       </div>
       <div className="text text-2">
-        <p className='sm:text-[30px] text-[20px] text-center'>powered by "ai and <br /> stable diffusion"</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>powered by "ai and <br /> stable diffusion"</p>
       </div>
       <div className="text px-3 text-3">
-        <p className='sm:text-[30px] text-[20px] text-center'>Create custom qr codes for  your  personal and business needs</p>
+        <p className='sm:text-[22px] text-[20px] text-center'>Create custom qr codes for  your  personal and business needs</p>
       </div>
 
       <div className="text text-4">
