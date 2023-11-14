@@ -19,7 +19,132 @@ const Generate = () => {
   const [loading, setLoading] = useState(false);
   const data = images.slice(4, 6);
   const [isSelected, setisSelected] = useState(data[0])
-  const [promptValue, setPromptValue] = useState(data[0].description);
+  const [promptValue, setPromptValue] = useState(null);
+
+  let qrCodes = [
+    {
+      'image': '/textures/qr-code-1.png',
+      'prompt': 'humanoid android, covered in white porcelain skin, blue eyes, white wispy ghost wearing ornate armour 4k realistic fantasy, insane details, ghost phantom effect, hyper detailed, photoreal, photography, cinematic lighting, hdr, hd, cinematography, realism, fine art digital, HD, Mark Molnar mystical, redshift rendering, 8k –v 4',
+      'id': '1'
+    },
+    {
+      'image': '/textures/qr-code-2.png',
+      'prompt': 'character design, cyborg shadowrunner watching arm decompose into cybernetic tentacles in the style of live action movie version of appleseed –v 4',
+      'id': '2'
+    },
+    {
+      'image': '/textures/qr-code-3.png',
+      'prompt': 'twin girls and fawn in moonlit snowy forest by Ray Caesar –v 4',
+      'id': '3'
+    }, {
+      'image': '/textures/qr-code-4.png',
+      'prompt': 'cyberpunk girl in jacket, colorful tattoos, harlequin cyberpunk, highly detailed, Anna-Lou Leibovitz, dark environment, neon colors, back lighting, Cinematic scene, Cinematic lighting, movie poster, dramatic color variations, strong contrast lighting, 8K, hypermaximalist, detailed intricate, ray tracing, insane detailse ink illustration',
+      'id': '4'
+    },
+    {
+      'image': '/textures/qr-code-5.png',
+      'prompt': 'fanatic warrior, portrait, Arabic female, bald, determined, ornamental scars, scifi military armor in black and gold, space opera',
+      'id': '5'
+    },
+    {
+      'image': '/textures/qr-code-6.png',
+      'prompt': 'sci-fi cosmic diarama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism',
+      'id': '6'
+    },
+    {
+      'image': '/textures/qr-code-7.png',
+      'prompt': 'maze, Narrow steep staircase, Old Building, Floating buildings, Urban, City rain, art by miyazaki and Ian McQue and Akihiko Yoshida and Katsuya Terada, colorful, trending on artstation, gorgeous, ultra-detailed, realistic, 8k, octane render, hyper detailed, cinematic',
+      'id': '7'
+    },
+    {
+      'image': '/textures/qr-code-8.png',
+      'prompt': ': tree of life intricate, leaf fractal structure, ethereal, fractalpunk, octane render, unreal engine, blender render, immersive detail, enhanced quality',
+      'id': '8'
+    },
+    {
+      'image': '/textures/qr-code-9.png',
+      'prompt': 'anthropomorphic profile of the white snow owl Crystal priestess , art deco painting, pretty and expressive eyes, ornate costume, mythical, ethereal, intricate, elaborate, hyperrealism, hyper detailed, 3D, 8K, Ultra Realistic, high octane, ultra resolution, amazing detail, perfection, In frame, photorealistic, cinematic lighting, visual clarity, shading , Lumen Reflections, Super-Resolution, gigapixel, color grading, retouch, enhanced, PBR, Blender, V-ray, Procreate, zBrush, Unreal Engine 5, cinematic, volumetric, dramatic, neon lighting, wide angle lens',
+      'id': '9'
+    },
+    {
+      'image': '/textures/qr-code-10.png',
+      'prompt': 'an egg covered in a highly intricate filligree pattern in different coours extreme detail photographic quality',
+      'id': '10'
+    },
+    {
+      'image': '/textures/qr-code-11.png',
+      'prompt': 'a cover photography, body and face photo, a beautiful young woman covered in water and liquid, clothes old and ragged, half buried on trash and garbage, hyper realistic, model photography, 500px poses, detailed, intricate',
+      'id': '11'
+    },
+    {
+      'image': '/textures/qr-code-12.png',
+      'prompt': 'double exposure of full portrait of a detailed skull & mushroom hybrid, mossy scales, dark environment, mushroom scales, forest god, bright eyes, sharp fangs and big horns finely detailed, surrounded by forest, cinematic lighting, 4k, 8k, unreal engine 5, octane render',
+      'id': '3'
+    },
+
+    {
+      'image': '/textures/qr-code-15.png',
+      'prompt': 'close-up little cute ginger syberian cat, full body, front facing, samurai armor, anthropomorphic, soft cinematic lighting, 8k',
+      'id': '12'
+    },
+    {
+      'image': '/textures/qr-code-16.png',
+      'prompt': 'belle epoque, christmas, red house in the forest, photo realistic, 8k ',
+      'id': '13'
+    },
+    {
+      'image': '/textures/qr-code-17.png',
+      'prompt': 'tented resort in the desert, rocky and sandy terrain, 5 star hotel, beautiful landscape, landscape photography, depth of view, Fujifilm GFX 100 –uplight',
+      'id': '14'
+    },
+    {
+      'image': '/textures/qr-code-18.png',
+      'prompt': 'Eiffel tower, colorful paining style',
+      'id': '15'
+    },
+    {
+      'image': '/textures/qr-code-19.png',
+      'prompt': 'a painting of a colorful fruit stall in a busy market, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '16'
+    },
+    {
+      'image': '/textures/qr-code-20.png',
+      'prompt': 'masterpiece, best quality, mecha, no humans, black armor, blue eyes, science fiction, fire, laser canon beam, war, conflict, destroyed city background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '17'
+    },
+    {
+      'image': '/textures/qr-code-21.png',
+      'prompt': 'a detailed painting of a showey hillside on a cold winter day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '18'
+    },
+    {
+      'image': '/textures/qr-code-22.png',
+      'prompt': 'majestic knight, portrait, finely detailed armor, cinematic lighting, intricate filigree metal design, 4k, 8k, unreal engine, octane render',
+      'id': '19'
+    },
+    {
+      'image': '/textures/qr-code-23.png',
+      'prompt': 'masterpiece, best quality, mecha, no humans, black armor, blue eyes, science fiction, fire, laser canon beam, war, conflict, destroyed city background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '20'
+    },
+    {
+      'image': '/textures/qr-code-21.png',
+      'prompt': 'a detailed painting of a showey hillside on a cold winter day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)',
+      'id': '21'
+    }
+  ]
+
+  useEffect(() => {
+    const selectedQrCode = qrCodes.find((qrCode) => qrCode.id === qrCodeId);
+
+    if (selectedQrCode) {
+      setPromptValue(selectedQrCode.prompt);
+    } else {
+      // Handle the case where qrCodeId is not found
+      console.error(`QR code with ID ${qrCodeId} not found.`);
+      setPromptValue('a detailed painting of a showey hillside on a cold winter day, clue sky background with birds flying and trees, Andreas Rocha, matte painting concept art, a detailed matte painting, detailed background, ((illustration)), (((masterpiece))), ((best quality)), (High resolution)');
+    }
+  }, [qrCodeId]);
 
 
   const downloadImage = (imageUrl) => {

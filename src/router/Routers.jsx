@@ -14,6 +14,7 @@ const Routers = () => {
     <Routes>
       {/* <Link to="/generate">Generate</Link> */}
       <Route path='/' element={<Exp />} />
+      <Route path='/generate' element={<Generate />} />
       <Route path='/generate/:qrCodeId' element={<Generate />} />
       <Route path='/generated-then' element={<GenerateThen/>}/>
       <Route path='/services' element={<Services/>}/>
