@@ -877,7 +877,7 @@ const NavbarAndFullscreenMenu = () => {
         <div className="flex">
             <nav className="navbar">
                 <Link to={'/'}>
-                    <img className="w-[150px] pl-6" src="/public/images/logo.png" alt="logo" />
+                    <img className="w-[150px] pl-6" src="/images/logo.png" alt="logo" />
                 </Link>
                 <button className="menuButton rotate-90 mr-5 font-black">
                     <FaBars className='text-red-400 text-3xl ' />
@@ -924,23 +924,23 @@ const NavbarAndFullscreenMenu = () => {
                     <h1 className='text-5xl font-black  text-[#b18060]'>Our brands</h1>
                     <div>
                         <div className="overlay absolute inset-0 w-full h-full z-10">
-                            <img className='w-full h-full object-cover opacity-40' src="/public/images/overlay.png" alt="Overlay Image" />
+                            <img className='w-full h-full object-cover opacity-40' src="/images/overlay.png" alt="Overlay Image" />
                         </div>
                         <div className="logo flex flex-col justify-center items-center text-center relative w-32">
-                            <a className='cursor-pointer'><img className='w-full h-auto' src="/src/assets/hudbil_logo.png" alt="" /></a>
+                            <a className='cursor-pointer'><img className='w-full h-auto' src="/images/hudbil_logo.png" alt="" /></a>
                             <div className=" w-2/3 mx-auto h-[2px] bg-[#B18060]"></div>
                         </div>
                         <div className="logo  flex flex-col justify-center items-center text-center  relative w-36">
-                            <a className='cursor-pointer'><img className='w-full h-auto' src="/src/assets/coltfox_logo.png" alt="" /></a>
+                            <a className='cursor-pointer'><img className='w-full h-auto' src="/images/coltfox_logo.png" alt="" /></a>
                             <div className=" w-2/3 mx-auto h-[2px] bg-[#B18060]"></div>
 
                         </div>
                         <div className="logo  flex flex-col justify-center items-center text-center relative w-32">
-                            <a className='cursor-pointer'><img className='w-full h-auto' src="/src/assets/maus_bg_logo.png" alt="" /></a>
+                            <a className='cursor-pointer'><img className='w-full h-auto' src="/images/maus_bg_logo.png" alt="" /></a>
                             <div className=" w-2/3 mx-auto h-[2px] bg-[#B18060]"></div>
                         </div>
                         <div className="logo  flex flex-col justify-center items-center text-center  relative w-32">
-                            <a className='cursor-pointer'><img className='w-full h-auto' src="/src/assets/maus_logo.png" alt="" /></a>
+                            <a className='cursor-pointer'><img className='w-full h-auto' src="/images/maus_logo.png" alt="" /></a>
                             <div className=" w-2/3 mx-auto h-[2px] bg-[#B18060]"></div>
 
                         </div>
