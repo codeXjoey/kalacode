@@ -6,7 +6,7 @@ import './exp.css'
 import NavbarAndFullscreenMenu from '../menu/menu';
 import { useNavigate } from 'react-router-dom';
 const Exp = () => {
-  let navigate = useNavigate();
+
 
   const [showCookiePopup, setShowCookiePopup] = useState(true);
   const [hasAcceptedCookies, setHasAcceptedCookies] = useState(false);
@@ -245,7 +245,7 @@ const Exp = () => {
 }
 
 function initExperience() {
-;  //------------------------- Variables 
+  //------------------------- Variables 
   //Particles configuration
   const debug = {
     //Fingerprint
@@ -564,7 +564,7 @@ function initExperience() {
     mouseIntersects = raycaster.intersectObjects(qrCodesArray);
 
     if (mouseIntersects.length > 0 && mouseIntersects[0].distance < 35 && !isObjectSelected) {
-
+      // Check if the clicked object is the close button
       if (event.target.classList.contains('close-button-class')) {
         // Do nothing or add any specific behavior for the close button
         return;
@@ -575,11 +575,11 @@ function initExperience() {
       qrCodeSelected.isSelected = true;
       isObjectSelected = true;
       const i = qrCodesArray.indexOf(qrCodeSelected);
+
       qrCodeInfo.classList.add('QrCodeInfo--active')
       qrCodePrompt.textContent = qrCodes[qrCodeSelected.index].prompt;
-      console.log();
-      navigate(`/generate/${qrCodes[qrCodeSelected.index].id}`);
-      qrCodeToCero(); 
+
+      qrCodeToCero();
 
     } else if (isObjectSelected) {
       // Check if the clicked object is not the close button
