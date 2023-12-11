@@ -234,15 +234,15 @@ const Generate = () => {
   return (
     <>
       <NavbarAndFullscreenMenu />
-      <div className='h-screen z-[100000000]'>
+      <div className='h-screen bg-black z-[100000000]'>
         <div className="flex justify-between z-50 items-center px-4 sm:px-12 ">
           <div className="sm:w-auto  z-50 w-full ">
 
           </div>
         </div>
-        <div className="flex h-[86vh] sm:h-[90vh] mt-20 sm:mt-12  flex-col items-center justify-center">
+        <div className="flex h-[86vh] sm:h-[90vh]  mt-20 sm:mt-12  flex-col items-center justify-center">
           {showForm && !showModal && (
-            <div className={`z-10 relative flex flex-col justify-center py-10 qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm ? 'fade-in' : 'fade-out'}`}>
+            <div className={`z-50 relative border-2   flex flex-col justify-center py-10 qr-gen-form w-[90%] max-w-5xl sm:w-full text-white ${showForm ? 'fade-in' : 'fade-out'}`}>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
               <div className="corner-border-generated"></div>
@@ -280,23 +280,23 @@ const Generate = () => {
                     </div>
                     <div className="flex sm:flex-row  flex-col sm:gap-32 justify-center">
                       <div className="text-center my-4 relative">
-                        <button className="relative px-14 py-2 text-white border-[1px] border-white rounded-xl bg-transparent"
+                        <button className="relative  px-14 py-4 text-white border-[1px] border-white/30  bg-transparent overflow-hidden  flex-1 btn  button   text-center  sm:px-15   transition duration-500 ease-in-out"
                           onClick={handleGenerateButtonClick} // Use the new function here
 
                         >
 
-
-                          Generate Now
+                          <div className="corner-button z-50"></div>
+                          <div className="corner-button z-50"></div>
+                          <div className="corner-button z-50"></div>
+                          <div className="corner-button z-50"></div>
+                          <span className="btn-content ">
+                            <span className="btn-inner-content  ">
+                              <span>Generate Now</span>
+                            </span>
+                          </span>
                         </button>
                       </div>
-                      <div className="text-center my-4 relative">
-                        <button className="relative px-14 py-2 text-white border-[1px] rounded-xl border-white bg-transparent"
-                          onClick={handleGenerateButtonClick} // Use the new function here
-
-                        >
-                          Generated Then
-                        </button>
-                      </div>
+                     
                     </div>
                   </form>
                 </div>

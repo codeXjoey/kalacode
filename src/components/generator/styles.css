@@ -106,7 +106,7 @@
   position: absolute;
   width: 20px; /* Adjust the length of the corner borders as needed */
   height: 20px; /* Adjust the length of the corner borders as needed */
-  border: 2px solid rgb(171, 49, 49); /* Adjust the border properties as needed */
+  border: 2px solid #bd2020; /* Adjust the border properties as needed */
 }
 
 
@@ -172,7 +172,7 @@
   position: absolute;
   width: 30px; /* Adjust the length of the corner borders as needed */
   height: 30px; /* Adjust the length of the corner borders as needed */
-  border: 2px solid #FE7272; /* Adjust the border properties as needed */
+  border: 2px solid #bd2020; /* Adjust the border properties as needed */
 }
 
 

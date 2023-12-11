@@ -16,20 +16,37 @@ const Exp = () => {
   const [selectedQrCodeId, setSelectedQrCodeId] = useState('');
 
   useEffect(() => {
-
-    //------------------ Menu buttons
-    // const menuButton = document.querySelector(".menuButton");
-    // const fullscreenMenu = document.getElementById("fullscreen-menu");
-    // const closeButton = document.getElementById("close-menu");
-    // menuButton.addEventListener("click", function () {
-    //   fullscreenMenu.style.display = "flex";
-    // });
-    // closeButton.addEventListener("click", function () {
-    //   fullscreenMenu.style.display = "none";
-    // });
-
     initExperience();
-  })
+  }, [setSelectedQrCodeId])
+
+
+
+  useEffect(() => {
+    const acceptedCookies = localStorage.getItem('acceptedCookies');
+    if (acceptedCookies) {
+      setShowCookiePopup(false);
+      setHasAcceptedCookies(true);
+    }
+  }, []);
+
+  const handleAcceptAll = () => {
+    localStorage.setItem('acceptedCookies', 'true');
+    setShowCookiePopup(false);
+    setHasAcceptedCookies(true);
+  };
+
+  const handleDeny = () => {
+    setShowCookiePopup(false);
+  };
+
+  useEffect(() => {
+    if (hasAcceptedCookies) {
+      document.body.style.overflow = 'visible';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [hasAcceptedCookies]);
+
 
 
   function initExperience() {
@@ -360,7 +377,7 @@ const Exp = () => {
 
 
     const qrCodeOnClick = (event) => {
-      // console.log('Click event triggered');
+      event.preventDefault();
       if (event.target.closest('.QrCodeInfo')) {
         return;
       }
@@ -382,31 +399,35 @@ const Exp = () => {
 
         // Rest of your code for opening the container
         qrCodeSelected = mouseIntersects[0].object;
-        setSelectedQrCodeId(qrCodes[qrCodeSelected.index].id);
-        qrCodeSelected.isSelected = true;
-        isObjectSelected = true;
-        const i = qrCodesArray.indexOf(qrCodeSelected);
+        if (qrCodeSelected) { // Check if qrCodeSelected is not null
+          qrCodeSelected.scale.set(2, 2, 2);
+          console.log('Before setSelectedQrCodeId');
+          setSelectedQrCodeId(qrCodes[qrCodeSelected.index].id);
+          console.log('After setSelectedQrCodeId');
+          qrCodeToCero();
+          qrCodeSelected.isSelected = true;
+          isObjectSelected = true;
+          const i = qrCodesArray.indexOf(qrCodeSelected);
 
-        qrCodeInfo.classList.add('QrCodeInfo--active')
-        qrCodePrompt.textContent = qrCodes[qrCodeSelected.index].prompt;
+          qrCodeInfo.classList.add('QrCodeInfo--active');
+          qrCodePrompt.textContent = qrCodes[qrCodeSelected.index].prompt;
 
-        qrCodeToCero();
+        }
 
-      } else if (isObjectSelected) {
-        // Check if the clicked object is not the close button
+      } else if (isObjectSelected && qrCodeSelected) {
         if (!event.target.classList.contains('close-button-class')) {
-          // Rest of your code for closing the container
-          qrCodeInfo.classList.remove('QrCodeInfo--active')
+          qrCodeInfo.classList.remove('QrCodeInfo--active');
           qrCodeToPrevious();
         }
       }
     }
 
-    window.addEventListener('pointerdown', qrCodeOnClick);
+    window.addEventListener('click', qrCodeOnClick);
 
 
 
     function qrCodeToCero() {
+      console.log('0000000000')
       gsap.to(qrCodeSelected.position, { duration: 0.5, delay: 0, x: 0 });
       gsap.to(qrCodeSelected.position, { duration: 0.5, delay: 0, y: 0 });
       gsap.to(qrCodeSelected.position, { duration: 0.5, delay: 0, z: -2.5 - qrCodesGroup.position.z });
@@ -959,6 +980,7 @@ const Exp = () => {
       // scene.add(randomParticles);
 
     }
+
     function createQrCodes() {
       const colors = [new THREE.Color(debug.fingerprintBaseColor1), new THREE.Color(debug.fingerprintBaseColor2), new THREE.Color(debug.fingerprintBaseColor3)];
 
@@ -1053,30 +1075,9 @@ const Exp = () => {
     }
   }
 
-  const handleAcceptAll = () => {
-
-    localStorage.setItem('acceptedCookies', 'true');
-
-    setShowCookiePopup(false);
-    setHasAcceptedCookies(true);
-  };
-
-  const handleDeny = () => {
-    setShowCookiePopup(false);
-  };
 
 
 
-
-
-  useEffect(() => {
-    // Check if the user has previously accepted cookies
-    const acceptedCookies = localStorage.getItem('acceptedCookies');
-    if (acceptedCookies) {
-      setShowCookiePopup(false);
-      setHasAcceptedCookies(true);
-    }
-  }, []);
 
 
 
@@ -1086,14 +1087,14 @@ const Exp = () => {
       <div className="fixed bg-[#DB1F1E] bottom-0 left-0 w-full sm:h-52  z-50">
         <div className="relative flex sm:flex-row flex-col justify-between h-full">
           <div className="p-4 sm:py-10 sm:px-10 sm:w-3/4">
-            <h1 className="text-lg footer-text font-black mb-2 text-white">Personalize your experience</h1>
+            <h1 className="text-lg footer-text uppercase font-black mb-2 text-white">Personalize your experience</h1>
             <p className="text-xs sm:text-sm footer-text opacity-90 text-white">
               We use functional cookies to make the website work properly, analytical cookies to measure your behavior and marketing cookies for ads and content personalization. We collect data on how you use our website to make our website easier to use, but also to tailor or personalize communication in advertisements, on our website, or apps. By clicking accept you agree to this. More information? Read our cookie policy.
             </p>
           </div>
           <div className="p-8 flex sm:flex-row flex-col sm:max-h-24 gap-4 items-center my-auto sm:w-1/4">
             <button
-              className="flex-1 uppercase outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
+              className="flex-1  outline-1 bg-white outline-offset-1 outline outline-gray-50 relative py-[8.9px] px-20 sm:px-5"
               onClick={handleAcceptAll}
             >
               <div className="corner-button-then"></div>
@@ -1103,7 +1104,7 @@ const Exp = () => {
               Accept all
             </button>
             <button
-              className="overflow-hidden uppercase flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
+              className="overflow-hidden  flex-1 btn relative button  text-white hover:bg-white/10 text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out"
               onClick={handleDeny}
             >
               <div className="corner-button-deny"></div>
@@ -1112,7 +1113,7 @@ const Exp = () => {
               <div className="  corner-button-deny "></div>
               <span className="btn-content ">
                 <span className="btn-inner-content">
-                  <span>More Info</span>
+                  <span>Reject All</span>
                 </span>
               </span>
 
@@ -1166,16 +1167,20 @@ const Exp = () => {
         <div>
           <p>POWER AT YOUR FINGERTIPS</p>
           <footer>
-            <Link to={'/generate'}>
+            <Link to={'/generate-qr-code'}>
               <div
                 style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px" }}
                 className="generate-now">
-                <button className="button_generate-now ">GENERATE NOW
-
+                <button className="button_generate-now overflow-hidden  flex-1 btn relative button   text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out ">
                   <div className="corner-button"></div>
                   <div className="corner-button"></div>
                   <div className="corner-button"></div>
                   <div className="corner-button"></div>
+                  <span className="btn-content ">
+                    <span className="btn-inner-content mr-10">
+                      <span>Generate Now</span>
+                    </span>
+                  </span>
                   <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
 
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1227,25 +1232,32 @@ const Exp = () => {
       </div>
 
       <footer>
-        <Link to={`/generate/${selectedQrCodeId}`}>
-          <div
-            style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px" }}
-            className="generate-now">
-            <button className="button_generate-now ">GENERATE NOW
-              <div className="corner-button"></div>
-              <div className="corner-button"></div>
-              <div className="corner-button"></div>
-              <div className="corner-button"></div>
-              <svg style={{ position: "absolute" }} viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                  <path d="m.5 8.5 4-4-4-4" fill="none" stroke="#ffffff" strokeLinecap="round"
-                    strokeLinejoin="round" transform="translate(9 6)"></path>
-                </g>
-              </svg>
-            </button>
-          </div>
+        <Link to={`/generate-qr-code/${selectedQrCodeId}`}>
+        <div
+                style={{ position: "relative", outline: "1px solid rgba(204, 204, 204, 0.597)", padding: "1px", outlineOffset: "2px" }}
+                className="generate-now">
+                <button className="button_generate-now overflow-hidden  flex-1 btn relative button   text-center px-[5rem] sm:px-5 py-3  transition duration-500 ease-in-out ">
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <div className="corner-button"></div>
+                  <span className="btn-content ">
+                    <span className="btn-inner-content mr-10">
+                      <span>Use Prompt</span>
+                    </span>
+                  </span>
+                  <svg style={{ position: "absolute " }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="m.5 6 2-2-2-2" fill="none" stroke="#ffffff" strokeLinecap="round"
+                        strokeLinejoin="round" transform="translate(9 6)"></path>
+                    </g>
+                  </svg>
+                  {/* <!-- <div className='absolute top-0 left-[11.5rem] py-4  duration-500 w-12 h-full group-hover:bg-[#b6401e]/40 text-white flex justify-center items-center '>`>`</div> --> */}
+                </button>
+              </div>
         </Link>
       </footer>
 

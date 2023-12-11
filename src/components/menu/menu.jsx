@@ -874,7 +874,7 @@ const NavbarAndFullscreenMenu = () => {
     // }
 
     return (
-        <div className="flex">
+        <div className="flex h-32">
             <nav className="navbar">
                 <Link to={'/'}>
                     <img className="w-[150px] pl-6" src="/images/logo.png" alt="logo" />

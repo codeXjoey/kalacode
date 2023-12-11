@@ -122,11 +122,7 @@
     padding: 0px;
 }
 
-html,
-body {
-    /* overflow:hidden ; */
-    background-color: black;
-}
+
 /* Add this to your CSS */
 .resized-exp {
     /* Adjust the styles as needed for the resized state */
@@ -403,7 +399,7 @@ body {
 
 .generate-now svg {
     width: 20%;
-    margin-left: 14.97rem;
+    margin-left: 13.5rem;
     top: 1px;
     height: 97%;
     background-color: #DB1F1E;
@@ -609,6 +605,7 @@ body {
     position: absolute;
     width: 4px;
     height: 4px;
+    z-index: 99999999;
     border: 2px solid rgb(255, 254, 254);
 }
 
