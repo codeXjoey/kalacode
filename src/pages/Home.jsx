@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./pages.css"
+import NavbarAndFullscreenMenu from '../components/menu/menu';
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -255,6 +256,7 @@ const Home = () => {
   return (
     <div>
       {/*page1*/}
+      <NavbarAndFullscreenMenu/>
       <div className='main-container'>
         <div className='page1-content'>
           <div className='head1'>We help</div>

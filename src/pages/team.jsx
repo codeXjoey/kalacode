@@ -1,9 +1,11 @@
 import React from 'react'
 import NavbarAndFullscreenMenu from '../components/menu/menu'
-import rectImage from '../assets/Rectangle 4245.png'
+import rectImage from '../assets/zen_fox.png'
 import arrow from '../assets/Vector (2).png'
 import Footer from '../components/footer/footer'
-
+import team1 from '../assets/team1.png'
+import team2 from '../assets/team2.png'
+import team3 from '../assets/team3.png'
 const Team = () => {
     return (
         <div>
@@ -15,35 +17,43 @@ const Team = () => {
                     <img className='w-full h-80   object-cover ' src={rectImage} alt="" />
                 </div>
             </div>
-            <p className='sm:px-32 mt-10 text-center'>Lorem ipsum dolor sit amet. Cum praesentium consequuntur ea unde itaque vel sunt odio est exercitationem ipsum nam numquam dolorem ad iste ullam. In sapiente unde sit corrupti culpa ex velit eius id numquam pariatur ad sint rerum qui consequatur veniam.</p>
+            <p className='sm:px-32 mt-10 text-center'>Being a Colt is more than just a role. Coltfox think, act and perform in a way that promotes collaboration, inspiration and excitement. A Coltfox is a clever beast with unique strengths that are beyond measurable.</p>
 
             <div className='mt-10 sm:ml-[28rem] px-5 sm:px-20'>
                 <h2 className='text-5xl text-[#DF2323] font-bold '>Leadership Team</h2>
                 <div className='h-[1px] my-10 bg-[#DF2323]'></div>
                 <div className="flex justify-end sm:flex-row flex-col gap-20">
                     <div className="teamCard w-72  ">
-                        <div className='bg-[#D9D9D9] h-80 '></div>
-                        <div className="bg-white">
-                            <p className='font-bold'>Name</p>
-                            <p>Profile</p>
+                        <div className='bg-[#D9D9D9] h-80 '>
+                            <img className='w-full h-full' src={team1} alt="" />
+                        </div>
+                        <div className="bg-[#FCAB64] p-2">
+                            <p className='font-bold text-white '>MD SHUJJATH</p>
+                            <p>Chief Executive Officer</p>
                         </div>
                     </div>
                     <div className="teamCard w-72  ">
-                        <div className='bg-[#D9D9D9] h-80 '></div>
-                        <div className="bg-white">
-                            <p className='font-bold'>Name</p>
-                            <p>Profile</p>
+                        <div className='bg-[#D9D9D9] h-80 '>
+                            <img className='w-full h-full' src={team2} alt="" />
+
+                        </div>
+                        <div className="bg-[#FCAB64] p-2">
+                            <p className='font-bold text-white '>MD SHUJJATH</p>
+                            <p>Chief Executive Officer</p>
                         </div>
                     </div>
                     <div className="teamCard w-72  ">
-                        <div className='bg-[#D9D9D9] h-80 '></div>
-                        <div className="bg-white">
-                            <p className='font-bold'>Name</p>
-                            <p>Profile</p>
+                        <div className='bg-[#D9D9D9] h-80 '>
+                            <img className='w-full h-full' src={team3} alt="" />
+
+                        </div>
+                        <div className="bg-[#FCAB64] p-2">
+                            <p className='font-bold text-white '>MD SHUJJATH</p>
+                            <p>Chief Executive Officer</p>
                         </div>
                     </div>
                 </div>
-                <p className='my-10'> Lorem ipsum dolor sit amet. Cum praesentium consequuntur ea unde itaque vel sunt odio est exercitationem ipsum nam numquam dolorem ad iste ullam. In sapiente unde sit corrupti culpa ex velit eius id numquam pariatur ad sint rerum qui consequatur veniam.</p>
+                <p className='my-10'> Coltfox  is not your typical digital marketing agency. We’re a strategic marketing firm that partners with clients to move their business forward. We’re bold. We’re curious. We’re transparent.</p>
             </div>
             <div className='mt-10 sm:ml-[28rem] px-5 sm:px-20'>
                 <h2 className='text-5xl text-[#DF2323] font-bold '>Team</h2>
@@ -158,7 +168,7 @@ const Team = () => {
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
         </div>
     )
 }

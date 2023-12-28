@@ -23,7 +23,7 @@ const Approach = () => {
                 <h1>Approach</h1>
             </div>
             <p className='text-center text-[#DF2323] text-xl mt-5'>We start with your audience</p>
-            <p className='text-center font-medium px-5 sm:px-48 mt-5'>Lorem ipsum dolor sit amet. Sed consequuntur minus sed numquam dolorum qui magnam eligendi ut laudantium iure vel ullam expedita vel dolorem odio ut quaerat sapiente. Ea voluptatibus autem eos autem consequatur ut galisum dolorem ut debitis animi quo iste voluptatum cum cupiditate cupiditate. </p>
+            <p className='text-center font-medium px-5 sm:px-48 mt-5'>Our journey begins by immersing ourselves in your audience. We define who they are, their aspirations, behaviors, and what channels they interact with. Our approach includes a comprehensive business audit and a collaborative marketing strategies, helping us to shape your brand by aligning your marketing at fingertips.</p>
             <div className="redLine bg-[#DF2323] h-[0.71px] my-20   w-full"></div>
             <div className="flex justify-center gap-10 ">
                 <div className='sm:h-14 h-10  sm:w-14 w-10  rounded-full border border-[#FE7272]'></div>
@@ -35,11 +35,11 @@ const Approach = () => {
                 <div className='sm:h-14 h-10  sm:w-14 w-10  relative top-28 rounded-full border border-[#FE7272]'></div>
             </div>
             <div className='text-center text-3xl sm:text-6xl mt-32 text-[#DF2323]  font-black '>
-                <h1>Customer - Centric</h1>
-                <h1>Approach</h1>
+                <h1>Practical Strategy</h1>
+                <h1>Development</h1>
             </div>
-            <p className='text-center text-[#DF2323] text-lg sm:text-xl mt-5'>We start with your audience</p>
-            <p className='text-center font-medium sm:px-48 mt-5'>Lorem ipsum dolor sit amet. Sed consequuntur minus sed numquam dolorum qui magnam eligendi ut laudantium iure vel ullam expedita vel dolorem odio ut quaerat sapiente. Ea voluptatibus autem eos autem consequatur ut galisum dolorem ut debitis animi quo iste voluptatum cum cupiditate cupiditate. </p>
+            <p className='text-center text-[#DF2323] text-lg sm:text-xl mt-5'>We define your objectives. </p>
+            <p className='text-center font-medium sm:px-48 mt-5'>Every business faces unique challenges. We diagnose the hurdles obstructing your path and define your goals. We gather data, generate innovative ideas, and put them to the test, either in controlled environments or the market itself. Through swift iterations, we ensure we meet or surpass every target.</p>
             <div className="redLine bg-[#DF2323] h-[0.71px] my-20   w-full"></div>
 
             <div className="flex  justify-center">
@@ -51,8 +51,8 @@ const Approach = () => {
             <div className='text-center text-3xl sm:text-6xl mt-32 text-[#DF2323]  font-black '>
                 <h1>Agile Adaptation</h1>
             </div>
-            <p className='text-center text-[#DF2323] text-lg sm:text-xl mt-5'>We start with your audience</p>
-            <p className='text-center font-medium sm:px-48 mt-5'>Lorem ipsum dolor sit amet. Sed consequuntur minus sed numquam dolorum qui magnam eligendi ut laudantium iure vel ullam expedita vel dolorem odio ut quaerat sapiente. Ea voluptatibus autem eos autem consequatur ut galisum dolorem ut debitis animi quo iste voluptatum cum cupiditate cupiditate. </p>
+            <p className='text-center text-[#DF2323] text-lg sm:text-xl mt-5'>We’re flexible to scale success.</p>
+            <p className='text-center font-medium sm:px-48 mt-5'>Every business faces unique challenges. We diagnose the hurdles obstructing your path and define your goals. We gather data, generate innovative ideas, and put them to the test, either in controlled environments or the market itself. Through swift iterations, we ensure we meet or surpass every target.</p>
             <div className="redLine bg-[#DF2323] h-[0.71px] my-20   w-full"></div>
 
 
@@ -173,8 +173,8 @@ const Approach = () => {
                     <rect x="1.5" y="95.3242" width="62.2698" height="64.3095" stroke="#5B5D5E" stroke-width="3" />
                 </svg>
                 <h2 className='text-center text-4xl font-black text-[#DF2323]'>Ongoing Learning & optimization</h2>
-                <p className='text-[#DF2323] text-md text-center'>We start with your audience</p>
-                <p className='text-center'>Lorem ipsum dolor sit amet. Sed consequuntur minus sed numquam dolorum qui magnam eligendi ut laudantium iure vel ullam expedita vel dolorem odio ut quaerat sapiente. Ea voluptatibus autem eos autem consequatur ut galisum dolorem ut debitis animi quo iste voluptatum cum cupiditate cupiditate. </p>
+                <p className='text-[#DF2323] text-md text-center'>We continually pursue excellence.</p>
+                <p className='text-center'>We’re committed to excellence. We consistently challenge and differentiate our solutions to achieve your goals. It’s what defines us and ensures your strategy remains dynamic and optimized. Our teams are dedicated to continual discovering, testing, and implementing new technologies to stay at the forefront of innovation.</p>
             </div>
             <Footer />
         </div>
